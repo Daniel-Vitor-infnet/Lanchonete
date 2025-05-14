@@ -9,15 +9,34 @@ $testesAtivos: false;
     display: flex;
     flex-direction: column;
 
+    @include mobile {
+        width: 78vw;
+        border-radius: px-para-rem(10px);
+    }
+
     .header_container {
-        height: 5vh;
+        height: alturaResponsivaViewport(5);
         display: flex;
         align-items: center;
         justify-content: center;
         padding: px-para-rem(10px);
         box-sizing: border-box;
         gap: px-para-rem(5px);
+
+        @include laptop {
+            height: alturaResponsivaViewport(6);
+        }
+
+        @include mobile {
+            height: alturaResponsivaViewport(10);
+            align-items: unset;
+            justify-content: unset;
+            flex-direction: column;
+            position: relative;
+        }
+
     }
+
 
     .title {
         max-width: 55%;
@@ -25,25 +44,53 @@ $testesAtivos: false;
         text-overflow: ellipsis;
         overflow: hidden;
         font-weight: bold;
+        font-size: px-para-rem(18px);
+
+        @include mobile {
+            max-width: 72%;
+        }
     }
 
     .complement {
-        width: 32%;
+        max-width: 32%;
         font-weight: bold;
         font-size: px-para-rem(18.5px);
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
+
+        @include laptop {
+            font-size: px-para-rem(16px);
+        }
+
+        @include mobile {
+            max-width: 72%;
+            font-size: px-para-rem(20px);
+        }
     }
 
     .icon {
         width: 5%;
         margin-left: auto;
         cursor: pointer;
+
+        @include mobile {
+            width: 15%;
+            height: 40%;
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
     }
 
+
     .content_container {
-        height: 25vh;
+        height: alturaResponsivaViewport(25);
         border-bottom: px-para-rem(2px) solid oklch(0.8 0 0);
         border-top: px-para-rem(2px) solid oklch(0.8 0 0);
         padding: px-para-rem(13px);
@@ -51,23 +98,42 @@ $testesAtivos: false;
     }
 
     .buttons_container {
-        height: 6.5vh;
+        height: alturaResponsivaViewport(8.5);
+        width: 100%;
+        display: flex;
+        justify-content: end;
+        align-items: center;
         overflow: hidden;
         padding: px-para-rem(10px);
         box-sizing: border-box;
         margin-left: auto;
+
     }
 
     .buttons_default {
-        height: px-para-rem(32px);
-        width: px-para-rem(174px);
+        height: px-para-rem(31px);
+        width: px-para-rem(154px);
         border-radius: px-para-rem(13px);
         font-size: px-para-rem(16px);
-        color: oklch(1 0 0);
+
+        @include laptop {
+            font-size: px-para-rem(14.7px);
+
+        }
+
+        @include mobile {
+            height: px-para-rem(35px);
+            width: px-para-rem(134px);
+            font-size: unset;
+            font-size: px-para-rem(14px);
+        }
 
         &:hover {
             box-shadow: unset;
             transform: unset;
         }
+        
+
+
     }
 }
