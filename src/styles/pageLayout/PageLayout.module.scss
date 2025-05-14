@@ -1,0 +1,11 @@
+@use '@stylesFunction/mixins' as *;
+@use "@stylesFunction/index" as *;
+
+$testesAtivos: false;
+
+
+.page {
+    width: 100%;
+    max-width: 100%;
+    display: grid;
+}

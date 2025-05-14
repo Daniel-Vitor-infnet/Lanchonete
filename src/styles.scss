@@ -1,0 +1,47 @@
+// Ajuste de SCSS para evitar rolagem horizontal em dispositivos móveis.
+
+@font-face {
+  font-family: 'PlaywriteITModerna';
+  src: url('@/assets/fonts/PlaywriteITModerna/PlaywriteITModerna-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --tema-cor-primaria: #FF6600; // Um fallback caso de problemas
+}
+
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  // Permite quebra de texto e evita zoom automático em iOS.
+  overflow-wrap: break-word;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'PlaywriteITModerna', Arial, sans-serif;
+  -webkit-overflow-scrolling: touch; // Garante rolagem suave em iOS.
+  background-image: url('@/assets/img/Fundo.png');
+  background-size: 100% 100%; // Garante que a imagem cubra a tela.
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: min(100dvh, 100vh);
+  -webkit-background-size: cover;
+}
+
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}

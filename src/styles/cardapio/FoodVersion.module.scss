@@ -1,0 +1,97 @@
+@use '@stylesFunction/mixins' as *;
+@use "@stylesFunction/index" as *;
+
+$testesAtivos: false;
+
+
+
+.main_container {
+  background-color: if($testesAtivos, lime, unset);
+
+
+  .title {
+    background-color: if($testesAtivos, lime, unset);
+    font-size: px-para-rem(18px);
+    font-weight: 600;
+    text-align: center;
+    padding: 10px;
+  }
+
+  .container_items {
+    display: grid;
+    gap: 10px;
+  }
+
+  .container_item {
+    display: grid;
+    grid-template-columns: auto 4fr auto;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 8px 4px 8px rgba(0, 0, 0, 0.2),
+  }
+
+  .img-complemento-container {
+    background-color: if($testesAtivos, hsl(135.06 100% 50%), unset);
+    position: relative;
+    height: px-para-rem(67px);
+    width: px-para-rem(67px);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .img-complemento {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+
+  .container_info {
+    background-color: if($testesAtivos, hsl(356.94 100% 50%), unset);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: px-para-rem(8px) px-para-rem(8px);
+  }
+
+
+  .title_item {
+    font-size: px-para-rem(16px);
+    font-weight: 540;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .price {
+    font-size: px-para-rem(16px);
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .price-free {
+    font-size: px-para-rem(16px); // 1rem
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .button_container { 
+    width: px-para-rem(40px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .button_container { 
+    width: px-para-rem(40px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+}

@@ -1,0 +1,53 @@
+@use "sass:math";
+
+
+@function px-para-rem($px) {
+    @if math.is-unitless($px) {
+        $px: $px * 1px; 
+    }
+    @return math.div($px, 16px) * 1rem;
+}
+
+
+@function alturaResponsivaViewport($valor) {
+    @return min(#{$valor}vh, #{$valor}dvh);
+}
+
+@mixin custom-scrollbar($mode: enable) {
+    @if $mode == enable {
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0.05);
+      -ms-overflow-style: auto;
+  
+      @supports not (scrollbar-width: thin) {
+        &::-webkit-scrollbar {
+          width: 17%;
+        }
+        &::-webkit-scrollbar-track {
+          background: rgba(0, 0, 0, 0.05);
+          border-radius: 3px;
+        }
+        &::-webkit-scrollbar-thumb {
+          background-color: rgba(0, 0, 0, 0.2);
+          border-radius: 3px;
+          border: 1px solid rgba(0, 0, 0, 0.05);
+          transition: background-color .2s ease-in-out;
+        }
+        &::-webkit-scrollbar-thumb:hover {
+          background-color: rgba(0, 0, 0, 0.3);
+        }
+      }
+    }
+    @else if $mode == unset {
+      // volta ao comportamento padrão
+      overflow-y: unset !important;
+      scrollbar-width: unset !important;
+      &::-webkit-scrollbar,
+      &::-webkit-scrollbar-track,
+      &::-webkit-scrollbar-thumb {
+        all: unset;
+      }
+    }
+  }
+  

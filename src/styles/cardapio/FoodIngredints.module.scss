@@ -1,0 +1,103 @@
+@use '@stylesFunction/mixins' as *;
+@use "@stylesFunction/index" as *;
+
+$testesAtivos: false;
+
+
+
+.main_container {
+  background-color: if($testesAtivos, lime, unset);
+  display: grid;
+  gap: 10px;
+
+
+  .container_item {
+    display: grid;
+    grid-template-columns: auto 4fr auto;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 8px 4px 8px rgba(0, 0, 0, 0.2),
+  }
+
+  .img-complemento-container {
+    background-color: if($testesAtivos, hsl(135.06 100% 50%), unset);
+    position: relative;
+    height: px-para-rem(67px);
+    width: px-para-rem(67px);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .img-complemento {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+
+  .container_info {
+    background-color: if($testesAtivos, hsl(356.94 100% 50%), unset);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: px-para-rem(8px) px-para-rem(8px);
+  }
+
+
+  .title_item {
+    font-size: px-para-rem(16px);
+    font-weight: 540;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .container_buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: px-para-rem(10px);
+  }
+
+  .buttons_default {
+    height: px-para-rem(25px);
+    min-width: unset;
+    width: px-para-rem(25px);
+    border-radius: px-para-rem(13px);
+    color: oklch(1 0 0);
+    border: px-para-rem(1px) solid oklch(0.8 0 0 / 0.3);
+
+    &:hover {
+      box-shadow: unset;
+      transform: unset;
+    }
+  }
+
+  .buttons_amount {
+    min-width: px-para-rem(24px);
+    text-align: center;
+    font-size: px-para-rem(18px);
+    font-weight: bold;
+    line-height: px-para-rem(25px); // igual à altura dos botões
+  }
+
+
+  .price {
+    font-size: px-para-rem(16px);
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .price-free {
+    font-size: px-para-rem(16px); // 1rem
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+
+}

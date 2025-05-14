@@ -1,0 +1,26 @@
+# Define como o Git deve tratar quebras de linha
+* text=auto
+
+# Trata arquivos TypeScript e JavaScript como texto
+*.ts     text
+*.tsx    text
+*.js     text
+*.jsx    text
+
+# Trata arquivos de configuração como texto
+*.json   text
+*.yml    text
+*.yaml   text
+*.md     text
+*.html   text
+*.css    text
+
+# Impede que arquivos binários sejam modificados acidentalmente
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.gif    binary
+*.svg    binary
+
+# Linguagem principal para GitHub Linguist (opcional)
+*.ts linguist-language=TypeScript

@@ -1,0 +1,84 @@
+@use '@stylesFunction/mixins' as *;
+@use "@stylesFunction/index" as *;
+@use 'sass:color';
+
+$testesAtivos: false;
+
+.main-container {
+    width: 86%;
+    height: calc(100% - px-para-rem(70px));
+    display: grid;
+    grid-template-columns: 0.23fr 1fr;
+
+    @include laptop {
+        height: 100%;
+        max-height: 100%;
+        width: 83%;
+        grid-template-columns: 0.27fr 1fr;
+    }
+
+    @include mobile {
+        width: 100%;
+        grid-template-columns: unset;
+        grid-template-rows: alturaResponsivaViewport(13) auto;
+    }
+
+    .barra-lateral-container {
+        border-right: px-para-rem(8px) solid color.adjust(blue, $lightness: -10%);
+
+        // @include mobile {
+        //     width: 100%;
+        //     border-right: unset;
+        //     border-bottom: px-para-rem(8px) solid color.adjust(blue, $lightness: -10%);
+        // }
+    }
+
+    .barra-lateral-conteudo {
+        display: grid;
+        grid-template-columns: 0.1fr 1fr;
+        justify-items: center;
+        align-items: center;
+        text-align: start;
+        gap: px-para-rem(10px);
+
+        @include mobile {
+            grid-template-columns: unset;
+        }
+    }
+
+    .barra-lateral-text {
+        min-width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: px-para-rem(15px);
+        font-weight: bold;
+
+        @include laptop {
+            font-size: px-para-rem(11.5px);
+        }
+
+        @include mobile {
+            max-width: 100%;
+            font-size: px-para-rem(13.8px);
+        }
+
+        @include mobile-small {
+            font-size: px-para-rem(11.5px);
+        }
+    }
+
+    .cardapio-container {
+        scrollbar-gutter: stable;
+        overscroll-behavior: contain;
+
+        @include custom-scrollbar;
+
+        @include mobile {
+            @include custom-scrollbar(unset);
+            overflow: unset;
+            scrollbar-gutter: unset; //Considerar tamanho do scrollbar
+            overscroll-behavior: unset; //Dar foco no scroll do container
+        }
+    }
+}

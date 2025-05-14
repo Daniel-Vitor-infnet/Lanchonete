@@ -1,0 +1,17 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 40vh;
+  padding: 2rem;
+  background-color: #fff3f3;
+
+
+}
+
+.alert {
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  font-weight: 500;
+}

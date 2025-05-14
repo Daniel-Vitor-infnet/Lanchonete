@@ -1,0 +1,161 @@
+@use '@stylesFunction/mixins' as *;
+@use "@stylesFunction/index" as *;
+
+$testesAtivos: false;
+
+
+.main-container {
+  background-color: oklch(0.68 0.19 43.9);
+  display: grid;
+  overflow: hidden;
+  grid-template-columns: 1fr 1fr 1fr;
+
+
+
+
+  .logo {
+    max-height: alturaResponsivaViewport(8);
+
+    @include laptop {
+      max-height: alturaResponsivaViewport(10);
+    }
+  }
+
+  .logo img {
+    height: 100%;
+    max-height: 100%;
+    margin-left: px-para-rem(20px);
+    background-color: if($testesAtivos, lime, unset);
+  }
+
+  // Conteúdo do meio
+  .extras {
+    background-color: if($testesAtivos, red, unset);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .status {
+    background-color: if($testesAtivos, yellow, unset);
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: center;
+    align-items: center;
+    gap: px-para-rem(4px);
+  }
+
+  @keyframes corStatus {
+    0% {
+      color: lch(71.85 94.03 134.67);
+    }
+
+    25% {
+      color: lch(80 90 150);
+    }
+
+    50% {
+      color: lch(75 95 180);
+    }
+
+    75% {
+      color: lch(70 85 200);
+    }
+
+    100% {
+      color: lch(71.85 94.03 134.67);
+    }
+  }
+
+  // Status Esrita
+  .status p {
+    font-size: px-para-rem(23.5px);
+    font-variant: small-caps;
+    font-family: monospace;
+    font-weight: bold;
+    animation: corStatus 3s infinite;
+    transition: color 0.3s ease;
+
+    @include laptop {
+      font-size: px-para-rem(20px);
+    }
+
+    @include mobile {
+      font-size: px-para-rem(23px);
+    }
+
+    @include mobile-small {
+      font-size: px-para-rem(18px);
+    }
+  }
+
+
+  .status-icon {
+    animation: corStatus 3s infinite;
+    transition: color 0.3s ease;
+  }
+
+
+
+
+  .menu {
+    background-color: if($testesAtivos, green, unset);
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+    overflow: hidden;
+    gap: px-para-rem(3px);
+  }
+
+  .botaoNav {
+    width: 100%;
+    height: 100%;
+    background-color: unset;
+    font-size: px-para-rem(15px);
+    font-weight: bold;
+    padding: px-para-rem(5px) px-para-rem(18px);
+    border: unset;
+    border-bottom: px-para-rem(5px) solid transparent;
+    transition: all 0.3s ease;
+
+
+    &.ativo {
+      border-bottom: px-para-rem(5px) solid white;
+    }
+
+    @include laptop {
+      font-size: px-para-rem(11px);
+      font-weight: 800;
+
+    }
+  }
+
+  .conta {
+    width: auto;
+    height: auto;
+    display: flex;
+    margin-right: px-para-rem(20px);
+  }
+}
+
+.conteudo-principal {
+  background-color: blue !important;
+  width: 100%;
+  max-width: 100%;
+  min-height: alturaResponsivaViewport(85);
+
+  @include laptop {
+    min-height: alturaResponsivaViewport(78);
+  }
+
+  @include mobile {
+    min-height: alturaResponsivaViewport(81.3);
+  }
+
+  @include mobile {
+    min-height: alturaResponsivaViewport(81);
+  }
+
+
+}

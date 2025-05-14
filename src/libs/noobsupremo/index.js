@@ -1,0 +1,1 @@
+export { default as logPerso } from 'noob-supremo43-libs'; //APenaws um log personalizado

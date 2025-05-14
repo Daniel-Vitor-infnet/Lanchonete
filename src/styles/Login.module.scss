@@ -1,0 +1,89 @@
+@use "@stylesFunction/mixins.scss" as *;
+
+
+$primary-color: mediumspringgreen;
+$secondary-color: skyblue;
+$text-color: white;
+$button-color: darkorchid;
+$error-color: red;
+
+.main-container {
+  min-width: min(100vh, 100dvh);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @include laptop {}
+
+
+
+  @include mobile {}
+
+
+
+  .box {
+    width: 22%;
+    height: 450px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 60px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    overflow: hidden;
+
+    @include laptop {
+      width: 30%;
+      height: 400px;
+      margin-bottom: 60px;
+    }
+
+
+
+    @include mobile {
+      width: 90%;
+    }
+
+
+  }
+
+  .box>* {
+    height: 100%;
+  }
+
+  .link {
+    color: blue;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 8px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    @include laptop {}
+
+
+
+    @include mobile {}
+
+
+  }
+
+  .button {
+    margin-top: 16px;
+    background-color: $button-color !important;
+    color: $text-color !important;
+
+    @include laptop {}
+
+
+
+    @include mobile {}
+
+
+  }
+}

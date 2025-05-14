@@ -1,0 +1,73 @@
+@use '@stylesFunction/mixins' as *;
+@use "@stylesFunction/index" as *;
+
+$testesAtivos: false;
+
+.main_container {
+    background-color: lab(100 0 -0.03);
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+
+    .header_container {
+        height: 5vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: px-para-rem(10px);
+        box-sizing: border-box;
+        gap: px-para-rem(5px);
+    }
+
+    .title {
+        max-width: 55%;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        font-weight: bold;
+    }
+
+    .complement {
+        width: 32%;
+        font-weight: bold;
+        font-size: px-para-rem(18.5px);
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .icon {
+        width: 5%;
+        margin-left: auto;
+        cursor: pointer;
+    }
+
+    .content_container {
+        height: 25vh;
+        border-bottom: px-para-rem(2px) solid oklch(0.8 0 0);
+        border-top: px-para-rem(2px) solid oklch(0.8 0 0);
+        padding: px-para-rem(13px);
+        box-sizing: border-box;
+    }
+
+    .buttons_container {
+        height: 6.5vh;
+        overflow: hidden;
+        padding: px-para-rem(10px);
+        box-sizing: border-box;
+        margin-left: auto;
+    }
+
+    .buttons_default {
+        height: px-para-rem(32px);
+        width: px-para-rem(174px);
+        border-radius: px-para-rem(13px);
+        font-size: px-para-rem(16px);
+        color: oklch(1 0 0);
+
+        &:hover {
+            box-shadow: unset;
+            transform: unset;
+        }
+    }
+}

@@ -1,0 +1,232 @@
+@use '@stylesFunction/mixins' as *;
+@use "@stylesFunction/index" as *;
+
+$testesAtivos: false;
+
+
+.main-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: px-para-rem(9px);
+  margin-top: 15px;
+  margin-bottom: 15px;
+
+  @include laptop {
+    gap: px-para-rem(9px);
+  }
+
+  @include mobile {
+    flex-wrap: unset;
+    flex-direction: column;
+    align-items: center;
+    gap: px-para-rem(9px);
+    margin-top: px-para-rem(30px);
+    margin-bottom: px-para-rem(30px);
+
+  }
+
+
+  .item {
+    width: px-para-rem(240px);
+    height: px-para-rem(380px);
+    display: grid;
+    grid-template-rows: 0.6fr 1fr;
+    // color: oklch(0.47 0.11 50.85);
+    border: px-para-rem(5px) solid oklch(0.6 0.18 43.86);
+    border-radius: px-para-rem(16px);
+    box-shadow: 0 px-para-rem(6px) px-para-rem(12px) rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.03);
+    }
+
+    @include laptop {
+      width: px-para-rem(210px);
+      height: px-para-rem(330px);
+      grid-template-rows: 0.6fr 1fr;
+
+      &:hover {
+        transform: scale(1.025);
+      }
+    }
+
+    @include mobile {
+      width: 90%;
+      height: auto;
+      margin: 0 auto;
+      border: unset;
+      box-shadow: 0 px-para-rem(6px) px-para-rem(12px) rgba(0 0 0 / 0.88);
+      grid-template-rows: unset;
+      grid-template-columns: 0.7fr 1fr;
+
+
+      transition: unset;
+
+      &:hover {
+        transform: none;
+      }
+    }
+  }
+
+  .item-image-container {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .item-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+
+    @include mobile {
+      object-fit: cover;
+
+    }
+  }
+
+
+  .item-info {
+    min-height: 0;
+    max-height: 100%;
+    display: grid;
+    grid-template-rows: 1.4fr 3fr 1fr;
+    justify-items: center;
+    align-items: center;
+    gap: px-para-rem(13.6px);
+    padding: px-para-rem(12.8px);
+
+    @include laptop {
+      gap: px-para-rem(12px);
+    }
+
+    @include mobile {
+      display: grid;
+      grid-template-rows: 1fr auto 1fr;
+      justify-items: unset;
+      align-items: unset;
+      padding: unset;
+      padding-bottom: unset !important;
+    }
+  }
+
+  .item-title-pequeno {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-size: px-para-rem(19.5px);
+    font-weight: bold;
+
+    @include laptop {
+      font-size: px-para-rem(17px);
+    }
+
+    @include mobile {
+      display: grid;
+      justify-content: center;
+      align-items: unset;
+      grid-row: 1;
+      font-size: px-para-rem(20px);
+
+    }
+
+    @include mobile-small {
+      font-size: px-para-rem(17px);
+    }
+  }
+
+  .item-title-grande {
+    width: 100%;
+    text-align: center;
+    white-space: unset;
+    display: -webkit-box;
+    display: box;
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    font-size: px-para-rem(17px);
+    font-weight: bold;
+    overflow: hidden;
+
+    @include laptop {
+      width: 100%;
+      font-size: px-para-rem(16px);
+    }
+
+    @include mobile {
+
+      font-size: px-para-rem(15px);
+    }
+  }
+
+
+  .item-description {
+    display: -webkit-box;
+    display: box;
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    overflow: hidden;
+    text-align: center;
+    font-size: px-para-rem(16px);
+
+    @include laptop {
+      font-weight: 600;
+      font-size: px-para-rem(13px);
+    }
+
+    @include mobile {
+      width: 90%;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      margin-left: 11px;
+      justify-content: unset;
+      align-items: unset;
+      grid-row: 2;
+      text-align: unset;
+      font-size: px-para-rem(17px);
+      font-weight: unset;
+
+    }
+
+    @include mobile-small {
+      font-size: px-para-rem(14px);
+    }
+  }
+
+  .item-price {
+    max-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: px-para-rem(18px);
+    font-weight: bold;
+    overflow: hidden;
+
+
+    @include laptop {
+      font-size: px-para-rem(15.5px);
+    }
+
+    @include mobile {
+      display: grid;
+      justify-content: end;
+      align-items: center;
+      grid-row: 3;
+      margin-right: px-para-rem(8px);
+      font-size: px-para-rem(18px);
+    }
+
+    @include mobile-small {
+      font-size: px-para-rem(15px);
+    }
+  }
+}

@@ -1,0 +1,124 @@
+@use '@stylesFunction/mixins' as *;
+
+
+$primary-color: #1e90ff;
+$text-color: black;
+$background-white: white;
+$border-color: #000000;
+
+.main-container {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 60px;
+  margin-top: 60px;
+
+  @include laptop {}
+
+
+
+  @include mobile {}
+
+
+
+  .box {
+    background-color: rgb(255 255 255);
+    min-width: 40%;
+    border-radius: 10px;
+    padding: 60px;
+
+    @include laptop {
+      min-width: 56%;
+    }
+
+
+
+    @include mobile {
+      max-width: 90%;
+      padding: 30px;
+    }
+
+
+  }
+
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+
+    @include laptop {}
+
+
+
+    @include mobile {}
+
+
+  }
+
+  .sub-title {
+    display: flex;
+    align-items: center;
+
+    @include laptop {}
+
+
+
+    @include mobile {}
+
+
+  }
+
+  .option-container {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid $border-color;
+    padding: 20px;
+
+    @include laptop {}
+
+
+
+    @include mobile {}
+
+
+  }
+
+  .button-aplicar-container {
+    display: flex;
+    justify-content: end;
+    margin-top: 40px;
+
+    @include laptop {}
+
+
+
+    @include mobile {}
+
+
+  }
+
+  .button-pedidos-cards-container {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    height: 140px;
+    margin-top: 50px;
+    border-radius: 6px;
+    gap: 20px;
+
+    @include laptop {
+      height: unset;
+    }
+
+
+
+    @include mobile {}
+
+
+  }
+
+}

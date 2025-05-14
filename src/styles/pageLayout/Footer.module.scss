@@ -1,0 +1,66 @@
+@use '@stylesFunction/mixins' as *;
+@use "@stylesFunction/index" as *;
+
+$testesAtivos: false;
+
+.footer-container {
+    overflow: hidden;
+    background-color: #030303;
+    color: white;
+    text-align: center;
+    border-top: px-para-rem(8px) solid #ffcc00;
+    padding: px-para-rem(16px) 0;
+
+    .company-name {
+        font-weight: bold;
+        letter-spacing: px-para-rem(2px);
+        font-size: px-para-rem(24px);
+        text-transform: uppercase;
+
+        @include laptop {
+            font-size: px-para-rem(18px);
+        }
+    }
+
+    .grid-container {
+        display: flex;
+        justify-content: center;
+        gap: px-para-rem(16px);
+    }
+
+    .contact-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: px-para-rem(8px);
+    }
+
+    .icon-text {
+        display: flex;
+        align-items: center;
+        gap: px-para-rem(8px);
+        font-size: px-para-rem(18px);
+
+        @include laptop {
+            font-size: px-para-rem(14px);
+        }
+    }
+
+    .social-media-container {
+        display: flex;
+        justify-content: center;
+        gap: px-para-rem(16px);
+        margin-top: px-para-rem(24px);
+    }
+
+    .copyright-text {
+        margin-top: px-para-rem(20px);
+        opacity: 0.8;
+        font-size: px-para-rem(14px);
+
+        @include laptop {
+            margin-top: px-para-rem(5px);
+            font-size: px-para-rem(12px);
+        }
+    }
+}

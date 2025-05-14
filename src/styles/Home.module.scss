@@ -1,0 +1,45 @@
+@use "@stylesFunction/mixins" as *;
+
+$teste-color: mediumspringgreen;
+$teste-border-color: skyblue;
+
+.home {
+  .carousel {
+    height: 25vh;
+    background-color: $teste-color;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+
+  .avatar-container {
+    width: 160px;
+    height: 160px;
+    position: relative;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    outline: 4px solid $teste-border-color;
+  }
+
+  .avatar {
+    width: 100%;
+    height: 100%;
+    outline: 4px solid darkorchid;
+  }
+
+  .status {
+    position: absolute;
+    font-size: 0.8rem;
+    padding: 1.8px;
+    border-radius: 6px;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 380%);
+    color: white;
+    background-color: red;
+  }
+
+
+}

@@ -1,0 +1,93 @@
+@use '@stylesFunction/mixins' as *;
+@use "@stylesFunction/index" as *;
+
+$testesAtivos: false;
+
+
+.main_container {
+  background-color: if($testesAtivos, lch(37.47 68.81 35.75), oklch(1 0 0));
+  width: 34%;
+  height: 90%;
+  border-radius: 20px;
+    @include custom-scrollbar;
+
+  @include mobile {
+    @include custom-scrollbar(unset);
+  }
+
+  .title {
+    padding: px-para-rem(30px);
+    font-size: px-para-rem(26px);
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: px-para-rem(15px);
+    border-bottom: 2px dashed black;
+  }
+
+  .text_container {
+    display: flex;
+    flex-direction: column;
+    gap: px-para-rem(5px);
+    width: 60%;
+  }
+
+  .text_Title {
+    font-size: px-para-rem(18px);
+    font-weight: bold;
+  }
+
+  .text_Description {
+    font-size: px-para-rem(16px);
+    display: -webkit-box;
+    display: box;
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    overflow: hidden;
+  }
+
+  .circulo_colorido {
+    width: px-para-rem(40px);
+    height: px-para-rem(40px);
+    border-radius: 50%;
+    border: px-para-rem(2px) solid #000;
+    cursor: pointer;
+  }
+
+
+  .select_container {
+    border: 3px solid mediumvioletred;
+    width: 26vw;
+    height: alturaResponsivaViewport(76);
+  }
+
+  .buttons_data_base_container {
+    padding: px-para-rem(30px);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .buttons_data_base {
+    height: px-para-rem(37px);
+    width: px-para-rem(174px);
+    border-radius: px-para-rem(13px);
+    font-size: px-para-rem(16px);
+    margin-left: px-para-rem(10px);
+    color: oklch(1 0 0);
+
+    &:hover {
+      box-shadow: unset;
+      transform: unset;
+    }
+  }
+
+
+
+}
