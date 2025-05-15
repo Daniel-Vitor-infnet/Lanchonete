@@ -1,0 +1,82 @@
+@use '@stylesFunction/mixins' as *;
+@use "@stylesFunction/index" as *;
+
+$testesAtivos: false;
+
+
+
+.main_container {
+  background-color: if($testesAtivos, lime, unset);
+  display: grid;
+  gap: 10px;
+
+
+  .food_container {
+    display: flex;
+    justify-content: space-between;
+
+  }
+
+  .title {
+    background-color: if($testesAtivos, lime, unset);
+    font-size: px-para-rem(18px);
+    font-weight: 600;
+    text-align: center;
+    padding: 10px;
+  }
+
+  .food_name {
+    background-color: if($testesAtivos, lime, unset);
+    font-size: px-para-rem(17.6px);
+    font-weight: 600;
+    color: oklch(0.68 0.2 43.5)
+  }
+
+  .title_category {
+    background-color: if($testesAtivos, lime, unset);
+    font-size: px-para-rem(16px);
+    font-weight: 600;
+    color: oklch(0.68 0.2 43.5)
+  }
+
+  .title_itens {
+    background-color: if($testesAtivos, lime, unset);
+    font-size: px-para-rem(17px);
+  }
+
+
+  .complements_container {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    padding-left: px-para-rem(13px);
+    box-sizing: border-box;
+  }
+
+  .ingredients_container {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    padding-left: px-para-rem(13px);
+    box-sizing: border-box;
+  }
+
+
+  .price {
+    font-size: px-para-rem(16px);
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .price_free {
+    font-size: px-para-rem(16px); // 1rem
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+
+}
