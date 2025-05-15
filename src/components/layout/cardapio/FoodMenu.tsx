@@ -6,6 +6,7 @@ import { InterfaceFoodAddons, InterfaceFoodDataBase, InterfaceSettingsColors, In
 import FoodVersion from '@/components/layout/cardapio/FoodVersion';
 import FoodIngredients from '@/components/layout/cardapio/FoodIngredients';
 import FoodComplement from '@/components/layout/cardapio/FoodComplement';
+import FoodOrderEnd from '@/components/layout/cardapio/FoodOrderEnd';
 import { ButtonPerson } from '@/components';
 import stylesPerso from "@/styles/cardapio/FoodMenu.module.scss";
 import { Blur } from '@/components';
@@ -155,9 +156,6 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
 
   //#endregion
 
-  //logPerso({ tipo: "info", mensagem: "Opcionais", variavel: complementBaseData[pagCurrent.id!] });
-
-  console.log(stylesPerso["close_button"])
 
   return (
     <Blur>
@@ -227,7 +225,13 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
               />
             )}
             {pagCurrent.name === 'orderEnd' && (
-              <p>Pedido finalizado</p>
+              <FoodOrderEnd
+                food={FoodSelect}
+                complements={Object.values(complements).flatMap((c) => c.items)}
+                version={versions}
+                ingredients={Object.values(ingredients).filter((i) => i.amount > 0)}
+                settingsColorsBaseData={settingsColorsBaseData}
+              />
             )}
           </Grid>
         </Grid>
