@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Card, CardContent, Typography, Grid, Box } from "@/libs/mui";
-import { getByScreenSize, estoqueItemCardapio, formatarValorR$, culoriCalc } from "@/utils/function";
+import { getByScreenSize, imgStockCheck, formatMoneyBR, culoriCalc } from "@/utils/function";
 import stylesPerso from "@/styles/cardapio/CardsFoods.module.scss";
 import { logPerso } from 'noob-supremo43-libs';
 import { InterfaceFoodDataBase, InterfaceSettingsColors } from "@/types";
@@ -46,7 +46,7 @@ const CardsList: React.FC<CardsListProps> = ({ comidas, setSelectFood, settingsC
               }}
             >
               <Box className={stylesPerso['item_image_container']}>
-                {estoqueItemCardapio({
+                {imgStockCheck({
                   image: item.image,
                   altImg: item.title,
                   stylesPerso: stylesPerso['item_image'],
@@ -62,7 +62,7 @@ const CardsList: React.FC<CardsListProps> = ({ comidas, setSelectFood, settingsC
                   {item.description}
                 </Typography>
                 <Typography className={stylesPerso['item_price']} style={{ color: settingsColorsBaseData['dinheiro'].value }}>
-                  {formatarValorR$(item.price)}
+                  {formatMoneyBR(item.price)}
                 </Typography>
               </CardContent>
             </Card>
@@ -78,7 +78,7 @@ const CardsList: React.FC<CardsListProps> = ({ comidas, setSelectFood, settingsC
           content={
             <Grid className={stylesPerso['main_container_alert']}>
               <Box className={stylesPerso['item_image_container_alert']}>
-                {estoqueItemCardapio({
+                {imgStockCheck({
                   image: itemOut.image,
                   altImg: itemOut.title,
                   stylesPerso: stylesPerso['item_image_alert'],
@@ -90,7 +90,7 @@ const CardsList: React.FC<CardsListProps> = ({ comidas, setSelectFood, settingsC
                 {itemOut.description}
               </Typography>
               <Typography className={stylesPerso['item_price_alert']} style={{ color: settingsColorsBaseData['dinheiro'].value }}>
-                {formatarValorR$(itemOut.price)}
+                {formatMoneyBR(itemOut.price)}
               </Typography>
             </Grid>
           }

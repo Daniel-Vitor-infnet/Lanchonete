@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { Grid, Typography, Box } from "@/libs/mui";
 import { InterfaceSettingsColors, InterfaceIngredientMap } from '@/types';
-import { estoqueItemCardapio, formatarValorR$, culoriCalc } from '@/utils/function';
+import { imgStockCheck, formatMoneyBR, culoriCalc } from '@/utils/function';
 import stylesPerso from "@/styles/cardapio/FoodIngredints.module.scss";
 import { ButtonPerson } from '@/components';
 
@@ -46,11 +46,11 @@ export default function FoodIngredients({ ingredients, setIngredients, settingsC
                             },
                         }}
                     >
-                        <Box className={stylesPerso["img-complemento-container"]} >
-                            {estoqueItemCardapio({
+                        <Box className={stylesPerso["img_complemento_container"]} >
+                            {imgStockCheck({
                                 image: ing.image,
                                 altImg: ing.title,
-                                stylesPerso: stylesPerso["img-complemento"],
+                                stylesPerso: stylesPerso["img_complemento"],
                                 stock: ing.stock,
                             })}
                         </Box>
@@ -61,13 +61,13 @@ export default function FoodIngredients({ ingredients, setIngredients, settingsC
                             </Typography>
                             {/* Lógica de preço gratis ou preço normal */}
                             <Typography className={stylesPerso["price"]} style={{ color: settingsColorsBaseData["dinheiro"].value }}>
-                                {formatarValorR$(ing.price)}
+                                {formatMoneyBR(ing.price)}
                             </Typography>
                             {ing.amount > 0 && (
                                 <Typography className={stylesPerso["price"]} style={{ color: settingsColorsBaseData["escrita_dark"].value }}>
                                     SubTotal:
                                     <span style={{ color: settingsColorsBaseData["dinheiro"].value }}>
-                                        {formatarValorR$(ing.price * ing.amount)}
+                                        {formatMoneyBR(ing.price * ing.amount)}
                                     </span>
                                 </Typography>
                             )}

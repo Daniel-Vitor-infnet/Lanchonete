@@ -57,7 +57,7 @@ type Params = {
 };
 
 
-export function estoqueItemCardapio({ image, altImg, stylesPerso, stock, limit }: Params) {
+export function imgStockCheck({ image, altImg, stylesPerso, stock, limit }: Params) {
   //console.log("image base", image);
 
 

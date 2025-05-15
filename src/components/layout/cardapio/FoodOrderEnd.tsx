@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@/libs/mui"; import { culoriCalc, formatarValorR$ } from "@/utils/function";
+import { Grid, Typography } from "@/libs/mui"; import { culoriCalc, formatMoneyBR } from "@/utils/function";
 import { InterfaceFoodPropVersion, InterfaceFoodVersion, InterfaceIngredient, InterfaceSettingsColors, InterfaceFoodDataBase } from "@/types"
 import { Box } from "@mui/material";
 import stylesPerso from "@/styles/cardapio/FoodOrderEnd.module.scss";
@@ -32,7 +32,7 @@ export default function FoodOrderEnd({ food, complements, version, ingredients, 
                     {`${food.title} (Versão: ${version.title})`}
                 </Typography>
                 <Typography className={stylesPerso["price"]} style={{ color: settingsColorsBaseData["dinheiro"].value }}>
-                    {formatarValorR$(version.price)}
+                    {formatMoneyBR(version.price)}
                 </Typography>
             </Box>
 
@@ -49,7 +49,7 @@ export default function FoodOrderEnd({ food, complements, version, ingredients, 
                                 • {i.title}
                             </Typography>
                             <Typography className={stylesPerso["price"]} style={{ color: settingsColorsBaseData["dinheiro"].value }}>
-                                {formatarValorR$(i.price)}
+                                {formatMoneyBR(i.price)}
                             </Typography>
                         </Box>
                     ))
@@ -69,7 +69,7 @@ export default function FoodOrderEnd({ food, complements, version, ingredients, 
                             • {c.title}
                         </Typography>
                         <Typography className={stylesPerso[c.price > 0 ? "price" : "price_free"]} style={{ color: settingsColorsBaseData["dinheiro"].value }}>
-                            {c.price > 0 ? formatarValorR$(c.price) : "Grátis"}
+                            {c.price > 0 ? formatMoneyBR(c.price) : "Grátis"}
                         </Typography>
                     </Box>
                 ))}

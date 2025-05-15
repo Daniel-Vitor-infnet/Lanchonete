@@ -1,6 +1,6 @@
 import { Grid, Typography, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Box } from "@/libs/mui";
 import { InterfaceFoodAddons, InterfaceSettingsColors, InterfaceFoodVersion, InterfaceFoodDataBase } from '@/types';
-import { foodVersionCheck, iconSelect, estoqueItemCardapio, formatarValorR$, culoriCalc } from '@/utils/function';
+import { foodVersionCheck, iconSelect, imgStockCheck, formatMoneyBR, culoriCalc } from '@/utils/function';
 import stylesPerso from "@/styles/cardapio/FoodVersion.module.scss";
 
 
@@ -58,11 +58,11 @@ export default function FoodComplement({ food, version, setVersions, versionBase
                   },
                 }}
               >
-                <Box className={stylesPerso["img-complemento-container"]} >
-                  {estoqueItemCardapio({
+                <Box className={stylesPerso["img_complemento-container"]} >
+                  {imgStockCheck({
                     image: v.image || food.image,
                     altImg: v.title,
-                    stylesPerso: stylesPerso["img-complemento"],
+                    stylesPerso: stylesPerso["img_complemento"],
                     stock: v.stock,
                     limit: !!v.image ? 1 : food.amount_image,
                   })}
@@ -72,7 +72,7 @@ export default function FoodComplement({ food, version, setVersions, versionBase
                     {v.title}
                   </Typography>
                   <Typography className={stylesPerso["price"]} style={{ color: settingsColorsBaseData["dinheiro"].value }}>
-                    {formatarValorR$(v.price)}
+                    {formatMoneyBR(v.price)}
                   </Typography>
                 </Grid>
                 {v.stock

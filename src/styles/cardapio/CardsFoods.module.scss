@@ -8,8 +8,9 @@ $testesAtivos: false;
   flex-wrap: wrap;
   justify-content: center;
   gap: px-para-rem(9px);
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-top: px-para-rem(15px);
+  margin-bottom: px-para-rem(15px);
+
 
   @include laptop {
     gap: px-para-rem(9px);

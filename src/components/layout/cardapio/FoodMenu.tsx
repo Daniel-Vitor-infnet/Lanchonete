@@ -1,7 +1,7 @@
 import { Grid, Typography } from "@/libs/mui";
 import { useCallback, useState, useEffect, useMemo } from 'react';
 import { useComplementosPorComida, useVersionPorComidas, useSettingsColors, useDatabaseStatusUI, useIngredientesPorComida } from '@/hooks'
-import { getByScreenSize, estoqueItemCardapio, iconSelect, formatarValorR$, culoriCalc, foodVersionCheck, getBrowser } from "@/utils/function";
+import { getByScreenSize, imgStockCheck, iconSelect, formatMoneyBR, culoriCalc, foodVersionCheck, getBrowser } from "@/utils/function";
 import { InterfaceFoodAddons, InterfaceFoodDataBase, InterfaceSettingsColors, InterfaceFoodVersion, InterfaceIngredient, InterfaceIngredientMap } from '@/types';
 import FoodVersion from '@/components/layout/cardapio/FoodVersion';
 import FoodIngredients from '@/components/layout/cardapio/FoodIngredients';
@@ -172,10 +172,10 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
 
         {/* Imagem */}
         <Grid className={stylesPerso["menu_image_container"]}>
-          {estoqueItemCardapio({
+          {imgStockCheck({
             image: FoodSelect.image,
             altImg: FoodSelect.title,
-            stylesPerso: stylesPerso["img-complemento"],
+            stylesPerso: stylesPerso["img_complemento"],
             stock: FoodSelect.stock,
             limit: FoodSelect.amount_image,
           })}
@@ -239,7 +239,7 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
         {/* Rodapé com total e botões */}
         <Grid className={stylesPerso["order_footer"]} style={{ background: settingsColorsBaseData["base_tematica"].value }} >
           <Typography className={stylesPerso["order_total"]} style={{ color: settingsColorsBaseData["dinheiro"].value }} >
-            Total: {formatarValorR$(total)}
+            Total: {formatMoneyBR(total)}
           </Typography>
           <Grid className={stylesPerso["order_buttons"]}>
             <ButtonPerson

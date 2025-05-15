@@ -3,18 +3,14 @@
 
 $testesAtivos: false;
 
-
-
 .main_container {
   background-color: if($testesAtivos, lime, unset);
   display: grid;
-  gap: 10px;
-
+  gap: px-para-rem(10px);
 
   .food_container {
     display: flex;
     justify-content: space-between;
-
   }
 
   .title {
@@ -22,21 +18,21 @@ $testesAtivos: false;
     font-size: px-para-rem(18px);
     font-weight: 600;
     text-align: center;
-    padding: 10px;
+    padding: px-para-rem(10px);
   }
 
   .food_name {
     background-color: if($testesAtivos, lime, unset);
     font-size: px-para-rem(17.6px);
     font-weight: 600;
-    color: oklch(0.68 0.2 43.5)
+    color: oklch(0.68 0.2 43.5);
   }
 
   .title_category {
     background-color: if($testesAtivos, lime, unset);
     font-size: px-para-rem(16px);
     font-weight: 600;
-    color: oklch(0.68 0.2 43.5)
+    color: oklch(0.68 0.2 43.5);
   }
 
   .title_itens {
@@ -44,10 +40,9 @@ $testesAtivos: false;
     font-size: px-para-rem(17px);
   }
 
-
   .complements_container {
     display: flex;
-    gap: 10px;
+    gap: px-para-rem(10px);
     justify-content: space-between;
     padding-left: px-para-rem(13px);
     box-sizing: border-box;
@@ -55,12 +50,11 @@ $testesAtivos: false;
 
   .ingredients_container {
     display: flex;
-    gap: 10px;
+    gap: px-para-rem(10px);
     justify-content: space-between;
     padding-left: px-para-rem(13px);
     box-sizing: border-box;
   }
-
 
   .price {
     font-size: px-para-rem(16px);
@@ -77,6 +71,4 @@ $testesAtivos: false;
     overflow: hidden;
     text-overflow: ellipsis;
   }
-
-
 }

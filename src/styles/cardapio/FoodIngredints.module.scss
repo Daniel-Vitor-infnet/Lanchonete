@@ -3,23 +3,20 @@
 
 $testesAtivos: false;
 
-
-
 .main_container {
   background-color: if($testesAtivos, lime, unset);
   display: grid;
-  gap: 10px;
-
+  gap: px-para-rem(10px);
 
   .container_item {
     display: grid;
     grid-template-columns: auto 4fr auto;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 8px 4px 8px rgba(0, 0, 0, 0.2),
+    padding: px-para-rem(10px);
+    border-radius: px-para-rem(10px);
+    box-shadow: px-para-rem(8px) px-para-rem(4px) px-para-rem(8px) rgba(0, 0, 0, 0.2);
   }
 
-  .img-complemento-container {
+  .img_complemento_container {
     background-color: if($testesAtivos, hsl(135.06 100% 50%), unset);
     position: relative;
     height: px-para-rem(67px);
@@ -28,13 +25,12 @@ $testesAtivos: false;
     flex-shrink: 0;
   }
 
-  .img-complemento {
+  .img_complemento {
     position: absolute;
     width: 100%;
     height: 100%;
     object-fit: contain;
   }
-
 
   .container_info {
     background-color: if($testesAtivos, hsl(356.94 100% 50%), unset);
@@ -43,7 +39,6 @@ $testesAtivos: false;
     justify-content: center;
     padding: px-para-rem(8px) px-para-rem(8px);
   }
-
 
   .title_item {
     font-size: px-para-rem(16px);
@@ -82,7 +77,6 @@ $testesAtivos: false;
     line-height: px-para-rem(25px); // igual à altura dos botões
   }
 
-
   .price {
     font-size: px-para-rem(16px);
     font-weight: 600;
@@ -90,14 +84,5 @@ $testesAtivos: false;
     overflow: hidden;
     text-overflow: ellipsis;
   }
-
-  .price-free {
-    font-size: px-para-rem(16px); // 1rem
-    font-weight: 600;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
 
 }

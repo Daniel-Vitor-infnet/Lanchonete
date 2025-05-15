@@ -1,7 +1,7 @@
 import { Grid, Typography, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Box } from "@/libs/mui";
 import { InterfaceFoodAddons, InterfaceSettingsColors } from '@/types';
-import { foodVersionCheck, estoqueItemCardapio, formatarValorR$, culoriCalc, iconSelect } from '@/utils/function';
-import stylesPerso from "@/styles/cardapio/FoodComplement1.module.scss";
+import { foodVersionCheck, imgStockCheck, formatMoneyBR, culoriCalc, iconSelect } from '@/utils/function';
+import stylesPerso from "@/styles/cardapio/FoodComplement.module.scss";
 
 
 type CategoriaComComidas = InterfaceFoodAddons[string];
@@ -76,11 +76,11 @@ export default function FoodComplement({ complement, setComplements, complementD
                   },
                 }}
               >
-                <Box className={stylesPerso["img-complemento-container"]} >
-                  {estoqueItemCardapio({
+                <Box className={stylesPerso["img_complemento_container"]} >
+                  {imgStockCheck({
                     image: c.image,
                     altImg: c.title,
-                    stylesPerso: stylesPerso["img-complemento"],
+                    stylesPerso: stylesPerso["img_complemento"],
                     stock: c.stock,
                     limit: c.amount_image,
                   })}
@@ -91,8 +91,8 @@ export default function FoodComplement({ complement, setComplements, complementD
                     {foodVersionCheck({ data: c, yes: `${c.title} (${c.version?.title})`, no: c.title })}
                   </Typography>
                   {/* Lógica de preço gratis ou preço normal */}
-                  <Typography className={stylesPerso[c.free ? "price-free" : "price"]} style={{ color: settingsColorsBaseData["dinheiro"].value }}>
-                    {c.free ? "Grátis" : foodVersionCheck({ data: c, yes: formatarValorR$(c.version?.price), no: formatarValorR$(c.price) })}
+                  <Typography className={stylesPerso[c.free ? "price_free" : "price"]} style={{ color: settingsColorsBaseData["dinheiro"].value }}>
+                    {c.free ? "Grátis" : foodVersionCheck({ data: c, yes: formatMoneyBR(c.version?.price), no: formatMoneyBR(c.price) })}
                   </Typography>
                 </Grid>
                 {/* Lógica para saber se o item tem estoque ou não */}

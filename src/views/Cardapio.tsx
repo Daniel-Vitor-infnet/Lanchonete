@@ -102,7 +102,7 @@ const Cardapio = ({ categoryDataBase, foodsDataBase, settingsColorsBaseData }: C
 
 
   return (
-    <Box className={styles['main-container']}>
+    <Box className={styles['main_container']}>
       <TabContext value={selectCategoryID}>
         <TabList
           orientation={typeTab}
@@ -110,7 +110,7 @@ const Cardapio = ({ categoryDataBase, foodsDataBase, settingsColorsBaseData }: C
           allowScrollButtonsMobile
           variant="scrollable"
           onChange={(_, newValue) => setSelectCategoryID(newValue)}
-          className={styles['barra-lateral-container']}
+          className={styles['barra_lateral_container']}
           sx={{
             ".MuiTabs-scrollButtons": { width: "auto" },
             ".MuiTabs-scrollButtons.Mui-disabled": { display: "none" },
@@ -142,11 +142,11 @@ const Cardapio = ({ categoryDataBase, foodsDataBase, settingsColorsBaseData }: C
                     display: "usnet",
                   },
                 }}
-                className={styles['barra-lateral-subcontainer']}
+                className={styles['barra_lateral_subcontainer']}
                 label={
-                  <Grid className={styles['barra-lateral-conteudo']}>
+                  <Grid className={styles['barra_lateral_conteudo']}>
                     {iconSelect({ iconInfo: c.icon, size: iconSize, colorData: settingsColorsBaseData["icon_dark"].value, })}
-                    <Typography className={styles['barra-lateral-text']} style={{ color: culoriCalc({ keyColorData: settingsColorsBaseData['escrita_dark'].value, calc: [0.24, 0.0, 0.0] }) }}>
+                    <Typography className={styles['barra_lateral_text']} style={{ color: culoriCalc({ keyColorData: settingsColorsBaseData['escrita_dark'].value, calc: [0.24, 0.0, 0.0] }) }}>
                       {c.title}
                     </Typography>
                   </Grid>
@@ -158,7 +158,7 @@ const Cardapio = ({ categoryDataBase, foodsDataBase, settingsColorsBaseData }: C
         <TabPanel
           key={selectCategoryID}
           value={selectCategoryID}
-          className={styles['cardapio-container']}
+          className={styles['cardapio_container']}
           sx={{
             '&::-webkit-scrollbar-thumb': {
               backgroundColor: settingsColorsBaseData["scrollbar"].value,
