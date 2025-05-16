@@ -107,13 +107,21 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
 
   // ¦  ========== [ Valores ] ==========
 
-  const versionsTotal = useMemo(() => {
+  const versionsPrice = useMemo(() => {
     return FoodVersionBaseData.length > 0 ? versions.price : FoodSelect.price // Se não tiver versão, pega o preço padrão da comida
   }, [versions])
 
+  const ingredientsPriceTotal = useMemo(() => {
+    return Object.values(ingredients)
+      .filter((c) => c.amount !== 0)
+      .reduce((sum, c) => {
+        return sum + (c.price * c.amount); // Soma os preços dos complementos escolhidos
+      }, 0);
+
+  }, [ingredients])
 
   // Opcionais filtrados
-  const complementsfiltered = useMemo(() => {
+  const complementsTotal = useMemo(() => {
     return Object.values(complements)
       .flatMap((c) => c.items) // Converte o array separado por categorias para um único array de todos os itens escolhidos
       .filter((c) => c.id !== "null") // Filtra as opção de n escolher um complemento (id === null)
@@ -123,8 +131,8 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
   }, [complements])
 
   const total = useMemo(() => {
-    return versionsTotal + complementsfiltered; // Soma o preço da comida com o preço dos complementos escolhidos
-  }, [complementsfiltered, versionsTotal])
+    return versionsPrice + ingredientsPriceTotal + complementsTotal; // Soma o preço da comida com o preço dos complementos escolhidos
+  }, [versionsPrice, ingredientsPriceTotal, complementsTotal])
 
 
 
@@ -156,6 +164,7 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
 
   //#endregion
 
+  console.log("pagCurrent", pagCurrentIndex)
 
   return (
     <Blur>
@@ -191,6 +200,7 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
 
         {/* Conteúdo de cada etapa */}
         <Grid className={stylesPerso["menu_steps_wrapper"]}
+          key={pagCurrentIndex}
           sx={{
             '&::-webkit-scrollbar-thumb': {
               backgroundColor: settingsColorsBaseData["scrollbar"].value,
