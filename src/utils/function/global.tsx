@@ -18,11 +18,6 @@ export function formatMoneyBR(valor: number | undefined): string {
 
 
 
-interface ReorderObjectProps<T extends Record<string, any>> {
-  obj: T;
-  order: (keyof T)[];
-}
-
 interface ReorderArrayProps {
   arr: any[];
   order: any[];

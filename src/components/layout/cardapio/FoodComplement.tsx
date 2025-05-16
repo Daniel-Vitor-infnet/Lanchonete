@@ -1,6 +1,6 @@
 import { Grid, Typography, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Box } from "@/libs/mui";
 import { InterfaceFoodAddons, InterfaceSettingsColors } from '@/types';
-import { foodVersionCheck, imgStockCheck, formatMoneyBR, culoriCalc, iconSelect } from '@/utils/function';
+import { foodVersionCheck, imgStockCheck2, formatMoneyBR, culoriCalc, iconSelect } from '@/utils/function';
 import stylesPerso from "@/styles/cardapio/FoodComplement.module.scss";
 
 
@@ -77,7 +77,7 @@ export default function FoodComplement({ complement, setComplements, complementD
                 }}
               >
                 <Box className={stylesPerso["img_complemento_container"]} >
-                  {imgStockCheck({
+                  {imgStockCheck2({
                     image: c.image,
                     altImg: c.title,
                     stylesPerso: stylesPerso["img_complemento"],

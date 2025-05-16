@@ -1,7 +1,7 @@
 import { Grid, Typography } from "@/libs/mui";
 import { useCallback, useState, useEffect, useMemo } from 'react';
 import { useComplementosPorComida, useVersionPorComidas, useSettingsColors, useDatabaseStatusUI, useIngredientesPorComida } from '@/hooks'
-import { getByScreenSize, imgStockCheck, iconSelect, formatMoneyBR, culoriCalc, foodVersionCheck, getBrowser } from "@/utils/function";
+import { getByScreenSize, imgStockCheck2, iconSelect, formatMoneyBR, culoriCalc, foodVersionCheck, getBrowser } from "@/utils/function";
 import { InterfaceFoodAddons, InterfaceFoodDataBase, InterfaceSettingsColors, InterfaceFoodVersion, InterfaceIngredient, InterfaceIngredientMap } from '@/types';
 import FoodVersion from '@/components/layout/cardapio/FoodVersion';
 import FoodIngredients from '@/components/layout/cardapio/FoodIngredients';
@@ -172,7 +172,7 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
 
         {/* Imagem */}
         <Grid className={stylesPerso["menu_image_container"]}>
-          {imgStockCheck({
+          {imgStockCheck2({
             image: FoodSelect.image,
             altImg: FoodSelect.title,
             stylesPerso: stylesPerso["img_complemento"],

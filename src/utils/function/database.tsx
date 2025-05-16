@@ -48,7 +48,16 @@ export function gerarImagemAleatoria(path: string, total: number): string {
 }
 
 
-type Params = {
+interface imgStockCheckProps {
+  image: string;
+  altImg: string;
+  stylesPerso?: string;
+  stock: boolean;
+  limit?: number;
+};
+
+
+interface imgStockCheckProps2 {
   image: string;
   altImg: string;
   stylesPerso: any;
@@ -57,7 +66,64 @@ type Params = {
 };
 
 
-export function imgStockCheck({ image, altImg, stylesPerso, stock, limit }: Params) {
+export function imgStockCheck({ image, altImg, stylesPerso, stock, limit }: imgStockCheckProps) {
+  //console.log("image base", image);
+
+
+  // Se o item tiver mais de uma imagem, gera uma imagem aleatória
+  if (!!limit && limit > 1) {
+    image = gerarImagemAleatoria(image, limit);
+  }
+
+
+  const imageData = getPublicImageURL(image);
+
+
+  const imgContainerStyle: React.CSSProperties = {
+    position: 'relative',
+    overflow: 'hidden',
+  };
+
+  const imgStyle: React.CSSProperties = {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    objectFit: 'contain',
+  };
+
+
+  if (stock) {
+    return (
+      <div style={stylesPerso ? {} : imgContainerStyle}>
+        <img
+          src={imageData}
+          alt={altImg}
+          loading="lazy"
+          style={stylesPerso ? {} : imgStyle}
+        />
+      </div>
+    );
+  } else {
+    return (
+      <div style={stylesPerso ? {} : imgContainerStyle}>
+        <img
+          src={imageData}
+          alt={altImg}
+          loading="lazy"
+          style={{ filter: "grayscale(100%)", ...(stylesPerso ? {} : imgStyle) }}
+        />
+        <img
+          src="https://tcbwhkdbktgzelgtyzgv.supabase.co/storage/v1/object/public/image/extras/esgotado.png"
+          alt="Esgotado"
+          style={stylesPerso ? {} : imgStyle}
+        />
+      </div>
+    );
+  }
+}
+
+
+export function imgStockCheck2({ image, altImg, stylesPerso, stock, limit }: imgStockCheckProps2) {
   //console.log("image base", image);
 
 

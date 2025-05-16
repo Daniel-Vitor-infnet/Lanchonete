@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Card, CardContent, Typography, Grid, Box } from "@/libs/mui";
-import { getByScreenSize, imgStockCheck, formatMoneyBR, culoriCalc } from "@/utils/function";
+import { getByScreenSize, imgStockCheck2, formatMoneyBR, culoriCalc } from "@/utils/function";
 import stylesPerso from "@/styles/cardapio/CardsFoods.module.scss";
 import { logPerso } from 'noob-supremo43-libs';
 import { InterfaceFoodDataBase, InterfaceSettingsColors } from "@/types";
@@ -46,7 +46,7 @@ const CardsList: React.FC<CardsListProps> = ({ comidas, setSelectFood, settingsC
               }}
             >
               <Box className={stylesPerso['item_image_container']}>
-                {imgStockCheck({
+                {imgStockCheck2({
                   image: item.image,
                   altImg: item.title,
                   stylesPerso: stylesPerso['item_image'],
@@ -78,7 +78,7 @@ const CardsList: React.FC<CardsListProps> = ({ comidas, setSelectFood, settingsC
           content={
             <Grid className={stylesPerso['main_container_alert']}>
               <Box className={stylesPerso['item_image_container_alert']}>
-                {imgStockCheck({
+                {imgStockCheck2({
                   image: itemOut.image,
                   altImg: itemOut.title,
                   stylesPerso: stylesPerso['item_image_alert'],

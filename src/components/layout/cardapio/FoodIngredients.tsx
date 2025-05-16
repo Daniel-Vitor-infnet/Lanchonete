@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { Grid, Typography, Box } from "@/libs/mui";
 import { InterfaceSettingsColors, InterfaceIngredientMap } from '@/types';
-import { imgStockCheck, formatMoneyBR, culoriCalc } from '@/utils/function';
+import { imgStockCheck2, formatMoneyBR, culoriCalc } from '@/utils/function';
 import stylesPerso from "@/styles/cardapio/FoodIngredints.module.scss";
 import { ButtonPerson } from '@/components';
 
@@ -47,7 +47,7 @@ export default function FoodIngredients({ ingredients, setIngredients, settingsC
                         }}
                     >
                         <Box className={stylesPerso["img_complemento_container"]} >
-                            {imgStockCheck({
+                            {imgStockCheck2({
                                 image: ing.image,
                                 altImg: ing.title,
                                 stylesPerso: stylesPerso["img_complemento"],
