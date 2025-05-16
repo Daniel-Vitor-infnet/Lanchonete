@@ -12,7 +12,7 @@ interface FoodOrderEndProps {
     food: InterfaceFoodDataBase;
     complements: InterfaceFoodPropVersion[];
     version: InterfaceFoodVersion;
-    ingredients: InterfaceIngredientAmount[] | undefined;
+    ingredients: InterfaceIngredientAmount[] | [];
     settingsColorsBaseData: InterfaceSettingsColors
 }
 
@@ -20,6 +20,7 @@ interface FoodOrderEndProps {
 export default function FoodOrderEnd({ food, complements, version, ingredients, settingsColorsBaseData }: FoodOrderEndProps) {
 
 
+    console.log(ingredients)
     return (
         <Box className={stylesPerso["main_container"]} >
 
@@ -42,8 +43,8 @@ export default function FoodOrderEnd({ food, complements, version, ingredients, 
                 <Typography className={stylesPerso["title_category"]} style={{ color: settingsColorsBaseData["escrita_tematica"].value }} >
                     Ingredientes (Extras)
                 </Typography>
-                {!!ingredients
-                    ? ingredients!.map((i) => (
+                {ingredients.length > 0
+                    ? ingredients.map((i) => (
                         <Box key={i.id} className={stylesPerso["ingredients_container"]}>
                             <Typography className={stylesPerso["title_itens"]} style={{ color: settingsColorsBaseData["escrita_dark"].value }} >
                                 • {i.title}
@@ -53,7 +54,11 @@ export default function FoodOrderEnd({ food, complements, version, ingredients, 
                             </Typography>
                         </Box>
                     ))
-                    : <Typography>Nenhum ingrediente escolhido</Typography>
+                    : <Box className={stylesPerso["ingredients_container"]}>
+                        <Typography className={stylesPerso["title_itens"]} style={{ color: settingsColorsBaseData["escrita_dark"].value }} >
+                            Nenhum ingrediente escolhido
+                        </Typography>
+                    </Box>
                 }
             </Box>
 

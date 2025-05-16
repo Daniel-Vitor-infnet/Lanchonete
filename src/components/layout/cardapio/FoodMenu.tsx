@@ -259,7 +259,7 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
               />)
               : (<ButtonPerson
                 colorsData={settingsColorsBaseData}
-                className={stylesPerso["buttons_default"]}
+                className={stylesPerso["button_order_end"]}
                 text="Fianalizar Pedido"
                 onClick={() => ("")}
               />)

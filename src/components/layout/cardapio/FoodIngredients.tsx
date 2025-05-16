@@ -44,7 +44,7 @@ export default function FoodIngredients({ ingredients, setIngredients, settingsC
                 {Object.values(ingredients).map((ing) => {
                     return (
                         <Grid
-                            className={`${stylesPerso["item_container"]} ${stylesPerso["item_container_ingredients"]}`}
+                            className={stylesPerso["item_container_ingredients"]}
                             key={ing.id}
                             sx={{
                                 backgroundColor: 'trnasparent',
@@ -99,7 +99,7 @@ export default function FoodIngredients({ ingredients, setIngredients, settingsC
                                     />
 
                                 </Grid>
-                                : <span className={`${stylesPerso["icon_Stock"]} ${stylesPerso["icon_Stock_ingredients"]}`} >{iconSelect({ iconInfo: "mui-geral-Close", size: 1.7, colorData: culoriCalc({ keyColorData: settingsColorsBaseData['base_tematica'].value, calc: [-0.19, 0.09, -31.58] }) })}</span>
+                                : <span className={stylesPerso["icon_Stock_ingredients"]} >{iconSelect({ iconInfo: "mui-geral-Close", size: 1.7, colorData: culoriCalc({ keyColorData: settingsColorsBaseData['base_tematica'].value, calc: [-0.19, 0.09, -31.58] }) })}</span>
                             }
                         </ Grid>
                     )

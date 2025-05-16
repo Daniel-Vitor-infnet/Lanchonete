@@ -3,22 +3,6 @@ import { supabase } from '@/libs/supabaseClient'
 import { InterfaceFoodPropVersion, InterfaceFoodAddons } from '@/types'
 import { getPublicImageURL } from '@/utils/function'
 
-// Default Option fixo
-const defaultOption: InterfaceFoodPropVersion = {
-  id: "null",
-  categoria_id: "null",
-  free: true,
-  title: "Não quero complemento",
-  description: "null",
-  price: 0,
-  image: "extras/noOption.webp",
-  stock: true,
-  sale: true,
-  promotion: null,
-  amount_image: 1,
-  version: null,
-}
-
 export const useComplementosPorComida = (
   comidaId: string,
   temDefaultOption: boolean = true,
@@ -87,12 +71,29 @@ export const useComplementosPorComida = (
         // Cria a categoria se ainda não existir
         if (!acc[key]) {
           acc[key] = {
-            category: { ...cat },     // sem ordem na categoria
-            order: row.order,         // ordem vinda de complementos
+            category: { ...cat },
+            order: row.order,
             items: []
           }
+
           // Sempre adiciona o defaultOption no início se ativado
           if (temDefaultOption) {
+            const randomId = Math.floor(Math.random() * 1001) // 0–1000
+            const randomCategoriaId = 1001 + Math.floor(Math.random() * 1001) // 1001–2001
+            const defaultOption: InterfaceFoodPropVersion = {
+              id: `null${randomId}`,
+              categoria_id: `null${randomCategoriaId}`,
+              free: true,
+              title: "Não quero complemento",
+              description: "null",
+              price: 0,
+              image: "extras/noOption.webp",
+              stock: true,
+              sale: true,
+              promotion: null,
+              amount_image: 1,
+              version: null,
+            }
             acc[key].items.push(defaultOption)
           }
         }
@@ -128,28 +129,24 @@ export const useComplementosPorComida = (
 
       // Ordena os items de cada categoria do mais barato ao mais caro
       for (const categoria of Object.values(agrupado)) {
-        // Separa o defaultOption do resto
         const [defaultItem, outros] = categoria.items.reduce<[InterfaceFoodPropVersion | null, InterfaceFoodPropVersion[]]>(
           (acc, item) => {
-            if (item.id === defaultOption.id) acc[0] = item
+            if (item.title === "Não quero complemento") acc[0] = item
             else acc[1].push(item)
             return acc
           },
           [null, []]
         )
 
-        // Ordena baseando-se no preço real, considerando regra do free
         outros.sort((a, b) => {
           const priceA = a.free ? 0 : a.version ? a.version.price : a.price
           const priceB = b.free ? 0 : b.version ? b.version.price : b.price
           return priceA - priceB
         })
 
-        // Garante o defaultOption sempre no topo
         categoria.items = defaultItem ? [defaultItem, ...outros] : outros
       }
 
-      // Ordena as categorias pela coluna "order" da tabela complementos
       return Object.fromEntries(
         Object.entries(agrupado).sort(([, a], [, b]) => (a.order ?? 0) - (b.order ?? 0))
       )

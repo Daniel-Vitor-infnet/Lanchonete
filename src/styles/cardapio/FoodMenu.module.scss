@@ -14,7 +14,7 @@ $testesAtivos: false;
 
   @include laptop {
     width: 35vw;
-    grid-template-rows: 0.2fr 0.8fr 0.4fr 0.9fr 0.2fr;
+    grid-template-rows: 0.2fr 0.8fr 0.3fr 1fr 0.2fr;
 
   }
 
@@ -108,7 +108,7 @@ $testesAtivos: false;
     overflow: hidden;
 
     @include laptop {
-      font-size: px-para-rem(16px);
+      padding: px-para-rem(20px);
     }
 
     span {
@@ -129,6 +129,12 @@ $testesAtivos: false;
     padding: px-para-rem(20px);
 
     @include custom-scrollbar;
+
+
+    @include laptop {
+      padding: px-para-rem(5px) px-para-rem(10px);
+    }
+
 
     @include mobile {
       @include custom-scrollbar(unset);
@@ -162,7 +168,7 @@ $testesAtivos: false;
       font-size: px-para-rem(18px);
     }
   }
-    
+
   .order_buttons {
     display: flex;
     gap: px-para-rem(10px);
@@ -182,12 +188,20 @@ $testesAtivos: false;
 
     @include laptop {
       height: px-para-rem(30px);
-      width: px-para-rem(120px);
+      width: px-para-rem(130px);
       font-size: px-para-rem(14px);
     }
-
-
-
   }
+
+ .button_order_end {
+  @extend .buttons_default;
+
+  @include laptop {
+    width: px-para-rem(144px);
+    font-size: px-para-rem(13px);
+  }
+
+ }
   
+
 }

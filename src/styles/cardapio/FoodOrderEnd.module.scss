@@ -19,6 +19,12 @@ $testesAtivos: false;
     font-weight: 600;
     text-align: center;
     padding: px-para-rem(10px);
+
+
+    @include laptop {
+      font-size: px-para-rem(17px);
+      padding: unset;
+    }
   }
 
   .food_name {
@@ -26,18 +32,34 @@ $testesAtivos: false;
     font-size: px-para-rem(17.6px);
     font-weight: 600;
     color: oklch(0.68 0.2 43.5);
+
+
+
+    @include laptop {
+      font-size: px-para-rem(16px);
+    }
   }
 
   .title_category {
     background-color: if($testesAtivos, lime, unset);
-    font-size: px-para-rem(16px);
+    font-size: px-para-rem(17px);
     font-weight: 600;
     color: oklch(0.68 0.2 43.5);
+
+
+    @include laptop {
+      font-size: px-para-rem(16px);
+    }
   }
 
   .title_itens {
     background-color: if($testesAtivos, lime, unset);
-    font-size: px-para-rem(17px);
+    font-size: px-para-rem(16px);
+
+
+    @include laptop {
+      font-size: px-para-rem(15px);
+    }
   }
 
   .complements_container {
@@ -62,13 +84,14 @@ $testesAtivos: false;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+
+    @include laptop {
+      font-size: px-para-rem(15px);
+    }
   }
 
   .price_free {
-    font-size: px-para-rem(16px); // 1rem
-    font-weight: 600;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    @extend .price;
   }
 }
