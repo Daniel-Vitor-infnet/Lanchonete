@@ -1,0 +1,124 @@
+@use '@stylesFunction/mixins' as *;
+@use "@stylesFunction/index" as *;
+
+$testesAtivos: false;
+
+.main_container {
+
+  .title {
+    font-size: px-para-rem(18px);
+    font-weight: 600;
+    text-align: center;
+    padding: px-para-rem(10px);
+
+
+    @include laptop {
+      font-size: px-para-rem(17px);
+      padding: unset;
+    }
+  }
+
+  .items_container {
+    display: grid;
+    gap: px-para-rem(10px);
+  }
+
+  .item_container {
+    height: 70px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 5fr 0.3fr;
+
+    border-radius: px-para-rem(14px);
+    box-shadow: px-para-rem(8px) px-para-rem(4px) px-para-rem(8px) rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+  }
+
+  .item_container_ingredients {
+    grid-template-columns: 1fr 4fr 1.4fr;
+    position: relative;
+  }
+
+
+  .img_stock_check_container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .img_stock_check {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .info_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: px-para-rem(8px) px-para-rem(8px);
+  }
+
+  .title_item {
+    font-size: px-para-rem(16px);
+    font-weight: 540;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .price {
+    font-size: px-para-rem(16px);
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+
+  .icon_Stock {
+    width: 43px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .icon_Stock_ingredients {
+    position: absolute;
+    right: 6.5%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  // # Ingredientes 
+
+
+  .buttons_container_ingredients {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: px-para-rem(10px);
+  }
+
+  .buttons_amount {
+    height: px-para-rem(25px);
+    min-width: unset;
+    width: px-para-rem(25px);
+    border-radius: px-para-rem(13px);
+    color: oklch(1 0 0);
+    border: px-para-rem(1px) solid oklch(0.8 0 0 / 0.3);
+
+
+  }
+
+  .amount {
+    text-align: center;
+    font-size: px-para-rem(18.5px);
+    font-weight: bold;
+    padding: 0 5px;
+  }
+
+
+
+}

@@ -14,6 +14,8 @@ $testesAtivos: false;
 
   @include laptop {
     width: 35vw;
+    grid-template-rows: 0.2fr 0.8fr 0.4fr 0.9fr 0.2fr;
+
   }
 
   .menu_header {
@@ -40,6 +42,12 @@ $testesAtivos: false;
     -webkit-line-clamp: 2;
     line-clamp: 2;
     overflow: hidden;
+
+
+    @include laptop {
+      font-size: px-para-rem(19px);
+    }
+
   }
 
   .title {
@@ -50,6 +58,13 @@ $testesAtivos: false;
     transform: translateX(-50%);
     pointer-events: none;
     overflow: hidden;
+
+
+    @include laptop {
+      font-size: px-para-rem(10px);
+    }
+
+
   }
 
   .close_button {
@@ -92,9 +107,18 @@ $testesAtivos: false;
     line-clamp: 2;
     overflow: hidden;
 
+    @include laptop {
+      font-size: px-para-rem(16px);
+    }
+
     span {
       font-size: px-para-rem(19px);
       font-weight: bold;
+
+      @include laptop {
+        font-size: px-para-rem(16px);
+      }
+
     }
   }
 
@@ -135,10 +159,10 @@ $testesAtivos: false;
     font-weight: bold;
 
     @include laptop {
-      font-size: px-para-rem(20px);
+      font-size: px-para-rem(18px);
     }
   }
-
+    
   .order_buttons {
     display: flex;
     gap: px-para-rem(10px);
@@ -155,5 +179,15 @@ $testesAtivos: false;
       box-shadow: unset;
       transform: unset;
     }
+
+    @include laptop {
+      height: px-para-rem(30px);
+      width: px-para-rem(120px);
+      font-size: px-para-rem(14px);
+    }
+
+
+
   }
+  
 }

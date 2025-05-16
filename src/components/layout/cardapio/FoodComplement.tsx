@@ -1,7 +1,7 @@
 import { Grid, Typography, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Box } from "@/libs/mui";
 import { InterfaceFoodAddons, InterfaceSettingsColors } from '@/types';
-import { foodVersionCheck, imgStockCheck2, formatMoneyBR, culoriCalc, iconSelect } from '@/utils/function';
-import stylesPerso from "@/styles/cardapio/FoodComplement.module.scss";
+import { foodVersionCheck, imgStockCheck, formatMoneyBR, culoriCalc, iconSelect } from '@/utils/function';
+import stylesPerso from "@/styles/cardapio/FoodMenuOptions.module.scss";
 
 
 type CategoriaComComidas = InterfaceFoodAddons[string];
@@ -52,17 +52,15 @@ export default function FoodComplement({ complement, setComplements, complementD
 
 
       <RadioGroup
-        aria-labelledby="demo-controlled-radio-buttons-group"
-        name="controlled-radio-buttons-group"
         value={complement.items[0].version ? 'ver-' + complement.items[0].version.id : complement.items[0].id} // Abaixo: Lógica para saber se foi escolhido uma versão da comida ou não
         onChange={(e) => complementSelect(e.target.value)}
       >
 
-        <Box className={stylesPerso["container_items"]} >
+        <Box className={stylesPerso["items_container"]} >
           {complementData.items.map(c => {
             return (
               <Grid
-                className={stylesPerso["container_item"]}
+                className={stylesPerso["item_container"]}
                 style={{ cursor: c.stock ? "pointer" : "unset" }}
                 key={c.version?.id || c.id}
                 onClick={!c.stock ? undefined : () => {
@@ -76,16 +74,13 @@ export default function FoodComplement({ complement, setComplements, complementD
                   },
                 }}
               >
-                <Box className={stylesPerso["img_complemento_container"]} >
-                  {imgStockCheck2({
+                {imgStockCheck({
                     image: c.image,
                     altImg: c.title,
-                    stylesPerso: stylesPerso["img_complemento"],
                     stock: c.stock,
                     limit: c.amount_image,
                   })}
-                </Box>
-                <Grid className={stylesPerso["container_info"]}>
+                <Grid className={stylesPerso["info_container"]}>
                   {/* Lógica de titulos de acordo com a versão da comida */}
                   <Typography className={stylesPerso["title_item"]} style={{ color: settingsColorsBaseData["escrita_dark"].value }}>
                     {foodVersionCheck({ data: c, yes: `${c.title} (${c.version?.title})`, no: c.title })}
@@ -108,9 +103,9 @@ export default function FoodComplement({ complement, setComplements, complementD
                     }} />}
                     label={null}
                     labelPlacement="end"
-                    style={{ backgroundColor: "unset", margin: "unset" }}
+                    style={{  margin: "unset" }}
                   />
-                  : <span className={stylesPerso["button_container"]} >{iconSelect({ iconInfo: "mui-geral-Close", size: 1.7, colorData: culoriCalc({ keyColorData: settingsColorsBaseData['base_tematica'].value, calc: [-0.19, 0.09, -31.58] }) })}</span>
+                  : <span className={stylesPerso["icon_Stock"]} >{iconSelect({ iconInfo: "mui-geral-Close", size: 1.7, colorData: culoriCalc({ keyColorData: settingsColorsBaseData['base_tematica'].value, calc: [-0.19, 0.09, -31.58] }) })}</span>
                 }
               </ Grid>
             )
