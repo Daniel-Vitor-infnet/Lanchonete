@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
 import { supabase } from '@/libs/supabaseClient'
-import { InterfaceFoodPropVersion, InterfaceFoodVersion } from '@/types'
+import { InterfaceFoodVersionDataBase } from '@/types'
 
 export function useVersionPorComidas(
   comidaId: string,
   isSale: boolean = true
 ) {
-  return useQuery<InterfaceFoodVersion[]>({
+  return useQuery<InterfaceFoodVersionDataBase[]>({
     queryKey: ['versoes-comida', comidaId, isSale],
     queryFn: async () => {
       const { data, error } = await supabase

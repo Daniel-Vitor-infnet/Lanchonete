@@ -120,6 +120,7 @@ export const useComplementosPorComida = (
               image: versao.image,
               stock: versao.stock,
               sale: versao.sale,
+              free: row.free
             }
             : null,
         } as InterfaceFoodPropVersion)
