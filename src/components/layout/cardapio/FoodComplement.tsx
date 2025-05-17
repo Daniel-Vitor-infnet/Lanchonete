@@ -19,7 +19,6 @@ interface FoodComplementProps {
 export default function FoodComplement({ complement, setComplements, complementData, settingsColorsBaseData }: FoodComplementProps) {
 
 
-
   const complementSelect = ((select: string) => {
     const removeVer = (s: string) => s.startsWith('ver-') ? s.slice(4) : null;
     const selectedVersion = complementData.items.find(c => !removeVer(select) ? c.id === select : c.version?.id === removeVer(select));
@@ -39,6 +38,8 @@ export default function FoodComplement({ complement, setComplements, complementD
     }));
   })
 
+  //const colectIndex = Object.values(complementData).findIndex(c => c.category.id === "João");
+
 
   // ===== Renderização =====
   return (
@@ -47,7 +48,7 @@ export default function FoodComplement({ complement, setComplements, complementD
         className={stylesPerso["title"]}
         style={{ color: settingsColorsBaseData["escrita_dark"].value }}
       >
-        Opcional {complement.category.title}
+        Opcional: {complement.category.title} {complement.order} de {Object.keys(complementData).length}
       </FormLabel>
 
 

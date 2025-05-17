@@ -66,12 +66,12 @@ export default function FoodOrderEnd({ food, complements, version, ingredients, 
 
             <Box>
                 <Typography className={stylesPerso["title_category"]} style={{ color: settingsColorsBaseData["escrita_tematica"].value }} >
-                    Complementos
+                    Opcionais
                 </Typography>
-                {complements.map((c) => (
+                {complements.map((c, index) => (
                     <Box key={c.id} className={stylesPerso["complements_container"]}>
                         <Typography className={stylesPerso["title_itens"]} style={{ color: settingsColorsBaseData["escrita_dark"].value }} >
-                            • {c.title}
+                            • {c.title} (Opcional {index + 1})
                         </Typography>
                         <Typography className={stylesPerso[c.price > 0 ? "price" : "price_free"]} style={{ color: settingsColorsBaseData["dinheiro"].value }}>
                             {c.price > 0 ? formatMoneyBR(c.price) : "Grátis"}
