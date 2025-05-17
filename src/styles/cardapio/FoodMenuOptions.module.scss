@@ -32,12 +32,25 @@ $testesAtivos: false;
     border-radius: px-para-rem(14px);
     box-shadow: px-para-rem(8px) px-para-rem(4px) px-para-rem(8px) rgba(0, 0, 0, 0.2);
     overflow: hidden;
+
+
+    @include mobile {
+      height: px-para-rem(76px);
+      grid-template-columns: 1.7fr 5fr 0.3fr;
+    }
   }
 
   .item_container_ingredients {
     @extend .item_container;
     grid-template-columns: 1fr 4fr 1.4fr;
     position: relative;
+
+    @include mobile {
+      height: px-para-rem(84px);
+      grid-template-columns: 1.7fr 5fr 2.7fr;
+    }
+
+
   }
 
 
@@ -109,12 +122,16 @@ $testesAtivos: false;
 
   .buttons_amount {
     height: px-para-rem(25px);
-    min-width: unset;
+    min-width: unset; //Efeito do mui
     width: px-para-rem(25px);
     border-radius: px-para-rem(13px);
     color: oklch(1 0 0);
     border: px-para-rem(1px) solid oklch(0.8 0 0 / 0.3);
 
+    @include mobile {
+      height: px-para-rem(30px);
+      width: px-para-rem(26px);
+    }
 
   }
 

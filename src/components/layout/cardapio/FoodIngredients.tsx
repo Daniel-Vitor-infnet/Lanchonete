@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { Grid, Typography, Box } from "@/libs/mui";
 import { InterfaceSettingsColors, InterfaceIngredientMap } from '@/types';
-import { imgStockCheck, formatMoneyBR, culoriCalc, iconSelect } from '@/utils/function';
+import { imgStockCheck, formatMoneyBR, culoriCalc, iconSelect, getByScreenSize } from '@/utils/function';
 import stylesPerso from "@/styles/cardapio/FoodMenuOptions.module.scss";
 import { ButtonPerson } from '@/components';
 
@@ -30,6 +30,7 @@ export default function FoodIngredients({ ingredients, setIngredients, settingsC
 
 
 
+    const subTotal = getByScreenSize({ desktop: ["flex", "0.5rem"], mobile: ["collum", "unset"] });
 
 
     // ===== Renderização =====
@@ -64,12 +65,12 @@ export default function FoodIngredients({ ingredients, setIngredients, settingsC
                                     {ing.title}
                                 </Typography>
                                 {/* Lógica de preço gratis ou preço normal */}
-                                <Box sx={{ display: "flex" }}>
+                                <Box sx={{ display: subTotal[0] }}>
                                     <Typography className={stylesPerso["price"]} style={{ color: settingsColorsBaseData["dinheiro"].value }}>
                                         {formatMoneyBR(ing.price)}
                                     </Typography>
                                     {ing.amount > 0 && (
-                                        <Typography className={stylesPerso["price"]} style={{ color: settingsColorsBaseData["escrita_dark"].value, marginLeft: "0.5rem" }}>
+                                        <Typography className={stylesPerso["price"]} style={{ color: settingsColorsBaseData["escrita_dark"].value, marginLeft: subTotal[1] }}>
                                             SubTotal:
                                             <span style={{ color: settingsColorsBaseData["dinheiro"].value }}>
                                                 {formatMoneyBR(ing.price * ing.amount)}

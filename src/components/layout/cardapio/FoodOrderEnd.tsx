@@ -1,5 +1,5 @@
 import { Grid, Typography } from "@/libs/mui"; import { culoriCalc, formatMoneyBR } from "@/utils/function";
-import { InterfaceFoodPropVersion, InterfaceFoodVersion, InterfaceIngredient, InterfaceSettingsColors, InterfaceFoodDataBase } from "@/types"
+import { InterfaceFoodPropVersion, InterfaceFoodVersionDataBase, InterfaceIngredient, InterfaceSettingsColors, InterfaceFoodDataBase } from "@/types"
 import { Box } from "@mui/material";
 import stylesPerso from "@/styles/cardapio/FoodOrderEnd.module.scss";
 
@@ -11,7 +11,7 @@ interface InterfaceIngredientAmount extends InterfaceIngredient {
 interface FoodOrderEndProps {
     food: InterfaceFoodDataBase;
     complements: InterfaceFoodPropVersion[];
-    version: InterfaceFoodVersion;
+    version: InterfaceFoodVersionDataBase;
     ingredients: InterfaceIngredientAmount[] | [];
     settingsColorsBaseData: InterfaceSettingsColors
 }

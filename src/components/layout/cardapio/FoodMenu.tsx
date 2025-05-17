@@ -2,7 +2,7 @@ import { Grid, Typography } from "@/libs/mui";
 import { useCallback, useState, useEffect, useMemo } from 'react';
 import { useComplementosPorComida, useVersionPorComidas, useSettingsColors, useDatabaseStatusUI, useIngredientesPorComida } from '@/hooks'
 import { getByScreenSize, imgStockCheck2, iconSelect, formatMoneyBR, culoriCalc, foodVersionCheck, getBrowser } from "@/utils/function";
-import { InterfaceFoodAddons, InterfaceFoodDataBase, InterfaceSettingsColors, InterfaceFoodVersion, InterfaceIngredient, InterfaceIngredientMap } from '@/types';
+import { InterfaceFoodAddons, InterfaceFoodDataBase, InterfaceSettingsColors, InterfaceFoodVersionDataBase, InterfaceIngredient, InterfaceIngredientMap } from '@/types';
 import FoodVersion from '@/components/layout/cardapio/FoodVersion';
 import FoodIngredients from '@/components/layout/cardapio/FoodIngredients';
 import FoodComplement from '@/components/layout/cardapio/FoodComplement';
@@ -72,7 +72,7 @@ type CardapioProps = {
   FoodSelect: InterfaceFoodDataBase;
   settingsColorsBaseData: InterfaceSettingsColors;
   setSelectFood: React.Dispatch<React.SetStateAction<InterfaceFoodDataBase | null>>
-  FoodVersionBaseData: InterfaceFoodVersion[];
+  FoodVersionBaseData: InterfaceFoodVersionDataBase[];
   FoodIngredientsBaseData: InterfaceIngredient[];
 };
 
@@ -86,7 +86,7 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
   // Estado para armazenar o index da pagina atual
   const [pagCurrentIndex, setPaginaAtualIndex] = useState(0);
 
-  const [versions, setVersions] = useState<InterfaceFoodVersion>(FoodVersionBaseData[0]); // Estado para armazenar a versão da comida com valor inicial da primeira 
+  const [versions, setVersions] = useState<InterfaceFoodVersionDataBase>(FoodVersionBaseData[0]); // Estado para armazenar a versão da comida com valor inicial da primeira 
 
   const [ingredients, setIngredients] = useState<InterfaceIngredientMap>(FoodIngredientsBaseData.reduce<InterfaceIngredientMap>((acc, ing) => {
     acc[ing.id] = { ...ing, amount: 0 };
@@ -164,7 +164,6 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
 
   //#endregion
 
-  console.log("pagCurrent", pagCurrentIndex)
 
   return (
     <Blur>

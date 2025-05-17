@@ -18,6 +18,14 @@ $testesAtivos: false;
 
   }
 
+  @include mobile {
+    width: 100%;
+    height: alturaResponsivaViewport(100);
+    grid-template-rows: 0.2fr 0.8fr 0.3fr 1fr 0.2fr;
+    overflow-y: unset;
+
+  }
+
   .menu_header {
     display: flex;
     justify-content: flex-end;
@@ -111,6 +119,13 @@ $testesAtivos: false;
       padding: px-para-rem(20px);
     }
 
+    @include mobile {
+      padding: px-para-rem(10px);
+      font-size: px-para-rem(16px);
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+    }
+
     span {
       font-size: px-para-rem(19px);
       font-weight: bold;
@@ -138,6 +153,7 @@ $testesAtivos: false;
 
     @include mobile {
       @include custom-scrollbar(unset);
+      overflow: auto;
     }
   }
 
@@ -167,6 +183,8 @@ $testesAtivos: false;
     @include laptop {
       font-size: px-para-rem(18px);
     }
+
+
   }
 
   .order_buttons {
@@ -191,17 +209,36 @@ $testesAtivos: false;
       width: px-para-rem(130px);
       font-size: px-para-rem(14px);
     }
+
+
+    @include mobile {
+      height: px-para-rem(40px);
+      width: px-para-rem(120px);
+      font-size: px-para-rem(14px);
+    }
+
+    @include mobile-small {
+      height: px-para-rem(40px);
+      width: px-para-rem(100px);
+      font-size: px-para-rem(14px);
+    }
   }
 
- .button_order_end {
-  @extend .buttons_default;
+  .button_order_end {
+    @extend .buttons_default;
 
-  @include laptop {
-    width: px-para-rem(144px);
-    font-size: px-para-rem(13px);
+    @include laptop {
+      width: px-para-rem(144px);
+      font-size: px-para-rem(13px);
+    }
+
+    @include mobile {
+      height: px-para-rem(40px);
+      width: px-para-rem(120px);
+      font-size: px-para-rem(14px);
+    }
+
   }
 
- }
-  
 
 }
