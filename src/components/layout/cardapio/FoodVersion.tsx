@@ -1,22 +1,26 @@
 import { Grid, Typography, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Box } from "@/libs/mui";
-import { InterfaceFoodAddons, InterfaceSettingsColors, InterfaceFoodVersion, InterfaceFoodDataBase } from '@/types';
-import { foodVersionCheck, iconSelect, estoqueItemCardapio, formatarValorR$, culoriCalc } from '@/utils/function';
-import stylesPerso from "@/styles/cardapio/FoodVersion.module.scss";
+import { InterfaceFoodAddons, InterfaceSettingsColors, InterfaceFoodVersionDataBase, InterfaceFoodDataBase } from '@/types';
+import { getByScreenSize, iconSelect, imgStockCheck, formatMoneyBR, culoriCalc } from '@/utils/function';
+import stylesPerso from "@/styles/cardapio/FoodMenuOptions.module.scss";
 
 
 // Props esperadas pelo componente Comidas
 interface FoodComplementProps {
   food: InterfaceFoodDataBase
-  version: InterfaceFoodVersion
-  setVersions: React.Dispatch<React.SetStateAction<InterfaceFoodVersion>>
-  versionBaseData: InterfaceFoodVersion[]
+  version: InterfaceFoodVersionDataBase
+  setVersions: React.Dispatch<React.SetStateAction<InterfaceFoodVersionDataBase>>
+  versionBaseData: InterfaceFoodVersionDataBase[]
   settingsColorsBaseData: InterfaceSettingsColors
 }
 
 
 
+
+
+
 export default function FoodComplement({ food, version, setVersions, versionBaseData, settingsColorsBaseData }: FoodComplementProps) {
 
+  const mobileBackGroundSelect = getByScreenSize({ desktop: false, mobile: true });
 
 
   // ===== Renderização =====
@@ -31,8 +35,6 @@ export default function FoodComplement({ food, version, setVersions, versionBase
 
 
       <RadioGroup
-        aria-labelledby="demo-controlled-radio-buttons-group"
-        name="controlled-radio-buttons-group"
         value={version.id || versionBaseData[0].id} // 
         onChange={(e) => {
           const selectedVersion = versionBaseData.find(v => v.id === e.target.value);
@@ -40,39 +42,42 @@ export default function FoodComplement({ food, version, setVersions, versionBase
         }}
       >
 
-        <Box className={stylesPerso["container_items"]}>
+        <Box className={stylesPerso["items_container"]}>
           {versionBaseData.map(v => {
             return (
               <Grid
-                className={stylesPerso["container_item"]}
+                className={stylesPerso["item_container"]}
                 style={{ cursor: v.stock ? "pointer" : "unset" }}
                 key={v.id}
                 onClick={() => {
                   if (window.getSelection()?.toString()) return;
+                  if (!v.stock) return;
                   setVersions(v);
                 }}
-                sx={{
-                  backgroundColor: 'trnasparent',
-                  '&:hover': {
-                    backgroundColor: culoriCalc({ keyColorData: settingsColorsBaseData["fundo_tematica"].value, calc: [-0.06, 0.05, -0.91] }),
-                  },
-                }}
+                sx={mobileBackGroundSelect 
+                  ? { backgroundColor: v.id === version.id ? culoriCalc({ keyColorData: settingsColorsBaseData["fundo_tematica"].value, calc: [-0.06, 0.05, -0.91] }): "trnasparent" }
+                  : {
+                    backgroundColor: 'trnasparent',
+                    '&:hover': {
+                      backgroundColor: culoriCalc({ keyColorData: settingsColorsBaseData["fundo_tematica"].value, calc: [-0.06, 0.05, -0.91] }),
+                    },
+                  }
+                }
+
               >
-                <Box className={stylesPerso["img-complemento-container"]} >
-                  {estoqueItemCardapio({
-                    image: v.image || food.image,
-                    altImg: v.title,
-                    stylesPerso: stylesPerso["img-complemento"],
-                    stock: v.stock,
-                    limit: !!v.image ? 1 : food.amount_image,
-                  })}
-                </Box>
-                <Grid className={stylesPerso["container_info"]}>
+                {imgStockCheck({
+                  image: v.image || food.image,
+                  altImg: v.title,
+                  stock: v.stock,
+                  limit: !!v.image ? 1 : food.amount_image,
+                })}
+                {/* <img src="https://via.placeholder.com/150" alt={"1"} style={{ height: "100%", width: "100%"}} /> */}
+                <Grid className={stylesPerso["info_container"]}>
                   <Typography className={stylesPerso["title_item"]} style={{ color: settingsColorsBaseData["escrita_dark"].value }}>
                     {v.title}
                   </Typography>
                   <Typography className={stylesPerso["price"]} style={{ color: settingsColorsBaseData["dinheiro"].value }}>
-                    {formatarValorR$(v.price)}
+                    {formatMoneyBR(v.price)}
                   </Typography>
                 </Grid>
                 {v.stock
@@ -87,9 +92,9 @@ export default function FoodComplement({ food, version, setVersions, versionBase
                     }} />}
                     label={null}
                     labelPlacement="end"
-                    style={{ backgroundColor: "unset", margin: "unset" }}
+                    style={{ margin: "unset" }}
                   />
-                  : <span className={stylesPerso["button_container"]} >{iconSelect({ iconInfo: "mui-geral-Close", size: 1.7, colorData: culoriCalc({ keyColorData: settingsColorsBaseData['base_tematica'].value, calc: [-0.19, 0.09, -31.58] }) })}</span>
+                  : <span className={stylesPerso["icon_Stock"]} >{iconSelect({ iconInfo: "mui-geral-Close", size: 1.7, colorData: culoriCalc({ keyColorData: settingsColorsBaseData['base_tematica'].value, calc: [-0.19, 0.09, -31.58] }) })}</span>
                 }
               </ Grid>
             )

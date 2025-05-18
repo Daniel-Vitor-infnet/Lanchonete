@@ -1,4 +1,3 @@
-import React from "react";
 import Button, { ButtonProps } from "@mui/material/Button";
 import { culoriCalc } from "@/utils/function";
 import { InterfaceSettingsColors } from "@/types"
@@ -52,21 +51,20 @@ const defaultStyles = {
 
 
 
-type Props = {
+type ButtonPersonProps = {
   text: string;
   disablePerson?: boolean;
-  colorsData?: InterfaceSettingsColors | string;
+  colorsData?: InterfaceSettingsColors;
   admin?: boolean;
 } & ButtonProps;
 
-const ButtonPerson: React.FC<Props> = ({ text, disablePerson, colorsData, ...props }) => {
+export default function ButtonPerson({ text, disablePerson, colorsData, ...props }: ButtonPersonProps) {
 
-  const corButtom = typeof colorsData === "string" ? colorsData : colorsData?.["button"]?.value || "";;
+  const corButtom = colorsData!["button"].value;
   const buttonsDataBase = {
     background: corButtom,
-    color: 'white',
     '&:hover': {
-      background: `linear-gradient(135deg, ${culoriCalc({ keyColorData: corButtom!, calc: [-0.12, 0.02, -11.3] })}, ${culoriCalc({ keyColorData: corButtom!, calc: [0.13, -0.02, 59.34] })})`,
+      background: `linear-gradient(135deg, ${culoriCalc({ keyColorData: corButtom, calc: [-0.12, 0.02, -11.3] })}, ${culoriCalc({ keyColorData: corButtom, calc: [0.13, -0.02, 59.34] })})`,
     },
   };
 
@@ -77,6 +75,7 @@ const ButtonPerson: React.FC<Props> = ({ text, disablePerson, colorsData, ...pro
       //sx={{ ...defaultStyles,  }}
       {...props}
       style={{
+        color: colorsData?.["escritabuttons"]?.["value"],
         ...(disablePerson && {
           opacity: 0.6,
           pointerEvents: 'none',
@@ -90,6 +89,5 @@ const ButtonPerson: React.FC<Props> = ({ text, disablePerson, colorsData, ...pro
       {text}
     </Button>
   );
-};
+}
 
-export default ButtonPerson;

@@ -15,7 +15,7 @@ import React from "react";
           <Routes />
         </AppProvider>
       </ScreenSizeProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   );
 

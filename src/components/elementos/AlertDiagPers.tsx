@@ -1,6 +1,6 @@
 import { Grid, Typography, Box } from "@/libs/mui";
 import { useCallback } from 'react';
-import { iconSelect, culoriCalc } from "@/utils/function";
+import { iconSelect, culoriCalc, getByScreenSize } from "@/utils/function";
 import { InterfaceSettingsColors } from '@/types';
 import { ButtonPerson } from '@/components';
 import { Blur } from '@/components';
@@ -10,20 +10,21 @@ import stylesPerso from '@/styles/elements/AlertDiagPers.module.scss';
 interface CustomizedDialogsProps {
    valueVH?: number;
    title: string;
-   extra: string;
+   extra?: string;
    noIcon?: boolean;
    content: React.ReactNode;
    buttons?: React.ReactNode;
    settingsColorsBaseData: InterfaceSettingsColors;
-   setOpenDialog: React.Dispatch<React.SetStateAction<boolean>>;
+   setOpenDialog: React.Dispatch<React.SetStateAction<any>>;
 }
 
 
 export default function CustomizedDialogs({ valueVH, title, extra, noIcon, content, buttons, settingsColorsBaseData, setOpenDialog }: CustomizedDialogsProps) {
 
-   const valueVHCheck = !!valueVH ? `${(valueVH / 100) * 79.5}vh` : undefined;
 
-   console.log(valueVHCheck)
+   const elmentSize = getByScreenSize({ desktop: 79.5, mobile: 72.5 })
+
+   const heightcheck = Number.isFinite(valueVH) ? `min(${(valueVH! / 100) * elmentSize}vh, ${(valueVH! / 100) * elmentSize}dvh)` : undefined;
 
    const setCloseDialog = useCallback(() => {
       setOpenDialog(false);
@@ -31,7 +32,7 @@ export default function CustomizedDialogs({ valueVH, title, extra, noIcon, conte
 
    return (
       <Blur>
-         <Box className={stylesPerso["main_container"]}>
+         <Box className={stylesPerso["main_container"]} >
             <Grid className={stylesPerso["header_container"]}>
                <Typography className={stylesPerso["title"]} style={{ color: settingsColorsBaseData["escrita_dark"].value }} >
                   {title}
@@ -48,13 +49,13 @@ export default function CustomizedDialogs({ valueVH, title, extra, noIcon, conte
                )}
             </Grid>
 
-            <Box className={stylesPerso["content_container"]} style={{ height: valueVHCheck && `min(${valueVHCheck}vh, ${valueVHCheck}dvh)`, borderColor: culoriCalc({ keyColorData: settingsColorsBaseData['borda_dark'].value, calc: [0.8, 0.0, 0.0] }) }}>
+            <Box className={stylesPerso["content_container"]} style={{ height: heightcheck, borderColor: culoriCalc({ keyColorData: settingsColorsBaseData['borda_dark'].value, calc: [0.8, 0.0, 0.0] }) }}>
                {content}
             </Box>
 
             <Box className={stylesPerso["buttons_container"]}>
                {!!buttons
-                  ?  buttons 
+                  ? buttons
                   : <ButtonPerson
                      colorsData={settingsColorsBaseData}
                      className={stylesPerso["buttons_default"]}

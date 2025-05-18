@@ -1,12 +1,11 @@
 import { Grid, Typography, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Box } from "@/libs/mui";
 import { InterfaceFoodAddons, InterfaceSettingsColors } from '@/types';
-import { foodVersionCheck, estoqueItemCardapio, formatarValorR$, culoriCalc, iconSelect } from '@/utils/function';
-import stylesPerso from "@/styles/cardapio/FoodComplement1.module.scss";
+import { foodVersionCheck, imgStockCheck, formatMoneyBR, culoriCalc, iconSelect, getByScreenSize } from '@/utils/function';
+import stylesPerso from "@/styles/cardapio/FoodMenuOptions.module.scss";
 
 
 type CategoriaComComidas = InterfaceFoodAddons[string];
 
-// Props esperadas pelo componente Comidas
 interface FoodComplementProps {
   complement: CategoriaComComidas
   setComplements: React.Dispatch<React.SetStateAction<InterfaceFoodAddons>>
@@ -19,26 +18,25 @@ interface FoodComplementProps {
 export default function FoodComplement({ complement, setComplements, complementData, settingsColorsBaseData }: FoodComplementProps) {
 
 
-
   const complementSelect = ((select: string) => {
-    const removeVer = (s: string) => s.startsWith('ver-') ? s.slice(4) : null;
-    const selectedVersion = complementData.items.find(c => !removeVer(select) ? c.id === select : c.version?.id === removeVer(select));
+    const selectedVersion = complementData.items.find(c => select.startsWith('version-') ? c.version?.id === select.split("version-").at(-1) : c.id === select.split("version-").at(-1))!;
     setComplements(prev => ({
       ...prev,
       [complementData.category.id]: {
         ...prev[complementData.category.id],
-        items: [selectedVersion!.free
-          ? foodVersionCheck({
-            data: selectedVersion!,
-            yes: { ...selectedVersion!, version: { ...selectedVersion!.version!, price: 0 } },
-            no: { ...selectedVersion!, price: 0 },
-          })
+        items: [selectedVersion.free
+          ? !!selectedVersion.version
+            ? { ...selectedVersion, version: { ...selectedVersion.version, price: 0 } }
+            : { ...selectedVersion, price: 0 }
           : selectedVersion!
         ]
       }
     }));
   })
 
+  const mobileBackGroundSelect = getByScreenSize({ desktop: false, mobile: true });
+
+  const complemnetDataSelect = complement.items[0].version ? 'version-' + complement.items[0].version.id : complement.items[0].id
 
   // ===== Renderização =====
   return (
@@ -47,59 +45,65 @@ export default function FoodComplement({ complement, setComplements, complementD
         className={stylesPerso["title"]}
         style={{ color: settingsColorsBaseData["escrita_dark"].value }}
       >
-        Opcional {complement.category.title}
+        Opcional: {complement.category.title} {complement.order} de {Object.keys(complementData).length}
       </FormLabel>
 
 
       <RadioGroup
-        aria-labelledby="demo-controlled-radio-buttons-group"
-        name="controlled-radio-buttons-group"
-        value={complement.items[0].version ? 'ver-' + complement.items[0].version.id : complement.items[0].id} // Abaixo: Lógica para saber se foi escolhido uma versão da comida ou não
+        value={complemnetDataSelect} // Abaixo: Lógica para saber se foi escolhido uma versão da comida ou não
         onChange={(e) => complementSelect(e.target.value)}
       >
 
-        <Box className={stylesPerso["container_items"]} >
+        <Box className={stylesPerso["items_container"]} >
           {complementData.items.map(c => {
+            const checkVersion = !!c.version ? c.version : c;
+            const checkVersionID = !!c.version ? 'version-' + c.version.id : c.id;
+            const checkStock = c.version === null ? c.stock : c.stock && c.version.stock;
+
+
             return (
               <Grid
-                className={stylesPerso["container_item"]}
-                style={{ cursor: c.stock ? "pointer" : "unset" }}
-                key={c.version?.id || c.id}
-                onClick={!c.stock ? undefined : () => {
-                  if (window.getSelection()?.toString()) return;
-                  complementSelect(foodVersionCheck({ data: c, yes: "ver-" + c.version?.id, no: c.id }));
-                }}
-                sx={{
-                  backgroundColor: 'trnasparent',
-                  '&:hover': {
-                    backgroundColor: culoriCalc({ keyColorData: settingsColorsBaseData["fundo_tematica"].value, calc: [-0.06, 0.05, -0.91] }),
-                  },
-                }}
+                className={stylesPerso["item_container"]}
+                style={{ cursor: checkStock ? "pointer" : "unset" }}
+                key={checkVersion.id}
+                onClick={checkStock
+                  ? () => {
+                    if (window.getSelection()?.toString()) return;
+                    complementSelect(checkVersionID);
+                  }
+                  : undefined
+                }
+                sx={mobileBackGroundSelect
+                  ? { backgroundColor: checkVersionID === complemnetDataSelect  ? culoriCalc({ keyColorData: settingsColorsBaseData["fundo_tematica"].value, calc: [-0.06, 0.05, -0.91] }) : "trnasparent" }
+                  : {
+                    backgroundColor: 'trnasparent',
+                    '&:hover': {
+                      backgroundColor: culoriCalc({ keyColorData: settingsColorsBaseData["fundo_tematica"].value, calc: [-0.06, 0.05, -0.91] }),
+                    },
+                  }
+                }
               >
-                <Box className={stylesPerso["img-complemento-container"]} >
-                  {estoqueItemCardapio({
-                    image: c.image,
-                    altImg: c.title,
-                    stylesPerso: stylesPerso["img-complemento"],
-                    stock: c.stock,
-                    limit: c.amount_image,
-                  })}
-                </Box>
-                <Grid className={stylesPerso["container_info"]}>
+                {imgStockCheck({
+                  image: c.image,
+                  altImg: checkVersion.title,
+                  stock: checkStock,
+                  limit: c.amount_image,
+                })}
+                <Grid className={stylesPerso["info_container"]}>
                   {/* Lógica de titulos de acordo com a versão da comida */}
                   <Typography className={stylesPerso["title_item"]} style={{ color: settingsColorsBaseData["escrita_dark"].value }}>
-                    {foodVersionCheck({ data: c, yes: `${c.title} (${c.version?.title})`, no: c.title })}
+                    {!!c.version ? `${c.title} (${c.version.title})` : c.title}
                   </Typography>
                   {/* Lógica de preço gratis ou preço normal */}
-                  <Typography className={stylesPerso[c.free ? "price-free" : "price"]} style={{ color: settingsColorsBaseData["dinheiro"].value }}>
-                    {c.free ? "Grátis" : foodVersionCheck({ data: c, yes: formatarValorR$(c.version?.price), no: formatarValorR$(c.price) })}
+                  <Typography className={stylesPerso[c.free ? "price_free" : "price"]} style={{ color: settingsColorsBaseData["dinheiro"].value }}>
+                    {checkVersion.free ? "Grátis" : checkVersion.price}
                   </Typography>
                 </Grid>
                 {/* Lógica para saber se o item tem estoque ou não */}
-                {c.stock
+                {checkStock
                   ? <FormControlLabel
-                    key={foodVersionCheck({ data: c, yes: c.version?.id, no: c.id })}
-                    value={foodVersionCheck({ data: c, yes: "ver-" + c.version?.id, no: c.id })} // Lógica criar para saber se foi escolhido uma versão da comida ou não
+                    key={checkVersion.id}
+                    value={checkVersionID}
                     control={<Radio sx={{
                       color: culoriCalc({ keyColorData: settingsColorsBaseData["base_tematica"].value, calc: [-0.13, 0.07, -18.67] }),
                       '&.Mui-checked': {
@@ -108,9 +112,9 @@ export default function FoodComplement({ complement, setComplements, complementD
                     }} />}
                     label={null}
                     labelPlacement="end"
-                    style={{ backgroundColor: "unset", margin: "unset" }}
+                    style={{ margin: "unset" }}
                   />
-                  : <span className={stylesPerso["button_container"]} >{iconSelect({ iconInfo: "mui-geral-Close", size: 1.7, colorData: culoriCalc({ keyColorData: settingsColorsBaseData['base_tematica'].value, calc: [-0.19, 0.09, -31.58] }) })}</span>
+                  : <span className={stylesPerso["icon_Stock"]} >{iconSelect({ iconInfo: "mui-geral-Close", size: 1.7, colorData: culoriCalc({ keyColorData: settingsColorsBaseData['base_tematica'].value, calc: [-0.19, 0.09, -31.58] }) })}</span>
                 }
               </ Grid>
             )

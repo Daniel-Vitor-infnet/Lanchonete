@@ -41,7 +41,7 @@ export interface InterfaceIngredientMap {
     [key: string]: InterfaceIngredient & { amount: number };
 }
 
-export interface InterfaceFoodVersion {
+export interface InterfaceFoodVersionDataBase {
     id: string
     title: string
     description: string
@@ -49,6 +49,10 @@ export interface InterfaceFoodVersion {
     image: string | null
     stock: boolean
     sale: boolean
+}
+
+export interface InterfaceFoodVersion extends InterfaceFoodVersionDataBase {
+    free: boolean
 }
 
 export interface InterfaceFoodPropVersion extends InterfaceFoodDataBase {

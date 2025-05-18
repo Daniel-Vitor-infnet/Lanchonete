@@ -6,7 +6,7 @@ import { useScreenWidth } from "@/ScreenSizeContext"; // ajuste o caminho se nec
 
 //#region fuction para conver o number para string e formatar o valor (duas casas decimais)
 
-export function formatarValorR$(valor: number | undefined): string {
+export function formatMoneyBR(valor: number | undefined): string {
   if (valor === undefined) return '';
   return new Intl.NumberFormat('pt-BR', {
     style: 'currency',
@@ -17,11 +17,6 @@ export function formatarValorR$(valor: number | undefined): string {
 //#endregion
 
 
-
-interface ReorderObjectProps<T extends Record<string, any>> {
-  obj: T;
-  order: (keyof T)[];
-}
 
 interface ReorderArrayProps {
   arr: any[];

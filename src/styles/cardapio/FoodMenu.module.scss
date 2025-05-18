@@ -3,16 +3,30 @@
 
 $testesAtivos: false;
 
-
-
 .main_container {
   width: 30vw;
   height: alturaResponsivaViewport(91);
   border-radius: px-para-rem(20px);
   display: grid;
-  grid-template-rows: 0.2fr 0.7fr 0.2fr 0.9fr 0.2fr;
+  grid-template-rows: 0.2fr 0.7fr 0.28fr 0.9fr 0.2fr;
+
   gap: px-para-rem(10px);
   overflow-y: auto;
+
+  @include laptop {
+    width: 35vw;
+    height: alturaResponsivaViewport(97);
+    grid-template-rows: 0.2fr 0.8fr 0.3fr 1fr 0.2fr;
+
+  }
+
+  @include mobile {
+    width: 100%;
+    height: alturaResponsivaViewport(100);
+    grid-template-rows: 0.2fr 0.8fr 0.2fr 1fr 0.2fr;
+    overflow-y: unset;
+
+  }
 
 
   .menu_header {
@@ -21,7 +35,6 @@ $testesAtivos: false;
     align-items: center;
     position: relative;
   }
-
 
   .title_small {
     width: 75%;
@@ -40,6 +53,12 @@ $testesAtivos: false;
     -webkit-line-clamp: 2;
     line-clamp: 2;
     overflow: hidden;
+
+
+    @include laptop {
+      font-size: px-para-rem(19px);
+    }
+
   }
 
   .title {
@@ -50,6 +69,13 @@ $testesAtivos: false;
     transform: translateX(-50%);
     pointer-events: none;
     overflow: hidden;
+
+
+    @include laptop {
+      font-size: px-para-rem(10px);
+    }
+
+
   }
 
   .close_button {
@@ -58,7 +84,6 @@ $testesAtivos: false;
     align-items: center;
     z-index: 2;
     margin-right: px-para-rem(24px);
-  
     width: px-para-rem(30px);
     height: px-para-rem(30px);
     border-radius: 50%;
@@ -67,7 +92,6 @@ $testesAtivos: false;
     font-size: px-para-rem(20px);
     color: if($testesAtivos, hsl(342.12 100% 50%), #e65100);
     transition: background-color 0.2s;
-  
   }
 
   .menu_image_container {
@@ -75,7 +99,7 @@ $testesAtivos: false;
     overflow: hidden;
   }
 
-  .img-complemento {
+  .img_complemento {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -90,48 +114,59 @@ $testesAtivos: false;
     display: box;
     -webkit-box-orient: vertical;
     box-orient: vertical;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    overflow: hidden;
+
+
+    @include mobile {
+      padding: px-para-rem(10px);
+      font-size: px-para-rem(16px);
+    }
 
     span {
       font-size: px-para-rem(19px);
       font-weight: bold;
+
+      @include laptop {
+        font-size: px-para-rem(16px);
+      }
+
     }
+  }
+
+
+
+
+
+  .ver_mais {
+    font-weight: bold;
+    text-decoration: underline;
+    text-align: center;
+    cursor: pointer;
+
+    @include mobile {
+      font-size: px-para-rem(16px);
+    }
+
   }
 
   .menu_steps_wrapper {
     min-height: 100%;
     max-height: 100%;
     width: 100%;
-    padding: px-para-rem(20px);
+    padding: px-para-rem(5px) px-para-rem(20px);
+    ;
 
     @include custom-scrollbar;
 
 
-    @include mobile {
-      @include custom-scrollbar(unset);
+    @include laptop {
+      padding: px-para-rem(5px) px-para-rem(10px);
     }
 
-  }
 
-
-  .order_footer {
-    width: 100%;
-    max-height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: px-para-rem(19px);
-    font-weight: bold;
-    padding: px-para-rem(10px) px-para-rem(16px);
-    border-top: 1px solid #ffb74d;
-  }
-
-  .order_total {
-    margin-left: px-para-rem(10px);
-    font-size: px-para-rem(19px);
-    font-weight: bold;
+    @include mobile {
+      @include custom-scrollbar(unset);
+      overflow: auto;
+    }
   }
 
   .menu_step_content {
@@ -142,78 +177,88 @@ $testesAtivos: false;
     flex-direction: column;
   }
 
-  // .order_summary {
-  //   padding: px-para-rem(24px);
-  //   background-color: #fff8f0;
-  //   border-radius: px-para-rem(12px);
-  //   box-shadow: 0 4px 12px rgba(255, 165, 0, 0.2);
-  //   border: 1px solid #ffe0b3;
-  // }
+  .order_footer {
+    width: 100%;
+    max-height: 100%;
+    border-top: px-para-rem(1px) solid #ffb74d;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: px-para-rem(10px);
+    box-sizing: border-box;
+  }
 
-  // .order_title {
-  //   font-size: px-para-rem(21.8px);
-  //   font-weight: 800;
-  //   margin-bottom: px-para-rem(19.2px);
-  // }
+  .order_total {
+    font-size: px-para-rem(19px);
+    font-weight: bold;
 
-  // .order_item {
-  //   font-size: px-para-rem(19.8px);
-  //   font-weight: bold;
-  //   margin-bottom: px-para-rem(9.6px);
-  // }
+    @include laptop {
+      font-size: px-para-rem(18px);
+    }
 
-  // .order_version {
-  //   font-size: px-para-rem(17.6px);
-  //   font-weight: 500;
-  //   margin-bottom: px-para-rem(16px);
-  //   color: #6d4c41;
-  // }
 
-  // .order_addons_title {
-  //   font-size: px-para-rem(19.2px);
-  //   font-weight: 700;
-  //   margin-top: px-para-rem(28.8px);
-  //   margin-bottom: px-para-rem(9.6px);
-  //   color: #ef6c00;
-  //   border-bottom: 2px dashed #ffcc80;
-  //   padding-bottom: px-para-rem(6.4px);
-  // }
+  }
 
-  // .order_addons {
-  //   font-size: px-para-rem(16.8px);
-  //   color: #5d4037;
-  //   padding-left: px-para-rem(16px);
-  //   margin-bottom: px-para-rem(4.8px);
-  // }
-
-  // .order_addons_version {
-  //   font-size: px-para-rem(16.8px);
-  //   color: #5d4037;
-  //   padding-left: px-para-rem(16px);
-  //   margin-bottom: px-para-rem(4.8px);
-  // }
-
-  // .order_buttons {
-  //   height: 100%;
-  //   width: 66%;
-  //   display: flex;
-  //   justify-content: end;
-  //   align-items: center;
-  // }
+  .order_buttons {
+    display: flex;
+    gap: px-para-rem(10px);
+  }
 
   .buttons_default {
     height: px-para-rem(37px);
     width: px-para-rem(174px);
     border-radius: px-para-rem(13px);
     font-size: px-para-rem(16px);
-    margin-left: px-para-rem(10px);
     color: oklch(1 0 0);
 
     &:hover {
       box-shadow: unset;
       transform: unset;
     }
+
+    @include laptop {
+      height: px-para-rem(30px);
+      width: px-para-rem(130px);
+      font-size: px-para-rem(14px);
+    }
+
+
+    @include mobile {
+      height: px-para-rem(40px);
+      width: px-para-rem(120px);
+      font-size: px-para-rem(14px);
+    }
+
+    @include mobile-small {
+      height: px-para-rem(40px);
+      width: px-para-rem(100px);
+      font-size: px-para-rem(14px);
+    }
+  }
+
+  .button_order_end {
+    @extend .buttons_default;
+
+    @include laptop {
+      width: px-para-rem(144px);
+      font-size: px-para-rem(13px);
+    }
+
+    @include mobile {
+      height: px-para-rem(40px);
+      width: px-para-rem(120px);
+      font-size: px-para-rem(14px);
+    }
+
   }
 
 
 }
+
+  .main_container_alert_description_complet {
+
+    .description_complet {
+      font-size: px-para-rem(20px);
+    }
+
+  }
