@@ -13,8 +13,7 @@ interface CardsListProps {
 }
 
 const CardsList: React.FC<CardsListProps> = ({ comidas, setSelectFood, settingsColorsBaseData }) => {
-  const [alertOpen, setAlertOpen] = useState(false);
-  const [itemOut, setItemOut] = useState<any | null>(null);
+  const [itemOut, setItemOut] = useState<any | false>(false);
 
   const limiteTitulo = getByScreenSize({ desktop: 18, mobile: 11 });
   const alertDialogSize = getByScreenSize({ desktop: 62, mobile: 78 });
@@ -26,7 +25,6 @@ const CardsList: React.FC<CardsListProps> = ({ comidas, setSelectFood, settingsC
     }
     else {
       setItemOut(item);
-      setAlertOpen(true);
     }
   };
 
@@ -70,7 +68,7 @@ const CardsList: React.FC<CardsListProps> = ({ comidas, setSelectFood, settingsC
         );
       })}
 
-      {alertOpen && (
+      {!!itemOut && (
         <AlertDiagPers
           valueVH={alertDialogSize}
           title={itemOut.title}
@@ -95,7 +93,7 @@ const CardsList: React.FC<CardsListProps> = ({ comidas, setSelectFood, settingsC
             </Grid>
           }
           settingsColorsBaseData={settingsColorsBaseData}
-          setOpenDialog={setAlertOpen}
+          setOpenDialog={setItemOut}
         />
       )}
     </Grid>

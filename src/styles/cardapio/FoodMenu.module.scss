@@ -8,12 +8,14 @@ $testesAtivos: false;
   height: alturaResponsivaViewport(91);
   border-radius: px-para-rem(20px);
   display: grid;
-  grid-template-rows: 0.2fr 0.7fr 0.2fr 0.9fr 0.2fr;
+  grid-template-rows: 0.2fr 0.7fr 0.28fr 0.9fr 0.2fr;
+
   gap: px-para-rem(10px);
   overflow-y: auto;
 
   @include laptop {
     width: 35vw;
+    height: alturaResponsivaViewport(97);
     grid-template-rows: 0.2fr 0.8fr 0.3fr 1fr 0.2fr;
 
   }
@@ -21,10 +23,11 @@ $testesAtivos: false;
   @include mobile {
     width: 100%;
     height: alturaResponsivaViewport(100);
-    grid-template-rows: 0.2fr 0.8fr 0.3fr 1fr 0.2fr;
+    grid-template-rows: 0.2fr 0.8fr 0.2fr 1fr 0.2fr;
     overflow-y: unset;
 
   }
+
 
   .menu_header {
     display: flex;
@@ -111,19 +114,11 @@ $testesAtivos: false;
     display: box;
     -webkit-box-orient: vertical;
     box-orient: vertical;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    overflow: hidden;
 
-    @include laptop {
-      padding: px-para-rem(20px);
-    }
 
     @include mobile {
       padding: px-para-rem(10px);
       font-size: px-para-rem(16px);
-      -webkit-line-clamp: 3;
-      line-clamp: 3;
     }
 
     span {
@@ -137,11 +132,28 @@ $testesAtivos: false;
     }
   }
 
+
+
+
+
+  .ver_mais {
+    font-weight: bold;
+    text-decoration: underline;
+    text-align: center;
+    cursor: pointer;
+
+    @include mobile {
+      font-size: px-para-rem(16px);
+    }
+
+  }
+
   .menu_steps_wrapper {
     min-height: 100%;
     max-height: 100%;
     width: 100%;
-    padding: px-para-rem(20px);
+    padding: px-para-rem(5px) px-para-rem(20px);
+    ;
 
     @include custom-scrollbar;
 
@@ -242,3 +254,11 @@ $testesAtivos: false;
 
 
 }
+
+  .main_container_alert_description_complet {
+
+    .description_complet {
+      font-size: px-para-rem(20px);
+    }
+
+  }

@@ -1,5 +1,5 @@
-import { Grid, Typography } from "@/libs/mui";
-import { useCallback, useState, useEffect, useMemo } from 'react';
+import { useCallback, useState, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
+import { Grid, Typography, Box } from "@/libs/mui";
 import { useComplementosPorComida, useVersionPorComidas, useSettingsColors, useDatabaseStatusUI, useIngredientesPorComida } from '@/hooks'
 import { getByScreenSize, imgStockCheck2, iconSelect, formatMoneyBR, culoriCalc, foodVersionCheck, getBrowser } from "@/utils/function";
 import { InterfaceFoodAddons, InterfaceFoodDataBase, InterfaceSettingsColors, InterfaceFoodVersionDataBase, InterfaceIngredient, InterfaceIngredientMap } from '@/types';
@@ -104,6 +104,10 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
     }, {} as InterfaceFoodAddons)
   );
 
+  // Estado para armazenar o número de linhas do texto
+  const pRef = useRef<HTMLParagraphElement>(null);
+  const [lineDescription, setlineDescription] = useState(0);
+  const [maxLineDescription, setmaxLineDescription] = useState(0);
 
   // ¦  ========== [ Valores ] ==========
 
@@ -139,6 +143,9 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
   // ¦  ========== [ Lógicas de tamanho de tela ] ==========
 
   const tamanhoTelaTitulo = getByScreenSize({ desktop: 21, mobile: 14 })
+  const maxLineDescriptionScreen = getByScreenSize({ desktop: 2, mobile: 3 })
+  const gridMenu = getByScreenSize({ desktop: [0.2, 0.7, [0.2, 0.28], 0.9, 0.2], laptop: [0.2, 0.8, [0.3, 0.4], 1, 0.2] ,mobile: [0.2, 0.8, [0.2, 0.45], 1, 0.2] })
+
 
   // Vai ser removido no futuro, por enquanto só para teste
 
@@ -162,12 +169,30 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
   const pagCurrent = pags[pagCurrentIndex];
 
 
-  //#endregion
+  useEffect(() => {
 
+    setmaxLineDescription(maxLineDescriptionScreen);
+
+  }, [maxLineDescription !== maxLineDescriptionScreen]);
+
+  useLayoutEffect(() => {
+    const el = pRef.current;
+    if (!el) return;
+
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    const rects = range.getClientRects();
+    setlineDescription(rects.length - 2); // Subtrai para considerar os dois span
+  }, [maxLineDescription]);
+
+
+
+  //#endregion  
 
   return (
     <Blur>
-      <Grid className={stylesPerso["main_container"]} style={{ background: settingsColorsBaseData["fundo_tematica"].value, borderColor: settingsColorsBaseData["borda_tematica"].value, boxShadow: `0 0 12px ${culoriCalc({ keyColorData: settingsColorsBaseData["base_tematica"].value, calc: [-0.16, 0.03, -6.7, -0.49] })}` }}>
+      <Grid 
+      className={stylesPerso["main_container"]} style={{gridTemplateRows: `${gridMenu[0]}fr ${gridMenu[1]}fr ${lineDescription < maxLineDescription ? gridMenu[2][0] : gridMenu[2][1]}fr ${gridMenu[3]}fr ${gridMenu[4]}fr` ,background: settingsColorsBaseData["fundo_tematica"].value, borderColor: settingsColorsBaseData["borda_tematica"].value, boxShadow: `0 0 12px ${culoriCalc({ keyColorData: settingsColorsBaseData["base_tematica"].value, calc: [-0.16, 0.03, -6.7, -0.49] })}` }}>
         {/* Cabeçalho */}
         <Grid className={stylesPerso["menu_header"]} style={{ background: settingsColorsBaseData["base_tematica"].value }} >
           <Typography className={FoodSelect.title > tamanhoTelaTitulo ? stylesPerso["title"] : stylesPerso["title_small"]} style={{ color: settingsColorsBaseData["escrita_tematica"].value }} >
@@ -190,12 +215,38 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
         </Grid>
 
         {/* Descrição */}
-        <Typography className={stylesPerso["description"]} style={{ color: settingsColorsBaseData["escrita_dark"].value }}>
-          <span style={{ color: settingsColorsBaseData["escrita_tematica"].value }} >
-            Descrição:
-          </span>
-          {` `} {FoodSelect.description}
-        </Typography>
+        <Box
+          sx={{
+            display: "grid",
+            gridTemplateRows: "1fr auto",
+            overflow: "hidden"
+          }}
+        >
+          <Typography
+            ref={pRef}
+            className={stylesPerso["description"]}
+            style={{
+              color: settingsColorsBaseData["escrita_dark"].value,
+              WebkitLineClamp: maxLineDescriptionScreen,
+              overflow: "hidden",
+            }}
+          >
+            <span style={{ color: settingsColorsBaseData["escrita_tematica"].value }}>
+              Descrição:
+            </span>
+            {` ${FoodSelect.description} `}
+          </Typography>
+
+          {lineDescription > maxLineDescription && (
+            <Typography
+              style={{ color: settingsColorsBaseData["link"].value }}
+              className={stylesPerso["ver_mais"]}
+            >
+              Descrição Completa (clique)
+            </Typography>
+          )}
+        </Box>
+
 
         {/* Conteúdo de cada etapa */}
         <Grid className={stylesPerso["menu_steps_wrapper"]}
