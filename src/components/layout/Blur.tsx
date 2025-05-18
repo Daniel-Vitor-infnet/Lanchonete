@@ -10,22 +10,35 @@ interface Blur1Props {
 
 const Blur1: React.FC<Blur1Props> = ({ onScrollActivate, children }) => {
   useEffect(() => {
-    // bloqueia rolagem ao montar
+    // guarda posição atual
     const scrollY = window.scrollY;
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${scrollY}px`;
-    document.body.style.left = '0';
-    document.body.style.right = '0';
-    document.body.style.width = '100%';
+
+    // bloqueia rolagem de body e html
+    Object.assign(document.body.style, {
+      position: 'fixed',
+      top: `-${scrollY}px`,
+      left: '0',
+      right: '0',
+      width: '100%',
+      overflow: 'hidden',             // esconde scrollbar do body
+    });
+    document.documentElement.style.overflow = 'hidden'; // esconde scrollbar do html
 
     return () => {
-      // restaura após desmontar
       const topValue = document.body.style.top;
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.left = '';
-      document.body.style.right = '';
-      document.body.style.width = '';
+
+      // restaura estilos originais
+      Object.assign(document.body.style, {
+        position: '',
+        top: '',
+        left: '',
+        right: '',
+        width: '',
+        overflow: '',
+      });
+      document.documentElement.style.overflow = '';
+
+      // retorna à posição de scroll anterior
       if (topValue) {
         const restoreY = -parseInt(topValue, 10);
         window.scrollTo(0, restoreY);
