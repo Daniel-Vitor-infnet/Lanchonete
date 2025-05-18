@@ -7,12 +7,10 @@ import FoodVersion from '@/components/layout/cardapio/FoodVersion';
 import FoodIngredients from '@/components/layout/cardapio/FoodIngredients';
 import FoodComplement from '@/components/layout/cardapio/FoodComplement';
 import FoodOrderEnd from '@/components/layout/cardapio/FoodOrderEnd';
-import { ButtonPerson } from '@/components';
+import { ButtonPerson, AlertDiagPers } from '@/components';
 import stylesPerso from "@/styles/cardapio/FoodMenu.module.scss";
 import { Blur } from '@/components';
-import { logPerso } from "noob-supremo43-libs";
 import { useAppContext } from '@/Context';
-import { Chrome } from "@uiw/react-color";
 
 //#region Lógica para garantir que todos bancos de dados foram carregados
 
@@ -109,6 +107,9 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
   const [lineDescription, setlineDescription] = useState(0);
   const [maxLineDescription, setmaxLineDescription] = useState(0);
 
+
+  const [alertDescription, setAlertDescription] = useState<string | false>(false);
+
   // ¦  ========== [ Valores ] ==========
 
   const versionsPrice = useMemo(() => {
@@ -142,9 +143,10 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
 
   // ¦  ========== [ Lógicas de tamanho de tela ] ==========
 
+  const alerDescriptionComplet = getByScreenSize({ desktop: undefined, mobile: 60 })
   const tamanhoTelaTitulo = getByScreenSize({ desktop: 21, mobile: 14 })
   const maxLineDescriptionScreen = getByScreenSize({ desktop: 2, mobile: 3 })
-  const gridMenu = getByScreenSize({ desktop: [0.2, 0.7, [0.2, 0.28], 0.9, 0.2], laptop: [0.2, 0.8, [0.3, 0.4], 1, 0.2] ,mobile: [0.2, 0.8, [0.2, 0.45], 1, 0.2] })
+  const gridMenu = getByScreenSize({ desktop: [0.2, 0.7, [0.2, 0.28], 0.9, 0.2], laptop: [0.2, 0.8, [0.3, 0.4], 1, 0.2], mobile: [0.2, 0.8, [0.2, 0.45], 1, 0.2] })
 
 
   // Vai ser removido no futuro, por enquanto só para teste
@@ -191,8 +193,8 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
 
   return (
     <Blur>
-      <Grid 
-      className={stylesPerso["main_container"]} style={{gridTemplateRows: `${gridMenu[0]}fr ${gridMenu[1]}fr ${lineDescription < maxLineDescription ? gridMenu[2][0] : gridMenu[2][1]}fr ${gridMenu[3]}fr ${gridMenu[4]}fr` ,background: settingsColorsBaseData["fundo_tematica"].value, borderColor: settingsColorsBaseData["borda_tematica"].value, boxShadow: `0 0 12px ${culoriCalc({ keyColorData: settingsColorsBaseData["base_tematica"].value, calc: [-0.16, 0.03, -6.7, -0.49] })}` }}>
+      <Grid
+        className={stylesPerso["main_container"]} style={{ gridTemplateRows: `${gridMenu[0]}fr ${gridMenu[1]}fr ${lineDescription < maxLineDescription ? gridMenu[2][0] : gridMenu[2][1]}fr ${gridMenu[3]}fr ${gridMenu[4]}fr`, background: settingsColorsBaseData["fundo_tematica"].value, borderColor: settingsColorsBaseData["borda_tematica"].value, boxShadow: `0 0 12px ${culoriCalc({ keyColorData: settingsColorsBaseData["base_tematica"].value, calc: [-0.16, 0.03, -6.7, -0.49] })}` }}>
         {/* Cabeçalho */}
         <Grid className={stylesPerso["menu_header"]} style={{ background: settingsColorsBaseData["base_tematica"].value }} >
           <Typography className={FoodSelect.title > tamanhoTelaTitulo ? stylesPerso["title"] : stylesPerso["title_small"]} style={{ color: settingsColorsBaseData["escrita_tematica"].value }} >
@@ -231,7 +233,7 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
               overflow: "hidden",
             }}
           >
-            <span style={{ color: settingsColorsBaseData["escrita_tematica"].value }}>
+            <span style={{ color: settingsColorsBaseData["escrita_tematica"].value }} >
               Descrição:
             </span>
             {` ${FoodSelect.description} `}
@@ -241,6 +243,7 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
             <Typography
               style={{ color: settingsColorsBaseData["link"].value }}
               className={stylesPerso["ver_mais"]}
+              onClick={() => (setAlertDescription(FoodSelect.description))}
             >
               Descrição Completa (clique)
             </Typography>
@@ -327,6 +330,23 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
 
           </Grid>
         </Grid>
+
+        {!!alertDescription && (
+          <AlertDiagPers
+            valueVH={alerDescriptionComplet}
+            title={"Descrição Completa"}
+            content={
+              <Grid className={stylesPerso['main_container_alert_description_complet']}>
+                <Typography className={stylesPerso['description_complet']} style={{ color: settingsColorsBaseData['escrita_dark'].value }}>
+                  {alertDescription}
+                </Typography>
+              </Grid>
+            }
+            settingsColorsBaseData={settingsColorsBaseData}
+            setOpenDialog={setAlertDescription}
+          />
+        )}
+
       </Grid>
     </Blur>
   );

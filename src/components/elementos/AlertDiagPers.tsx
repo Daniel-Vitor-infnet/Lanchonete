@@ -10,12 +10,12 @@ import stylesPerso from '@/styles/elements/AlertDiagPers.module.scss';
 interface CustomizedDialogsProps {
    valueVH?: number;
    title: string;
-   extra: string;
+   extra?: string;
    noIcon?: boolean;
    content: React.ReactNode;
    buttons?: React.ReactNode;
    settingsColorsBaseData: InterfaceSettingsColors;
-   setOpenDialog: React.Dispatch<React.SetStateAction<boolean>>;
+   setOpenDialog: React.Dispatch<React.SetStateAction<any>>;
 }
 
 

@@ -95,6 +95,15 @@ $testesAtivos: false;
         border-top: px-para-rem(2px) solid oklch(0.8 0 0);
         padding: px-para-rem(13px);
         box-sizing: border-box;
+
+
+        @include custom-scrollbar;
+
+
+        @include mobile {
+            @include custom-scrollbar(unset);
+            overflow: auto;
+        }
     }
 
     .buttons_container {
@@ -132,7 +141,7 @@ $testesAtivos: false;
             box-shadow: unset;
             transform: unset;
         }
-        
+
 
 
     }
