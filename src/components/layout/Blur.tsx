@@ -1,5 +1,5 @@
 // src/components/layout/Blur1.tsx
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import stylesPerso from '@/styles/elements/Blur.module.scss';
 
 interface Blur1Props {

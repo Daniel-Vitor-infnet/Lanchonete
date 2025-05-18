@@ -1,7 +1,7 @@
 import { useCallback, useState, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 import { Grid, Typography, Box } from "@/libs/mui";
 import { useComplementosPorComida, useVersionPorComidas, useSettingsColors, useDatabaseStatusUI, useIngredientesPorComida } from '@/hooks'
-import { getByScreenSize, imgStockCheck2, iconSelect, formatMoneyBR, culoriCalc, foodVersionCheck, getBrowser } from "@/utils/function";
+import { getByScreenSize, imgStockCheck2, iconSelect, formatMoneyBR, culoriCalc, getBrowser } from "@/utils/function";
 import { InterfaceFoodAddons, InterfaceFoodDataBase, InterfaceSettingsColors, InterfaceFoodVersionDataBase, InterfaceIngredient, InterfaceIngredientMap } from '@/types';
 import FoodVersion from '@/components/layout/cardapio/FoodVersion';
 import FoodIngredients from '@/components/layout/cardapio/FoodIngredients';
@@ -131,7 +131,7 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
       .flatMap((c) => c.items) // Converte o array separado por categorias para um único array de todos os itens escolhidos
       .filter((c) => c.id !== "null") // Filtra as opção de n escolher um complemento (id === null)
       .reduce((sum, c) => {
-        return sum + foodVersionCheck({ data: c, yes: c.version?.price, no: c.price }); // Soma os preços dos complementos escolhidos
+        return sum + (!!c.version ? c.version.price : c.price); // Soma os preços dos complementos escolhidos
       }, 0);
   }, [complements])
 
@@ -187,6 +187,12 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
     setlineDescription(rects.length - 2); // Subtrai para considerar os dois span
   }, [maxLineDescription]);
 
+  console.log(lineDescription <= maxLineDescription ? gridMenu[2][0] : gridMenu[2][1], "resultado")
+  console.log(gridMenu[2][0], "0")
+  console.log(gridMenu[2][1], "1")
+  console.log(lineDescription, "lineDescription")
+  console.log(maxLineDescription, "maxLineDescription")
+
 
 
   //#endregion  
@@ -194,7 +200,7 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
   return (
     <Blur>
       <Grid
-        className={stylesPerso["main_container"]} style={{ gridTemplateRows: `${gridMenu[0]}fr ${gridMenu[1]}fr ${lineDescription < maxLineDescription ? gridMenu[2][0] : gridMenu[2][1]}fr ${gridMenu[3]}fr ${gridMenu[4]}fr`, background: settingsColorsBaseData["fundo_tematica"].value, borderColor: settingsColorsBaseData["borda_tematica"].value, boxShadow: `0 0 12px ${culoriCalc({ keyColorData: settingsColorsBaseData["base_tematica"].value, calc: [-0.16, 0.03, -6.7, -0.49] })}` }}>
+        className={stylesPerso["main_container"]} style={{ gridTemplateRows: `${gridMenu[0]}fr ${gridMenu[1]}fr ${lineDescription <= maxLineDescription ? gridMenu[2][0] : gridMenu[2][1]}fr ${gridMenu[3]}fr ${gridMenu[4]}fr`, background: settingsColorsBaseData["fundo_tematica"].value, borderColor: settingsColorsBaseData["borda_tematica"].value, boxShadow: `0 0 12px ${culoriCalc({ keyColorData: settingsColorsBaseData["base_tematica"].value, calc: [-0.16, 0.03, -6.7, -0.49] })}` }}>
         {/* Cabeçalho */}
         <Grid className={stylesPerso["menu_header"]} style={{ background: settingsColorsBaseData["base_tematica"].value }} >
           <Typography className={FoodSelect.title > tamanhoTelaTitulo ? stylesPerso["title"] : stylesPerso["title_small"]} style={{ color: settingsColorsBaseData["escrita_tematica"].value }} >

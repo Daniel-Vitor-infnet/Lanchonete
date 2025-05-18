@@ -1,6 +1,6 @@
 import { Grid, Typography, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Box } from "@/libs/mui";
 import { InterfaceFoodAddons, InterfaceSettingsColors } from '@/types';
-import { foodVersionCheck, imgStockCheck, formatMoneyBR, culoriCalc, iconSelect, getByScreenSize } from '@/utils/function';
+import { imgStockCheck, formatMoneyBR, culoriCalc, iconSelect, getByScreenSize } from '@/utils/function';
 import stylesPerso from "@/styles/cardapio/FoodMenuOptions.module.scss";
 
 
@@ -96,7 +96,7 @@ export default function FoodComplement({ complement, setComplements, complementD
                   </Typography>
                   {/* Lógica de preço gratis ou preço normal */}
                   <Typography className={stylesPerso[c.free ? "price_free" : "price"]} style={{ color: settingsColorsBaseData["dinheiro"].value }}>
-                    {checkVersion.free ? "Grátis" : checkVersion.price}
+                    {checkVersion.free ? "Grátis" : formatMoneyBR(checkVersion.price)}
                   </Typography>
                 </Grid>
                 {/* Lógica para saber se o item tem estoque ou não */}

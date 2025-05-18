@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Card, CardContent, Typography, Grid, Box } from "@/libs/mui";
 import { getByScreenSize, imgStockCheck2, formatMoneyBR, culoriCalc } from "@/utils/function";
 import stylesPerso from "@/styles/cardapio/CardsFoods.module.scss";
-import { logPerso } from 'noob-supremo43-libs';
 import { InterfaceFoodDataBase, InterfaceSettingsColors } from "@/types";
 import { AlertDiagPers } from "@/components";
 

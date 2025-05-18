@@ -1,5 +1,5 @@
 import { Grid, Typography, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Box } from "@/libs/mui";
-import { InterfaceFoodAddons, InterfaceSettingsColors, InterfaceFoodVersionDataBase, InterfaceFoodDataBase } from '@/types';
+import { InterfaceSettingsColors, InterfaceFoodVersionDataBase, InterfaceFoodDataBase } from '@/types';
 import { getByScreenSize, iconSelect, imgStockCheck, formatMoneyBR, culoriCalc } from '@/utils/function';
 import stylesPerso from "@/styles/cardapio/FoodMenuOptions.module.scss";
 
@@ -35,7 +35,7 @@ export default function FoodComplement({ food, version, setVersions, versionBase
 
 
       <RadioGroup
-        value={version.id || versionBaseData[0].id} // 
+        value={version.id} // 
         onChange={(e) => {
           const selectedVersion = versionBaseData.find(v => v.id === e.target.value);
           if (selectedVersion) setVersions(selectedVersion);

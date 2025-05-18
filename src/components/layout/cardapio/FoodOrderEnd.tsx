@@ -1,6 +1,6 @@
-import { Grid, Typography } from "@/libs/mui"; import { culoriCalc, formatMoneyBR } from "@/utils/function";
+import { Box, Typography } from "@/libs/mui"; 
+import { culoriCalc, formatMoneyBR } from "@/utils/function";
 import { InterfaceFoodPropVersion, InterfaceFoodVersionDataBase, InterfaceIngredient, InterfaceSettingsColors, InterfaceFoodDataBase } from "@/types"
-import { Box } from "@mui/material";
 import stylesPerso from "@/styles/cardapio/FoodOrderEnd.module.scss";
 
 
