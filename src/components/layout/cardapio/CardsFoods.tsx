@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, Typography, Grid, Box } from "@/libs/mui";
-import { getByScreenSize, imgStockCheck2, formatMoneyBR, culoriCalc } from "@/utils/function";
+import { getByScreenSize, imgStockCheck, formatMoneyBR, culoriCalc, preloadImages, getPublicImageURL } from "@/utils/function";
 import stylesPerso from "@/styles/cardapio/CardsFoods.module.scss";
 import { InterfaceFoodDataBase, InterfaceSettingsColors } from "@/types";
 import { AlertDiagPers } from "@/components";
+
 
 interface CardsListProps {
   comidas: InterfaceFoodDataBase[];
@@ -13,9 +14,17 @@ interface CardsListProps {
 
 const CardsList: React.FC<CardsListProps> = ({ comidas, setSelectFood, settingsColorsBaseData }) => {
   const [itemOut, setItemOut] = useState<any | false>(false);
+  const [imgsLoaded, setImgsLoaded] = useState(false);
 
   const limiteTitulo = getByScreenSize({ desktop: 18, mobile: 11 });
   const alertDialogSize = getByScreenSize({ desktop: 62, mobile: 78 });
+  const mobileImg = getByScreenSize({ desktop: 'contain', mobile: "cover" });
+
+
+  useEffect(() => {
+    const imageUrls = comidas.map(item => getPublicImageURL(item.image));
+    preloadImages(imageUrls).then(() => setImgsLoaded(true));
+  }, []);
 
   const handleClick = (item: InterfaceFoodDataBase) => {
     if (window.getSelection()?.toString()) return;
@@ -26,6 +35,10 @@ const CardsList: React.FC<CardsListProps> = ({ comidas, setSelectFood, settingsC
       setItemOut(item);
     }
   };
+
+  if (!imgsLoaded) return <div>Carregando imagens...</div>; // ou algum skeleton
+
+  console.log(itemOut)
 
   return (
     <Grid className={stylesPerso['main_container']}>
@@ -42,15 +55,12 @@ const CardsList: React.FC<CardsListProps> = ({ comidas, setSelectFood, settingsC
                 borderColor: culoriCalc({ keyColorData: settingsColorsBaseData['borda_tematica'].value, calc: [-0.17, 0.01, -20.69] })
               }}
             >
-              <Box className={stylesPerso['item_image_container']}>
-                {imgStockCheck2({
-                  image: item.image,
-                  altImg: item.title,
-                  stylesPerso: stylesPerso['item_image'],
-                  stock: item.stock,
-                  limit: item.amount_image,
-                })}
-              </Box>
+              {imgStockCheck({
+                image: item.image,
+                altImg: item.title,
+                stock: item.stock,
+                objectFit: mobileImg,
+              })}
               <CardContent sx={{ p: 0 }} className={stylesPerso['item_info']}>
                 <Typography className={stylesPerso[titleTamanho]} style={{ color: culoriCalc({ keyColorData: settingsColorsBaseData['escrita_tematica'].value, calc: [-0.1, -0.02, -5.24] }) }}>
                   {item.title}
@@ -67,6 +77,8 @@ const CardsList: React.FC<CardsListProps> = ({ comidas, setSelectFood, settingsC
         );
       })}
 
+
+
       {!!itemOut && (
         <AlertDiagPers
           valueVH={alertDialogSize}
@@ -74,15 +86,12 @@ const CardsList: React.FC<CardsListProps> = ({ comidas, setSelectFood, settingsC
           extra="Item Esgotado"
           content={
             <Grid className={stylesPerso['main_container_alert']}>
-              <Box className={stylesPerso['item_image_container_alert']}>
-                {imgStockCheck2({
-                  image: itemOut.image,
-                  altImg: itemOut.title,
-                  stylesPerso: stylesPerso['item_image_alert'],
-                  stock: itemOut.stock,
-                  limit: itemOut.amount_image,
-                })}
-              </Box>
+              
+              {imgStockCheck({
+                image: itemOut.image,
+                altImg: itemOut.title,
+                stock: itemOut.stock,
+              })}
               <Typography className={stylesPerso['description_alert']} style={{ color: settingsColorsBaseData['escrita_dark'].value }}>
                 {itemOut.description}
               </Typography>

@@ -1,7 +1,7 @@
 import { useCallback, useState, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 import { Grid, Typography, Box } from "@/libs/mui";
 import { useComplementosPorComida, useVersionPorComidas, useSettingsColors, useDatabaseStatusUI, useIngredientesPorComida } from '@/hooks'
-import { getByScreenSize, imgStockCheck2, iconSelect, formatMoneyBR, culoriCalc, getBrowser } from "@/utils/function";
+import { getByScreenSize, imgStockCheck, iconSelect, formatMoneyBR, culoriCalc, getBrowser } from "@/utils/function";
 import { InterfaceFoodAddons, InterfaceFoodDataBase, InterfaceSettingsColors, InterfaceFoodVersionDataBase, InterfaceIngredient, InterfaceIngredientMap } from '@/types';
 import FoodVersion from '@/components/layout/cardapio/FoodVersion';
 import FoodIngredients from '@/components/layout/cardapio/FoodIngredients';
@@ -30,6 +30,8 @@ export default function CardapioBaseData({ FoodSelect, setSelectFood, settingsCo
   const { data: foodVersionBaseData, isLoading: isLoading2, error: error2 } = useVersionPorComidas(FoodSelect.id, true)
   const { data: foodIngredientsBaseData, isLoading: isLoading3, error: error3 } = useIngredientesPorComida(FoodSelect.id, true)
 
+  console.log(complementData, foodVersionBaseData, foodIngredientsBaseData)
+
   const safeComplementData = complementData ?? {}
   const safeVersion = foodVersionBaseData ?? []
   const safeIngredients = foodIngredientsBaseData ?? []
@@ -41,7 +43,7 @@ export default function CardapioBaseData({ FoodSelect, setSelectFood, settingsCo
   const statuses = [
     { isLoading: isLoading, error: error, isEmpty: !hasComplements, emptyMsg: 'Opcionais vazios' },
     { isLoading: isLoading2, error: error2, isEmpty: !hasVersion, emptyMsg: 'Sem versões' },
-    { isLoading: isLoading3, error: error2, isEmpty: !hasIngredients, emptyMsg: 'Sem ingredientes' },
+    { isLoading: isLoading3, error: error3, isEmpty: !hasIngredients, emptyMsg: 'Sem ingredientes' },
   ]
 
   const statusUI = useDatabaseStatusUI(statuses, 5000)
@@ -76,6 +78,8 @@ type CardapioProps = {
 
 
 const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setSelectFood, FoodVersionBaseData, FoodIngredientsBaseData }: CardapioProps) => {
+
+  
 
   const { browser } = useAppContext();
 
@@ -187,13 +191,6 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
     setlineDescription(rects.length - 2); // Subtrai para considerar os dois span
   }, [maxLineDescription]);
 
-  console.log(lineDescription <= maxLineDescription ? gridMenu[2][0] : gridMenu[2][1], "resultado")
-  console.log(gridMenu[2][0], "0")
-  console.log(gridMenu[2][1], "1")
-  console.log(lineDescription, "lineDescription")
-  console.log(maxLineDescription, "maxLineDescription")
-
-
 
   //#endregion  
 
@@ -212,15 +209,11 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
         </Grid>
 
         {/* Imagem */}
-        <Grid className={stylesPerso["menu_image_container"]}>
-          {imgStockCheck2({
+        {imgStockCheck({
             image: FoodSelect.image,
             altImg: FoodSelect.title,
-            stylesPerso: stylesPerso["img_complemento"],
             stock: FoodSelect.stock,
-            limit: FoodSelect.amount_image,
           })}
-        </Grid>
 
         {/* Descrição */}
         <Box

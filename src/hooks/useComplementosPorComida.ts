@@ -35,8 +35,7 @@ export const useComplementosPorComida = (
             image,
             stock,
             sale,
-            promotion,
-            amount_image
+            promotion
           ),
           versoes!complementos_versao_id_fkey(
             id,
@@ -50,6 +49,7 @@ export const useComplementosPorComida = (
         `)
         .eq('comida_id', comidaId)
 
+        console.log('useComplementosPorComida', { data, error })
       if (error) throw error
 
       const agrupado = (data || []).reduce<InterfaceFoodAddons>((acc, row) => {
@@ -91,7 +91,6 @@ export const useComplementosPorComida = (
               stock: true,
               sale: true,
               promotion: null,
-              amount_image: 1,
               version: null,
             }
             acc[key].items.push(defaultOption)
@@ -109,7 +108,6 @@ export const useComplementosPorComida = (
           stock: comida.stock,
           sale: comida.sale,
           promotion: comida.promotion,
-          amount_image: comida.amount_image,
           free: row.free,
           version: versao
             ? {

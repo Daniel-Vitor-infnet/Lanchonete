@@ -83,6 +83,9 @@ const Cardapio = ({ categoryDataBase, foodsDataBase, settingsColorsBaseData }: C
   const [selectFood, setSelectFood] = useState<InterfaceFoodDataBase | null>(null);
   const [selectCategoryID, setSelectCategoryID] = useState(categoryDataBase[0].id);
 
+  console.log(selectFood)
+
+
   // Lógicas baseadas no tamanho da tela 
 
   const typeTab = getByScreenSize({ desktop: 'vertical', mobile: 'horizontal' });

@@ -19,7 +19,6 @@ export interface InterfaceFoodDataBase {
     stock: boolean
     sale: boolean
     promotion: boolean | null
-    amount_image: number
 }
 
 export interface InterfaceFood {

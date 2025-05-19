@@ -69,7 +69,6 @@ export default function FoodComplement({ food, version, setVersions, versionBase
                   image: v.image || food.image,
                   altImg: v.title,
                   stock: v.stock,
-                  limit: !!v.image ? 1 : food.amount_image,
                 })}
                 {/* <img src="https://via.placeholder.com/150" alt={"1"} style={{ height: "100%", width: "100%"}} /> */}
                 <Grid className={stylesPerso["info_container"]}>

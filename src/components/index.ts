@@ -9,7 +9,7 @@ export { default as ButtonOnOff } from '@/components/elementos/button/onOff.tsx'
 export { default as CardsFoods } from '@/components/layout/cardapio/CardsFoods';
 export { default as TimeSelectPerso } from '@/components/layout/timeSelectPerso.tsx';
 export { default as ButtonPerson } from '@/components/elementos/button/ButtonPerson';
-
+export { default as Loading } from '@/components/layout/database/Loading';
 export { default as Blur } from '@/components/layout/Blur';
 
 

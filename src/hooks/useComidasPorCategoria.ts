@@ -13,7 +13,7 @@ export const useComidasPorCategoria = ({ isSale = true }: UseComidasPorCategoria
     queryFn: async () => {
       const { data, error } = await supabase
         .from('comidas')
-        .select('id, categoria_id, title, description, price, image, stock, sale, promotion, amount_image')
+        .select('id, categoria_id, title, description, price, image, stock, sale, promotion')
 
       if (!data || error) throw error;
 

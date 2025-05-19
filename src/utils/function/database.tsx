@@ -53,42 +53,30 @@ interface imgStockCheckProps {
   altImg: string;
   stylesPerso?: string;
   stock: boolean;
-  limit?: number;
+  objectFit?: string;
 };
 
 
-interface imgStockCheckProps2 {
-  image: string;
-  altImg: string;
-  stylesPerso: any;
-  stock: boolean;
-  limit?: number;
-};
 
-
-export function imgStockCheck({ image, altImg, stylesPerso, stock, limit }: imgStockCheckProps) {
-  //console.log("image base", image);
-
-
-  // Se o item tiver mais de uma imagem, gera uma imagem aleatória
-  if (!!limit && limit > 1) {
-    image = gerarImagemAleatoria(image, limit);
-  }
+export function imgStockCheck({ image, altImg, stylesPerso, stock, objectFit }: imgStockCheckProps) {
 
 
   const imageData = getPublicImageURL(image);
+  const objectFitCheck: React.CSSProperties['objectFit'] = objectFit ? objectFit as React.CSSProperties['objectFit'] : "contain";
 
 
   const imgContainerStyle: React.CSSProperties = {
     position: 'relative',
     overflow: 'hidden',
+    height: '100%',
+    width: '100%',
   };
 
   const imgStyle: React.CSSProperties = {
     position: 'absolute',
     width: '100%',
     height: '100%',
-    objectFit: 'contain',
+    objectFit: objectFitCheck,
   };
 
 
@@ -123,45 +111,18 @@ export function imgStockCheck({ image, altImg, stylesPerso, stock, limit }: imgS
 }
 
 
-export function imgStockCheck2({ image, altImg, stylesPerso, stock, limit }: imgStockCheckProps2) {
-  //console.log("image base", image);
 
+export async function preloadImages(urls: string[]): Promise<void> {
+  const promises = urls.map(url => {
+    return new Promise<void>((resolve) => {
+      const img = new Image();
+      img.src = url;
+      img.onload = () => resolve();
+      img.onerror = () => resolve(); // mesmo se falhar, segue o fluxo
+    });
+  });
 
-  // Se o item tiver mais de uma imagem, gera uma imagem aleatória
-  if (!!limit && limit > 1) {
-    image = gerarImagemAleatoria(image, limit);
-  }
-
-
-  const imageData = getPublicImageURL(image);
-  //console.log("image teste561", imageData);
-
-  if (stock) {
-    return (
-      <img
-        className={stylesPerso}
-        src={imageData}
-        alt={altImg}
-        loading="lazy"
-      />
-    );
-  } else {
-    return (
-      <>
-        <img
-          className={stylesPerso}
-          src={imageData}
-          alt={altImg}
-          loading="lazy"
-          style={{ filter: "grayscale(100%)" }}
-        />
-        <img
-          className={stylesPerso}
-          src="https://tcbwhkdbktgzelgtyzgv.supabase.co/storage/v1/object/public/image/extras/esgotado.png"
-          alt="Esgotado"
-        />
-      </>
-    );
-  }
+  await Promise.all(promises);
 }
+
 

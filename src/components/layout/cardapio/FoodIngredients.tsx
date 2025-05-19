@@ -1,7 +1,7 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { Grid, Typography, Box } from "@/libs/mui";
 import { InterfaceSettingsColors, InterfaceIngredientMap } from '@/types';
-import { imgStockCheck, formatMoneyBR, culoriCalc, iconSelect, getByScreenSize } from '@/utils/function';
+import { imgStockCheck, formatMoneyBR, culoriCalc, iconSelect, getByScreenSize, preloadImages, getPublicImageURL } from '@/utils/function';
 import stylesPerso from "@/styles/cardapio/FoodMenuOptions.module.scss";
 import { ButtonPerson } from '@/components';
 
@@ -16,6 +16,7 @@ interface FoodIngredientsProps {
 export default function FoodIngredients({ ingredients, setIngredients, settingsColorsBaseData }: FoodIngredientsProps) {
 
 
+    const [imgsLoaded, setImgsLoaded] = useState(false);
 
     const amountButtons = useCallback((type: string, id: string) => {
         setIngredients((prev) => ({
@@ -32,6 +33,13 @@ export default function FoodIngredients({ ingredients, setIngredients, settingsC
 
     const subTotal = getByScreenSize({ desktop: ["flex", "0.5rem"], mobile: ["collum", "unset"] });
 
+
+    useEffect(() => {
+        const imageUrls = Object.values(ingredients).map(i => getPublicImageURL(i.image));
+        preloadImages(imageUrls).then(() => setImgsLoaded(true));
+    }, []);
+
+    if (!imgsLoaded) return <div>Carregando imagens...</div>; // ou algum skeleton
 
     // ===== Renderização =====
     return (
