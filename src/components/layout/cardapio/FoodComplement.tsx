@@ -1,6 +1,7 @@
+import { useEffect, useState } from 'react';
 import { Grid, Typography, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Box } from "@/libs/mui";
 import { InterfaceFoodAddons, InterfaceSettingsColors } from '@/types';
-import { foodVersionCheck, imgStockCheck, formatMoneyBR, culoriCalc, iconSelect, getByScreenSize } from '@/utils/function';
+import { imgStockCheck, formatMoneyBR, culoriCalc, iconSelect, getByScreenSize, preloadImages, getPublicImageURL  } from '@/utils/function';
 import stylesPerso from "@/styles/cardapio/FoodMenuOptions.module.scss";
 
 
@@ -17,6 +18,8 @@ interface FoodComplementProps {
 
 export default function FoodComplement({ complement, setComplements, complementData, settingsColorsBaseData }: FoodComplementProps) {
 
+
+   const [imgsLoaded, setImgsLoaded] = useState(false);
 
   const complementSelect = ((select: string) => {
     const selectedVersion = complementData.items.find(c => select.startsWith('version-') ? c.version?.id === select.split("version-").at(-1) : c.id === select.split("version-").at(-1))!;
@@ -37,6 +40,14 @@ export default function FoodComplement({ complement, setComplements, complementD
   const mobileBackGroundSelect = getByScreenSize({ desktop: false, mobile: true });
 
   const complemnetDataSelect = complement.items[0].version ? 'version-' + complement.items[0].version.id : complement.items[0].id
+
+    useEffect(() => {
+    const imageUrls = complementData.items.map(i => getPublicImageURL(i.image));
+    preloadImages(imageUrls).then(() => setImgsLoaded(true));
+  }, []);
+
+
+  if (!imgsLoaded) return <div>Carregando imagens...</div>; // ou algum skeleton
 
   // ===== Renderização =====
   return (
@@ -87,7 +98,6 @@ export default function FoodComplement({ complement, setComplements, complementD
                   image: c.image,
                   altImg: checkVersion.title,
                   stock: checkStock,
-                  limit: c.amount_image,
                 })}
                 <Grid className={stylesPerso["info_container"]}>
                   {/* Lógica de titulos de acordo com a versão da comida */}
@@ -96,7 +106,7 @@ export default function FoodComplement({ complement, setComplements, complementD
                   </Typography>
                   {/* Lógica de preço gratis ou preço normal */}
                   <Typography className={stylesPerso[c.free ? "price_free" : "price"]} style={{ color: settingsColorsBaseData["dinheiro"].value }}>
-                    {checkVersion.free ? "Grátis" : checkVersion.price}
+                    {checkVersion.free ? "Grátis" : formatMoneyBR(checkVersion.price)}
                   </Typography>
                 </Grid>
                 {/* Lógica para saber se o item tem estoque ou não */}

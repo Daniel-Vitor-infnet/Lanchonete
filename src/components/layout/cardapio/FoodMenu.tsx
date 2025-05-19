@@ -1,7 +1,7 @@
 import { useCallback, useState, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 import { Grid, Typography, Box } from "@/libs/mui";
 import { useComplementosPorComida, useVersionPorComidas, useSettingsColors, useDatabaseStatusUI, useIngredientesPorComida } from '@/hooks'
-import { getByScreenSize, imgStockCheck2, iconSelect, formatMoneyBR, culoriCalc, foodVersionCheck, getBrowser } from "@/utils/function";
+import { getByScreenSize, imgStockCheck, iconSelect, formatMoneyBR, culoriCalc, getBrowser } from "@/utils/function";
 import { InterfaceFoodAddons, InterfaceFoodDataBase, InterfaceSettingsColors, InterfaceFoodVersionDataBase, InterfaceIngredient, InterfaceIngredientMap } from '@/types';
 import FoodVersion from '@/components/layout/cardapio/FoodVersion';
 import FoodIngredients from '@/components/layout/cardapio/FoodIngredients';
@@ -30,6 +30,8 @@ export default function CardapioBaseData({ FoodSelect, setSelectFood, settingsCo
   const { data: foodVersionBaseData, isLoading: isLoading2, error: error2 } = useVersionPorComidas(FoodSelect.id, true)
   const { data: foodIngredientsBaseData, isLoading: isLoading3, error: error3 } = useIngredientesPorComida(FoodSelect.id, true)
 
+  console.log(complementData, foodVersionBaseData, foodIngredientsBaseData)
+
   const safeComplementData = complementData ?? {}
   const safeVersion = foodVersionBaseData ?? []
   const safeIngredients = foodIngredientsBaseData ?? []
@@ -41,7 +43,7 @@ export default function CardapioBaseData({ FoodSelect, setSelectFood, settingsCo
   const statuses = [
     { isLoading: isLoading, error: error, isEmpty: !hasComplements, emptyMsg: 'Opcionais vazios' },
     { isLoading: isLoading2, error: error2, isEmpty: !hasVersion, emptyMsg: 'Sem versões' },
-    { isLoading: isLoading3, error: error2, isEmpty: !hasIngredients, emptyMsg: 'Sem ingredientes' },
+    { isLoading: isLoading3, error: error3, isEmpty: !hasIngredients, emptyMsg: 'Sem ingredientes' },
   ]
 
   const statusUI = useDatabaseStatusUI(statuses, 5000)
@@ -76,6 +78,8 @@ type CardapioProps = {
 
 
 const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setSelectFood, FoodVersionBaseData, FoodIngredientsBaseData }: CardapioProps) => {
+
+  
 
   const { browser } = useAppContext();
 
@@ -131,7 +135,7 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
       .flatMap((c) => c.items) // Converte o array separado por categorias para um único array de todos os itens escolhidos
       .filter((c) => c.id !== "null") // Filtra as opção de n escolher um complemento (id === null)
       .reduce((sum, c) => {
-        return sum + foodVersionCheck({ data: c, yes: c.version?.price, no: c.price }); // Soma os preços dos complementos escolhidos
+        return sum + (!!c.version ? c.version.price : c.price); // Soma os preços dos complementos escolhidos
       }, 0);
   }, [complements])
 
@@ -188,13 +192,12 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
   }, [maxLineDescription]);
 
 
-
   //#endregion  
 
   return (
     <Blur>
       <Grid
-        className={stylesPerso["main_container"]} style={{ gridTemplateRows: `${gridMenu[0]}fr ${gridMenu[1]}fr ${lineDescription < maxLineDescription ? gridMenu[2][0] : gridMenu[2][1]}fr ${gridMenu[3]}fr ${gridMenu[4]}fr`, background: settingsColorsBaseData["fundo_tematica"].value, borderColor: settingsColorsBaseData["borda_tematica"].value, boxShadow: `0 0 12px ${culoriCalc({ keyColorData: settingsColorsBaseData["base_tematica"].value, calc: [-0.16, 0.03, -6.7, -0.49] })}` }}>
+        className={stylesPerso["main_container"]} style={{ gridTemplateRows: `${gridMenu[0]}fr ${gridMenu[1]}fr ${lineDescription <= maxLineDescription ? gridMenu[2][0] : gridMenu[2][1]}fr ${gridMenu[3]}fr ${gridMenu[4]}fr`, background: settingsColorsBaseData["fundo_tematica"].value, borderColor: settingsColorsBaseData["borda_tematica"].value, boxShadow: `0 0 12px ${culoriCalc({ keyColorData: settingsColorsBaseData["base_tematica"].value, calc: [-0.16, 0.03, -6.7, -0.49] })}` }}>
         {/* Cabeçalho */}
         <Grid className={stylesPerso["menu_header"]} style={{ background: settingsColorsBaseData["base_tematica"].value }} >
           <Typography className={FoodSelect.title > tamanhoTelaTitulo ? stylesPerso["title"] : stylesPerso["title_small"]} style={{ color: settingsColorsBaseData["escrita_tematica"].value }} >
@@ -206,15 +209,11 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
         </Grid>
 
         {/* Imagem */}
-        <Grid className={stylesPerso["menu_image_container"]}>
-          {imgStockCheck2({
+        {imgStockCheck({
             image: FoodSelect.image,
             altImg: FoodSelect.title,
-            stylesPerso: stylesPerso["img_complemento"],
             stock: FoodSelect.stock,
-            limit: FoodSelect.amount_image,
           })}
-        </Grid>
 
         {/* Descrição */}
         <Box

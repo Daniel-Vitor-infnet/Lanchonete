@@ -1,4 +1,4 @@
-import { useMemo, useEffect, useState, use } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
 import styles from '@/styles/Cardapio.module.scss';
 import { Grid, Tab, TabPanel, Typography, Box, TabList, TabContext } from "@/libs/mui";
@@ -83,6 +83,9 @@ const Cardapio = ({ categoryDataBase, foodsDataBase, settingsColorsBaseData }: C
   const [selectFood, setSelectFood] = useState<InterfaceFoodDataBase | null>(null);
   const [selectCategoryID, setSelectCategoryID] = useState(categoryDataBase[0].id);
 
+  console.log(selectFood)
+
+
   // Lógicas baseadas no tamanho da tela 
 
   const typeTab = getByScreenSize({ desktop: 'vertical', mobile: 'horizontal' });
@@ -93,11 +96,11 @@ const Cardapio = ({ categoryDataBase, foodsDataBase, settingsColorsBaseData }: C
 
   // Lógica para trocar o url conforme o id da categoria
   useEffect(() => {
-    const categoryURL = categoryDataBase.find((c) => c.id === selectCategoryID);
-    if (pagID !== categoryURL!.title.toLowerCase()) {
-      navigate(`/cardapio/${categoryURL!.title.toLowerCase()}`, { replace: true });
+    const cat = categoryDataBase.find(c => c.id === selectCategoryID);
+    if (cat && pagID !== cat.title.toLowerCase()) {
+      navigate(`/cardapio/${cat.title.toLowerCase()}`, { replace: true });
     }
-  }, [selectCategoryID]);
+  }, [selectCategoryID, navigate, pagID]);
 
 
 

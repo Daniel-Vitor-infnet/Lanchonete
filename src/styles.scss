@@ -31,7 +31,7 @@ body {
   padding: 0;
   font-family: 'PlaywriteITModerna', Arial, sans-serif;
   -webkit-overflow-scrolling: touch; // Garante rolagem suave em iOS.
-  background-image: url('@/assets/img/Fundo.png');
+  background-image: url('https://tcbwhkdbktgzelgtyzgv.supabase.co/storage/v1/object/public/image/extras/fundo.webp');
   background-size: 100% 100%; // Garante que a imagem cubra a tela.
   background-position: center;
   background-repeat: no-repeat;

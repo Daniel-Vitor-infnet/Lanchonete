@@ -253,14 +253,6 @@ $testesAtivos: false;
 
   }
 
-  .item_image_container_alert {
-    @extend .item_image_container;
-  }
-
-  .item_image_alert {
-    @extend .item_image;
-  }
-
   .item_price_alert {
     @extend .item_price;
     font-size: px-para-rem(20px);
