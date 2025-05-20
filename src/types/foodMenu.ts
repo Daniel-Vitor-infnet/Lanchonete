@@ -66,3 +66,19 @@ export interface InterfaceFoodAddons {
         order: number;
     }
 }
+
+
+// ¦  ========== [ PagOrderEnd ] ==========
+
+export interface InterfaceFoodPropVersionOrderEnd extends InterfaceFoodPropVersion {
+    categoryID: string
+}
+
+export interface InterfaceFoodDataBaseOrderEnd {
+    id: string
+    food: InterfaceFoodDataBase
+    version: InterfaceFoodVersion
+    ingredients: InterfaceIngredient[]
+    complements: InterfaceFoodPropVersionOrderEnd[]
+}
+

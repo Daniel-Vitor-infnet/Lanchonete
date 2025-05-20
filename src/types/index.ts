@@ -1,4 +1,16 @@
-export type { InterfaceFoodCategory, InterfaceFoodDataBase, InterfaceFood, InterfaceIngredient, InterfaceIngredientMap, InterfaceFoodVersionDataBase, InterfaceFoodVersion, InterfaceFoodPropVersion, InterfaceFoodAddons } from '@/types/foodMenu';
+export type {
+  InterfaceFoodCategory,
+  InterfaceFoodDataBase,
+  InterfaceFood,
+  InterfaceIngredient,
+  InterfaceIngredientMap,
+  InterfaceFoodVersionDataBase,
+  InterfaceFoodVersion,
+  InterfaceFoodPropVersion,
+  InterfaceFoodAddons,
+  InterfaceFoodPropVersionOrderEnd,
+  InterfaceFoodDataBaseOrderEnd,
+} from '@/types/foodMenu';
 
 
 

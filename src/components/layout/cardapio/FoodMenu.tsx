@@ -1,16 +1,19 @@
-import { useCallback, useState, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
+import { useState, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 import { Grid, Typography, Box } from "@/libs/mui";
 import { useComplementosPorComida, useVersionPorComidas, useSettingsColors, useDatabaseStatusUI, useIngredientesPorComida } from '@/hooks'
 import { getByScreenSize, imgStockCheck, iconSelect, formatMoneyBR, culoriCalc, getBrowser } from "@/utils/function";
-import { InterfaceFoodAddons, InterfaceFoodDataBase, InterfaceSettingsColors, InterfaceFoodVersionDataBase, InterfaceIngredient, InterfaceIngredientMap } from '@/types';
+import { InterfaceFoodAddons, InterfaceFoodDataBase, InterfaceSettingsColors, InterfaceFoodVersionDataBase, InterfaceIngredient, InterfaceIngredientMap, InterfaceFoodPropVersionOrderEnd, InterfaceFoodDataBaseOrderEnd } from '@/types';
 import FoodVersion from '@/components/layout/cardapio/FoodVersion';
 import FoodIngredients from '@/components/layout/cardapio/FoodIngredients';
 import FoodComplement from '@/components/layout/cardapio/FoodComplement';
 import FoodOrderEnd from '@/components/layout/cardapio/FoodOrderEnd';
-import { ButtonPerson, AlertDiagPers } from '@/components';
+import { ButtonPerson, AlertDiagPers, Blur } from '@/components';
 import stylesPerso from "@/styles/cardapio/FoodMenu.module.scss";
-import { Blur } from '@/components';
 import { useAppContext } from '@/Context';
+import { supabase } from '@/libs/supabaseClient'
+import { useNavigate } from "react-router-dom";
+
+
 
 //#region Lógica para garantir que todos bancos de dados foram carregados
 
@@ -79,9 +82,11 @@ type CardapioProps = {
 
 const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setSelectFood, FoodVersionBaseData, FoodIngredientsBaseData }: CardapioProps) => {
 
-  
+
 
   const { browser } = useAppContext();
+  const navigate = useNavigate();
+
 
   // ¦  ========== [ ESTADOS ] ==========
 
@@ -112,6 +117,7 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
   const [maxLineDescription, setmaxLineDescription] = useState(0);
 
 
+  const [loadingOrderEnd, setLoadingOrderEnd] = useState(false);
   const [alertDescription, setAlertDescription] = useState<string | false>(false);
 
   // ¦  ========== [ Valores ] ==========
@@ -153,7 +159,6 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
   const gridMenu = getByScreenSize({ desktop: [0.2, 0.7, [0.2, 0.28], 0.9, 0.2], laptop: [0.2, 0.8, [0.3, 0.4], 1, 0.2], mobile: [0.2, 0.8, [0.2, 0.45], 1, 0.2] })
 
 
-  // Vai ser removido no futuro, por enquanto só para teste
 
   //#region Lógica de paginas dinâmicas
 
@@ -194,6 +199,12 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
 
   //#endregion  
 
+  if (loadingOrderEnd) {
+    return (
+      <p>Carregando</p>
+    )
+  }
+
   return (
     <Blur>
       <Grid
@@ -210,10 +221,10 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
 
         {/* Imagem */}
         {imgStockCheck({
-            image: FoodSelect.image,
-            altImg: FoodSelect.title,
-            stock: FoodSelect.stock,
-          })}
+          image: FoodSelect.image,
+          altImg: FoodSelect.title,
+          stock: FoodSelect.stock,
+        })}
 
         {/* Descrição */}
         <Box
@@ -323,7 +334,18 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
                 colorsData={settingsColorsBaseData}
                 className={stylesPerso["button_order_end"]}
                 text="Fianalizar Pedido"
-                onClick={() => ("")}
+                onClick={async () => {
+
+                  setLoadingOrderEnd(true);
+                  await insertOrderSupaBase({
+                    food: FoodSelect,
+                    version: versions,
+                    ingredients: Object.values(ingredients).filter((i) => i.amount > 0),
+                    complements: complements,
+                  });
+
+                  navigate("/pedido_finalizado")
+                }}
               />)
             }
 
@@ -349,5 +371,46 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
       </Grid>
     </Blur>
   );
+
+}
+
+
+interface insertOrderSupaBaseProps {
+  food: InterfaceFoodDataBase
+  version: InterfaceFoodVersionDataBase
+  ingredients: InterfaceIngredient[] | []
+  complements: InterfaceFoodAddons
+}
+
+
+async function insertOrderSupaBase({ food, version, ingredients, complements }: insertOrderSupaBaseProps) {
+
+
+  const complementsFilter = Object.values(complements).reduce<InterfaceFoodPropVersionOrderEnd[]>((acc, value) => {
+
+    if (!value.items[0].id.includes("null")) {
+      acc.push({ ...value.items[0], categoryID: value.category.id });
+    }
+
+    return acc;
+  }, []);
+
+
+  const timestamp = Date.now();
+  const ingredientsCheck = ingredients.length > 0 ? ingredients : null
+  const complementsCheck = complementsFilter.length > 0 ? complementsFilter : null
+
+  await supabase
+    .from('pedidos_pendentes')
+    .insert([
+      {
+        id: timestamp,
+        food: food,
+        version: version,
+        ingredients: ingredientsCheck,
+        complements: complementsCheck
+      }
+    ]);
+
 
 }

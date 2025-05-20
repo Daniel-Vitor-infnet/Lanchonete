@@ -20,6 +20,12 @@ interface FoodOrderEndProps {
 export default function FoodOrderEnd({ food, complements, version, ingredients, settingsColorsBaseData }: FoodOrderEndProps) {
 
 
+    // console.log(food)
+    // console.log(complements)
+    // console.log(version)
+    // console.log(ingredients)
+
+
     console.log(ingredients)
     return (
         <Box className={stylesPerso["main_container"]} >

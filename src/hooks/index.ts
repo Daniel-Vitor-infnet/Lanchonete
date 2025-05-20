@@ -6,4 +6,5 @@ export { useVersionPorComidas } from './useVersionPorComidas';
 export { useSettingsColors } from './useSettingsColors';
 export { useDelayedLoading } from './useDelayedLoading';
 export { useDatabaseStatusUI } from './useDatabaseStatusUI';
+export { useOrderEnd } from './useOrderEnd';
 export { useSettings } from './useSettings';
