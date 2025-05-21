@@ -24,9 +24,9 @@ export default function CardapioData() {
 
   // ¦  ========== [ Bancos de dados ] ==========
 
-  const { data: categoryDataBase, isLoading: isLoading, error: error } = useCategorias({});
-  const { data: foodsDataBase, isLoading: isLoading2, error: error2 } = useComidasPorCategoria({});
-  const { data: settingsColorsBaseData, isLoading: isLoading3, error: error3 } = useSettingsColors({});
+  const { data: categoryDataBase, isLoading: categoryLoading, error: categoryError } = useCategorias({});
+  const { data: foodsDataBase, isLoading: foodsLoading, error: foodsError } = useComidasPorCategoria({});
+  const { data: settingsColorsBaseData, isLoading: settingsColorsLoading3, error: settingsColorsError } = useSettingsColors({});
 
   const safeCategory = categoryDataBase ?? []
   const safeFoods = foodsDataBase ?? {}
@@ -37,9 +37,9 @@ export default function CardapioData() {
   const hasColors = Object.keys(safeColors).length > 0
 
   const statuses = [
-    { isLoading: isLoading, error: error, isEmpty: !hasCategory, emptyMsg: 'Sem ingredientes' },
-    { isLoading: isLoading2, error: error2, isEmpty: !hasFoods, emptyMsg: 'Sem cores' },
-    { isLoading: isLoading3, error: error3, isEmpty: !hasColors, emptyMsg: 'Sem versões' },
+    { isLoading: categoryLoading, error: categoryError, isEmpty: !hasCategory, emptyMsg: 'Sem Categorias' },
+    { isLoading: foodsLoading, error: foodsError, isEmpty: !hasFoods, emptyMsg: 'Sem Comidas' },
+    { isLoading: settingsColorsLoading3, error: settingsColorsError, isEmpty: !hasColors, emptyMsg: 'Sem cores' },
   ]
 
   const statusUI = useDatabaseStatusUI(statuses, 5000)

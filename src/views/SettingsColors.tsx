@@ -27,14 +27,14 @@ export default function ColorsDataBase() {
 
     // ¦  ========== [ Bancos de dados ] ==========
 
-    const { data: colorsDataBase, isLoading: isLoading, error: error } = useSettingsColors({ admin: true });
+    const { data: colorsDataBase, isLoading: colorsLoading, error: colorsError } = useSettingsColors({ admin: true });
 
     const safeColors = colorsDataBase ?? {}
 
     const hasSettingsColors = Object.keys(safeColors).length > 0
 
     const statuses = [
-        { isLoading, error, isEmpty: !hasSettingsColors, emptyMsg: 'Sem cores' },
+        { isLoading: colorsLoading, error: colorsError, isEmpty: !hasSettingsColors, emptyMsg: 'Sem cores' },
     ];
 
     const statusUI = useDatabaseStatusUI(statuses, 5000)

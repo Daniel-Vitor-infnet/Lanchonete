@@ -29,9 +29,9 @@ export default function CardapioBaseData({ FoodSelect, setSelectFood, settingsCo
 
   // ¦  ========== [ Bancos de dados ] ==========
 
-  const { data: complementData, isLoading, error } = useComplementosPorComida(FoodSelect.id, true)
-  const { data: foodVersionBaseData, isLoading: isLoading2, error: error2 } = useVersionPorComidas(FoodSelect.id, true)
-  const { data: foodIngredientsBaseData, isLoading: isLoading3, error: error3 } = useIngredientesPorComida(FoodSelect.id, true)
+  const { data: complementData, isLoading: complementLoading, error: complementError } = useComplementosPorComida(FoodSelect.id, true)
+  const { data: foodVersionBaseData, isLoading: foodVersionLoading, error: foodVersionError } = useVersionPorComidas(FoodSelect.id, true)
+  const { data: foodIngredientsBaseData, isLoading: foodIngredientsLoading, error: foodIngredientsError } = useIngredientesPorComida(FoodSelect.id, true)
 
   console.log(complementData, foodVersionBaseData, foodIngredientsBaseData)
 
@@ -44,9 +44,9 @@ export default function CardapioBaseData({ FoodSelect, setSelectFood, settingsCo
   const hasIngredients = safeIngredients.length > 0
 
   const statuses = [
-    { isLoading: isLoading, error: error, isEmpty: !hasComplements, emptyMsg: 'Opcionais vazios' },
-    { isLoading: isLoading2, error: error2, isEmpty: !hasVersion, emptyMsg: 'Sem versões' },
-    { isLoading: isLoading3, error: error3, isEmpty: !hasIngredients, emptyMsg: 'Sem ingredientes' },
+    { isLoading: complementLoading, error: complementError, isEmpty: !hasComplements, emptyMsg: 'Sem complementos' },
+    { isLoading: foodVersionLoading, error: foodVersionError, isEmpty: !hasVersion, emptyMsg: 'Sem versões' },
+    { isLoading: foodIngredientsLoading, error: foodIngredientsError, isEmpty: !hasIngredients, emptyMsg: 'Sem ingredientes' },
   ]
 
   const statusUI = useDatabaseStatusUI(statuses, 5000)
