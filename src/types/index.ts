@@ -38,14 +38,5 @@ export interface InterfaceStatusCheck {
 };
 
 
-export interface PageLayoutProps  {
-  children?: React.ReactNode;
-  hideFooter?: boolean;
-  viewportLimit?: string | null;
-  isCenterItemH?: boolean;
-  isCenterItemV?: boolean;
-  hideAlertColor?: boolean;
-  testeLayout?: boolean;
-}
 
 
