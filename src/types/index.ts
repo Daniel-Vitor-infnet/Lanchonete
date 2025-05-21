@@ -11,6 +11,7 @@ export type {
   InterfaceFoodPropVersionOrderEnd,
   InterfaceFoodDataBaseOrderEnd,
 } from '@/types/foodMenu';
+export type { InterfacePaymentMethods } from '@/types/OrderEnd';
 
 
 

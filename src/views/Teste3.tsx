@@ -6,7 +6,6 @@ import { ButtonPerson } from '@/components';
 import { Blur } from '@/components';
 import { useAppContext } from '@/Context';
 import stylesPerso from '@/styles/OrderEnd.module.scss';
-import PaymentMethods from '@/components/layout/order-end/PaymentMethods';
 
 
 
@@ -19,7 +18,6 @@ export default function CustomizedDialogs() {
 
       <Box className={stylesPerso['main_container']}>
          <Grid className={stylesPerso['content']}>
-            <PaymentMethods />
          </Grid>
       </Box>
 

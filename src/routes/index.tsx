@@ -10,6 +10,7 @@ const Panel                 = lazy(() => import('@/views/Panel'));
 const Cardapio              = lazy(() => import('@/views/Cardapio'));  
 const SettingsColors        = lazy(() => import('@/views/SettingsColors'));
 const Teste                 = lazy(() => import('@/views/Teste'));
+const Teste2                = lazy(() => import('@/views/Teste2'));
 const PedidoFinalizado      = lazy(() => import('@/views/OrderEnd'));
 
 const router = createBrowserRouter([
@@ -58,7 +59,17 @@ const router = createBrowserRouter([
       },
       {
         path: '/pedido_finalizado',
-        element: <PedidoFinalizado />
+        element: <PedidoFinalizado />,
+        handle: {
+          viewportLimit: true,
+        }
+      },
+      {
+        path: '/teste2',
+        element: <Teste2 />,
+        handle: {
+          viewportLimit: true,
+        }
       },
     ]
   },

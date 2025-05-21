@@ -344,7 +344,8 @@ const Cardapio = ({ settingsColorsBaseData, complementBaseData, FoodSelect, setS
                     complements: complements,
                   });
 
-                  navigate("/pedido_finalizado")
+                  navigate("/pedido_finalizado", { state: { isForwarded: true } });
+
                 }}
               />)
             }

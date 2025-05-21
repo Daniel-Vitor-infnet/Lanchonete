@@ -13,6 +13,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import BlockIcon from '@mui/icons-material/Block';
+import PixIcon from '@mui/icons-material/Pix';
 
 
 interface InterfaceIconObject {
@@ -43,6 +44,9 @@ const icones: InterfaceIconObject = {
         Instagram: InstagramIcon,
         WhatsApp: WhatsAppIcon,
       },
+      paymentMethods: {
+        Pix: PixIcon,
+      }
 
 };
 
