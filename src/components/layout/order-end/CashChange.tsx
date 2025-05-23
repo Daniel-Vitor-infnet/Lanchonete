@@ -3,22 +3,20 @@ import { useCallback, useState } from 'react';
 import { iconSelect, culoriCalc, imgStockCheck, formatMoneyBR } from "@/utils/function";
 import { ButtonPerson } from '@/components';
 import stylesPerso from '@/styles/order-end/options.module.scss';
-import { settingsColorsBaseData, paymentMethods } from "../../../../Extras/const";
+import { InterfaceSettingsColors, } from '@/types';
 
-// interface PaymentMethodsProps {
-//   complement: CategoriaComComidas
-//   settingsColorsBaseData: InterfaceSettingsColors
-// }
+interface CashChangeProps {
+    change: string
+    setChange: React.Dispatch<React.SetStateAction<string>>
+    settingsColorsBaseData: InterfaceSettingsColors
+}
 
 const CashChangeOptions = [
-    { id: 'noChange', name: 'Não quero troco'},
-    { id: 'change', name: 'Preciso de troco'}
+    { id: 'noChange', name: 'Não quero troco' },
+    { id: 'change', name: 'Preciso de troco' }
 ]
 
-//export default function PaymentMethods({setSelectFood, settingsColorsBaseData }: PaymentMethodsProps) {
-export default function CashChange() {
-
-    const [change, setChange] = useState<string>('');
+export default function CashChange({ change, setChange, settingsColorsBaseData }: CashChangeProps) {
 
     return (
         <FormControl className={stylesPerso["main_container"]}>

@@ -7,4 +7,5 @@ export { useSettingsColors } from './useSettingsColors';
 export { useDelayedLoading } from './useDelayedLoading';
 export { useDatabaseStatusUI } from './useDatabaseStatusUI';
 export { useOrderEnd } from './useOrderEnd';
+export {usePaymentMethods} from './usePaymentMethods';
 export { useSettings } from './useSettings';

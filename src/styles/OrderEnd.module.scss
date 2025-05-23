@@ -5,7 +5,7 @@ $testesAtivos: false;
 
 
 .main_container {
-    //background-color: red;
+    // background-color: white;
     width: 100%;
     height: 100%;
     display: flex;
@@ -13,11 +13,57 @@ $testesAtivos: false;
 
 
     .content {
+        width: 50%;
+        height: auto;
         display: flex;
         flex-direction: column;
+        align-items: center;
         background-color: lawngreen;
-        width: 70%;
-        height: 100%;
+        box-shadow: px-para-rem(8px) px-para-rem(4px) px-para-rem(8px) rgba(0, 0, 0, 0.2);
+        padding: px-para-rem(16px);
+    gap: px-para-rem(10px);
+
+
+        @include custom-scrollbar;
+
+        @include mobile {
+            @include custom-scrollbar(unset);
+            overflow: auto;
+        }
+
+    }
+
+    .buttons_default {
+        flex-shrink: 0;
+        height: px-para-rem(37px);
+        width: px-para-rem(174px);
+        border-radius: px-para-rem(13px);
+        font-size: px-para-rem(16px);
+        color: oklch(1 0 0);
+
+        &:hover {
+            box-shadow: unset;
+            transform: unset;
+        }
+
+        @include laptop {
+            height: px-para-rem(30px);
+            width: px-para-rem(130px);
+            font-size: px-para-rem(14px);
+        }
+
+
+        @include mobile {
+            height: px-para-rem(40px);
+            width: px-para-rem(120px);
+            font-size: px-para-rem(14px);
+        }
+
+        @include mobile-small {
+            height: px-para-rem(40px);
+            width: px-para-rem(100px);
+            font-size: px-para-rem(14px);
+        }
     }
 
 }

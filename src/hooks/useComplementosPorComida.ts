@@ -49,7 +49,6 @@ export const useComplementosPorComida = (
         `)
         .eq('comida_id', comidaId)
 
-        console.log('useComplementosPorComida', { data, error })
       if (error) throw error
 
       const agrupado = (data || []).reduce<InterfaceFoodAddons>((acc, row) => {

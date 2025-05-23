@@ -2,7 +2,7 @@ import { useState, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 import { Grid, Typography, Box } from "@/libs/mui";
 import { useComplementosPorComida, useVersionPorComidas, useSettingsColors, useDatabaseStatusUI, useIngredientesPorComida } from '@/hooks'
 import { getByScreenSize, imgStockCheck, iconSelect, formatMoneyBR, culoriCalc, getBrowser } from "@/utils/function";
-import { InterfaceFoodAddons, InterfaceFoodDataBase, InterfaceSettingsColors, InterfaceFoodVersionDataBase, InterfaceIngredient, InterfaceIngredientMap, InterfaceFoodPropVersionOrderEnd, InterfaceFoodDataBaseOrderEnd } from '@/types';
+import { InterfaceFoodAddons, InterfaceFoodDataBase, InterfaceSettingsColors, InterfaceFoodVersionDataBase, InterfaceIngredient, InterfaceIngredientMap, InterfaceFoodPropVersionOrderEnd } from '@/types';
 import FoodVersion from '@/components/layout/cardapio/FoodVersion';
 import FoodIngredients from '@/components/layout/cardapio/FoodIngredients';
 import FoodComplement from '@/components/layout/cardapio/FoodComplement';
@@ -33,7 +33,6 @@ export default function CardapioBaseData({ FoodSelect, setSelectFood, settingsCo
   const { data: foodVersionBaseData, isLoading: foodVersionLoading, error: foodVersionError } = useVersionPorComidas(FoodSelect.id, true)
   const { data: foodIngredientsBaseData, isLoading: foodIngredientsLoading, error: foodIngredientsError } = useIngredientesPorComida(FoodSelect.id, true)
 
-  console.log(complementData, foodVersionBaseData, foodIngredientsBaseData)
 
   const safeComplementData = complementData ?? {}
   const safeVersion = foodVersionBaseData ?? []

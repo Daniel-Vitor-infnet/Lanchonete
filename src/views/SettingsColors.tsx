@@ -287,11 +287,9 @@ async function syncColorsFromLocalStorage(colorsDataBase: InterfaceSettingsColor
 
     const updates = Object.values(cores).map(obj => {
         const { name, description, observation, ...colorsDataBaseFormat } = colorsDataBase[obj.id];
-        console.log(colorsDataBaseFormat);
         return { ...colorsDataBaseFormat, value: obj.value }
     })
 
-    console.log(updates);
 
 
 

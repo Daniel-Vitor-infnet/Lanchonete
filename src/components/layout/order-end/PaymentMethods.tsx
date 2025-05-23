@@ -3,17 +3,18 @@ import { useCallback, useState } from 'react';
 import { iconSelect, culoriCalc, imgStockCheck, formatMoneyBR } from "@/utils/function";
 import { ButtonPerson } from '@/components';
 import stylesPerso from '@/styles/order-end/options.module.scss';
-import { settingsColorsBaseData, paymentMethods } from "../../../../Extras/const";
+import { InterfaceSettingsColors, InterfacePaymentMethods } from '@/types';
 
-// interface PaymentMethodsProps {
-//   complement: CategoriaComComidas
-//   settingsColorsBaseData: InterfaceSettingsColors
-// }
+interface PaymentMethodsProps {
+    PaymentMethodsDataBase: InterfacePaymentMethods[]
+    methodSelected: string
+    setMethodSelected: React.Dispatch<React.SetStateAction<string>>
+    settingsColorsBaseData: InterfaceSettingsColors
+}
 
-//export default function PaymentMethods({setSelectFood, settingsColorsBaseData }: PaymentMethodsProps) {
-export default function PaymentMethods() {
 
-    const [methodSelected, setMethodSelected] = useState<string>('');
+export default function PaymentMethods({ PaymentMethodsDataBase, methodSelected, setMethodSelected, settingsColorsBaseData }: PaymentMethodsProps) {
+
 
     return (
         <FormControl className={stylesPerso["main_container"]}>
@@ -31,7 +32,7 @@ export default function PaymentMethods() {
             >
 
                 <Box className={stylesPerso["items_container"]}>
-                    {paymentMethods.map(m => {
+                    {PaymentMethodsDataBase.map(m => {
                         return (
                             <Grid
                                 className={stylesPerso["item_container"]}

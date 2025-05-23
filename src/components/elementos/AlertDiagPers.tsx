@@ -9,7 +9,7 @@ import stylesPerso from '@/styles/elements/AlertDiagPers.module.scss';
 
 interface CustomizedDialogsProps {
    valueVH?: number;
-   title: string;
+   title?: string;
    extra?: string;
    noIcon?: boolean;
    content: React.ReactNode;
@@ -35,7 +35,7 @@ export default function CustomizedDialogs({ valueVH, title, extra, noIcon, conte
          <Box className={stylesPerso["main_container"]} >
             <Grid className={stylesPerso["header_container"]}>
                <Typography className={stylesPerso["title"]} style={{ color: settingsColorsBaseData["escrita_dark"].value }} >
-                  {title}
+                  {!!title ? title : "Aviso!"}
                </Typography>
                {!!extra && (
                   <Typography className={stylesPerso["complement"]} style={{ color: settingsColorsBaseData["observations"].value }} >

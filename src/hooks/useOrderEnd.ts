@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
 import { supabase } from '@/libs/supabaseClient'
-import { InterfaceFoodDataBaseOrderEnd } from '@/types'
+import { InterfacePagOrderEndDataBase } from '@/types'
 
 
 
 export const useOrderEnd = () => {
-  return useQuery<InterfaceFoodDataBaseOrderEnd[]>({
+  return useQuery<InterfacePagOrderEndDataBase[]>({
     queryKey: ['pedidos_pendentes'],
     queryFn: async () => {
       const { data, error } = await supabase

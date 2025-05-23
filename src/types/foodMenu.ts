@@ -68,17 +68,14 @@ export interface InterfaceFoodAddons {
 }
 
 
-// ¦  ========== [ PagOrderEnd ] ==========
-
-export interface InterfaceFoodPropVersionOrderEnd extends InterfaceFoodPropVersion {
-    categoryID: string
-}
-
-export interface InterfaceFoodDataBaseOrderEnd {
+export interface InterfaceOrderEndDataBase {
     id: string
     food: InterfaceFoodDataBase
     version: InterfaceFoodVersion
     ingredients: InterfaceIngredient[]
-    complements: InterfaceFoodPropVersionOrderEnd[]
+    complements: InterfaceFoodPropVersion[]
 }
+
+
+
 

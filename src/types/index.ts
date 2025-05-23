@@ -8,10 +8,9 @@ export type {
   InterfaceFoodVersion,
   InterfaceFoodPropVersion,
   InterfaceFoodAddons,
-  InterfaceFoodPropVersionOrderEnd,
-  InterfaceFoodDataBaseOrderEnd,
+  InterfaceOrderEndDataBase
 } from '@/types/foodMenu';
-export type { InterfacePaymentMethods } from '@/types/OrderEnd';
+export type { InterfacePaymentMethods, InterfaceFoodPropVersionOrderEnd, InterfacePagOrderEndDataBase } from '@/types/PagOrderEnd';
 
 
 

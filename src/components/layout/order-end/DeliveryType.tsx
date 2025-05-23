@@ -3,12 +3,13 @@ import { useCallback, useState } from 'react';
 import { iconSelect, culoriCalc, imgStockCheck, formatMoneyBR } from "@/utils/function";
 import { ButtonPerson } from '@/components';
 import stylesPerso from '@/styles/order-end/options.module.scss';
-import { settingsColorsBaseData } from "../../../../Extras/const";
+import { InterfaceSettingsColors, } from '@/types';
 
-// interface PaymentMethodsProps {
-//   complement: CategoriaComComidas
-//   settingsColorsBaseData: InterfaceSettingsColors
-// }
+interface DeliveryTypeProps {
+    deliveryTypeSelected: string
+    setDeliveryTypeSelected: React.Dispatch<React.SetStateAction<string>>
+    settingsColorsBaseData: InterfaceSettingsColors
+}
 
 const deliveryTypeOptions = [
     { id: 'delivery', name: 'Entrega', icon: 'mui-deliveryType-Delivery', size: 2 },
@@ -16,10 +17,11 @@ const deliveryTypeOptions = [
     { id: 'basket', name: 'Retirar na loja', icon: 'mui-deliveryType-Basket', size: 1.5 }
 ]
 
-//export default function PaymentMethods({setSelectFood, settingsColorsBaseData }: PaymentMethodsProps) {
-export default function DeliveryType() {
 
-    const [deliveryTypeSelected, setDeliveryTypeSelected] = useState<string>('');
+
+
+export default function DeliveryType({ deliveryTypeSelected, setDeliveryTypeSelected, settingsColorsBaseData }: DeliveryTypeProps) {
+
 
     return (
         <FormControl className={stylesPerso["main_container"]}>
