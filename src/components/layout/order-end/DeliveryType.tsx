@@ -2,7 +2,7 @@ import { Grid, Typography, FormControl, FormLabel, RadioGroup, FormControlLabel,
 import { useCallback, useState } from 'react';
 import { iconSelect, culoriCalc, imgStockCheck, formatMoneyBR } from "@/utils/function";
 import { ButtonPerson } from '@/components';
-import stylesPerso from '@/styles/order-end/PaymentMethods.module.scss';
+import stylesPerso from '@/styles/order-end/options.module.scss';
 import { settingsColorsBaseData } from "../../../../Extras/const";
 
 // interface PaymentMethodsProps {
@@ -27,7 +27,7 @@ export default function DeliveryType() {
                 className={stylesPerso["title"]}
                 style={{ color: settingsColorsBaseData["escrita_dark"].value }}
             >
-                Métodos de Pagamentos
+                Como quer receber o pedido?
             </FormLabel>
 
 
@@ -52,11 +52,14 @@ export default function DeliveryType() {
                                 </Typography>
                                 <FormControlLabel
                                     key={d.id}
-                                    value={d.id} 
+                                    value={d.id}
                                     control={<Radio sx={{
                                         color: culoriCalc({ keyColorData: settingsColorsBaseData["base_tematica"].value, calc: [-0.13, 0.07, -18.67] }),
                                         '&.Mui-checked': {
                                             color: culoriCalc({ keyColorData: settingsColorsBaseData["base_tematica"].value, calc: [-0.13, 0.07, -18.67] }),
+                                        },
+                                        '& .MuiSvgIcon-root': {
+                                            fontSize: 22,
                                         },
                                     }} />}
                                     label={null}
