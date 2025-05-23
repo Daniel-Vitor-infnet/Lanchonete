@@ -13,6 +13,8 @@ $testesAtivos: false;
 
 
     .content {
+        display: flex;
+        flex-direction: column;
         background-color: lawngreen;
         width: 70%;
         height: 100%;

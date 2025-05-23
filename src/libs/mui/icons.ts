@@ -14,6 +14,10 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import BlockIcon from '@mui/icons-material/Block';
 import PixIcon from '@mui/icons-material/Pix';
+import DeliveryDiningIcon from '@mui/icons-material/DeliveryDining';
+import TableBarIcon from '@mui/icons-material/TableBar';
+import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
+
 
 
 interface InterfaceIconObject {
@@ -46,6 +50,11 @@ const icones: InterfaceIconObject = {
       },
       paymentMethods: {
         Pix: PixIcon,
+      },
+      deliveryType: {
+        Delivery: DeliveryDiningIcon,
+        Table: TableBarIcon,
+        Basket: ShoppingBasketIcon,
       }
 
 };
