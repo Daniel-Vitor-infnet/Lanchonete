@@ -1,28 +1,34 @@
-import { Grid, Typography, Box } from "@/libs/mui";
+import { useState, useEffect } from 'react';
+import { useSettingsColors } from '@/hooks';
 
-import { useCallback } from 'react';
-import { iconSelect } from "@/utils/function";
-import { InterfaceSettingsColors, } from '@/types';
-import { ButtonPerson } from '@/components';
-import { Blur } from '@/components';
-import { useAppContext } from '@/Context';
-import stylesPerso from '@/styles/OrderEnd.module.scss';
-import PaymentMethods from '@/components/layout/order-end/PaymentMethods';
-import {usePaymentMethods} from '@/hooks';
+export default function Teste() {
+  // opcional: mantém seu hook original, caso precise
+  const { data: settingsColorsBaseData, isLoading: isLoading3, error: settingsColorsError } = useSettingsColors({});
 
+  // estados para armazenar os valores em vh
+  const [headerVh, setHeaderVh] = useState<string>('');
+  const [footerVh, setFooterVh] = useState<string>('');
 
+  useEffect(() => {
+    // seleciona os elementos header e footer renderizados pelo PageLayout
+    const headerEl = document.querySelector('header');
+    const footerEl = document.querySelector('footer');
+    const vh = window.innerHeight;
 
+    if (headerEl) {
+      const heightPx = headerEl.getBoundingClientRect().height;
+      setHeaderVh((heightPx / vh * 100).toFixed(2) + 'vh');
+    }
+    if (footerEl) {
+      const heightPx = footerEl.getBoundingClientRect().height;
+      setFooterVh((heightPx / vh * 100).toFixed(2) + 'vh');
+    }
+  }, []);
 
-export default function CustomizedDialogs() {
-   const { data: paymentMethodsDataBase, isLoading: paymentMethodsLoading, error: paymentMethodsEndError } = usePaymentMethods()
-
-console.log(paymentMethodsDataBase)
-
-   return (
-
-      <p>teste</p>
-
-   );
-
-
+  return (
+    <>
+      <p>Header ocupa: {headerVh}</p>
+      <p>Footer ocupa: {footerVh}</p>
+    </>
+  );
 }

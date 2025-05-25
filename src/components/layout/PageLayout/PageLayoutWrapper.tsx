@@ -1,6 +1,6 @@
 import { useMatches, Outlet } from 'react-router-dom';
 import PageLayout from '@/components/layout/PageLayout/PageLayout';
-import type { PageLayoutProps } from '@/components/layout/PageLayout/PageLayout';
+import type { PageLayoutDataBaseProps } from '@/components/layout/PageLayout/PageLayout';
 import { getByScreenSize } from '@/utils/function';
 
 // Define tipo auxiliar para configuracao por breakpoints
@@ -13,7 +13,7 @@ export default function PageLayoutWrapper() {
   // pega a rota ativa (mais profunda)
   const matches = useMatches();
   const handle = matches.at(-1)?.handle as Partial<
-    PageLayoutProps & { viewportLimitConfig?: ViewportConfig }
+    PageLayoutDataBaseProps & { viewportLimitConfig?: ViewportConfig }
   > ?? {};
 
   // se houver config, roda o hook com ela; senão fica undefined

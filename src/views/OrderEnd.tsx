@@ -78,6 +78,7 @@ interface OrderEndProps {
 const OrderEnd = ({ settingsColorsBaseData, orderEndDataBase, paymentMethodsDataBase }: OrderEndProps) => {
 
    const { browser } = useAppContext();
+   const navigate = useNavigate();
 
    const [methodSelected, setMethodSelected] = useState<string>('');
    const [deliveryTypeSelected, setDeliveryTypeSelected] = useState<string>('');
@@ -226,7 +227,7 @@ const OrderEnd = ({ settingsColorsBaseData, orderEndDataBase, paymentMethodsData
             </Box>
 
             <Typography style={{ color: settingsColorsBaseData["escrita_dark"].value, fontSize: "1.2rem" }} >
-               Valor Total: {" "}	
+               Valor Total: {" "}
                <span style={{ color: settingsColorsBaseData["dinheiro"].value, fontWeight: "bold" }} >
                   {formatMoneyBR(totalPrice)}
                </span>
@@ -243,6 +244,12 @@ const OrderEnd = ({ settingsColorsBaseData, orderEndDataBase, paymentMethodsData
                text="Concluir Pedido"
                disablePerson={!!alert}
                onClick={() => { }}
+            />
+            <ButtonPerson
+               colorsData={settingsColorsBaseData}
+               className={stylesPerso["buttons_default"]}
+               text="Cancelar Pedido"
+               onClick={() => navigate("/cardapio")}
             />
 
          </Grid>

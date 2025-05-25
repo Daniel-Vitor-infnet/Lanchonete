@@ -3,64 +3,50 @@
 
 $testesAtivos: false;
 
-.footer-container {
-    overflow: hidden;
-    background-color: #030303;
-    color: white;
-    text-align: center;
-    border-top: px-para-rem(8px) solid #ffcc00;
-    padding: px-para-rem(16px) 0;
+.main_container {
+    // Deve fazer o calculo do tamanho da tela
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: px-para-rem(10);
+    border-top: px-para-rem(5px) solid oklch(0.92 0.19 101.41 / 1.0);
 
-    .company-name {
-        font-weight: bold;
-        letter-spacing: px-para-rem(2px);
-        font-size: px-para-rem(24px);
-        text-transform: uppercase;
-
-        @include laptop {
-            font-size: px-para-rem(18px);
-        }
+    .title {
+        color: white;
+        font-size: px-para-rem(24);
+        font-weight: 700;
+        text-align: center;
     }
 
-    .grid-container {
+    .container {
         display: flex;
         justify-content: center;
-        gap: px-para-rem(16px);
-    }
-
-    .contact-container {
-        display: flex;
-        flex-direction: column;
         align-items: center;
-        gap: px-para-rem(8px);
+        gap: px-para-rem(5px);
     }
 
-    .icon-text {
+    .contact_container {
         display: flex;
-        align-items: center;
-        gap: px-para-rem(8px);
-        font-size: px-para-rem(18px);
-
-        @include laptop {
-            font-size: px-para-rem(14px);
-        }
-    }
-
-    .social-media-container {
-        display: flex;
+        flex-direction: row;
         justify-content: center;
-        gap: px-para-rem(16px);
-        margin-top: px-para-rem(24px);
-    }
+        align-items: center;
+        gap: px-para-rem(5px);
 
-    .copyright-text {
-        margin-top: px-para-rem(20px);
-        opacity: 0.8;
-        font-size: px-para-rem(14px);
-
-        @include laptop {
-            margin-top: px-para-rem(5px);
-            font-size: px-para-rem(12px);
+        @include mobile {
+            flex-direction: column;
         }
+
     }
+
+
+    .text_content {
+        color: white;
+        font-size: px-para-rem(18);
+    }
+
+    .copyright {
+        font-size: px-para-rem(14);
+        text-align: center;
+    }
+
 }

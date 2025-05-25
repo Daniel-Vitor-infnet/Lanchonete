@@ -4,7 +4,7 @@
 $testesAtivos: false;
 
 
-.main-container {
+.main-container { // Deve fazer o calculo do tamanho da tela
   background-color: oklch(0.68 0.19 43.9);
   display: grid;
   overflow: hidden;

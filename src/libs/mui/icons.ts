@@ -41,7 +41,7 @@ const icones: InterfaceIconObject = {
       contato: {
         Email: EmailIcon,
         Phone: PhoneIcon,
-        LocationOn: LocationOnIcon,
+        Location: LocationOnIcon,
       },
       social: {
         Facebook: FacebookIcon,

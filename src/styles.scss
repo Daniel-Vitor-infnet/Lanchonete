@@ -1,5 +1,4 @@
-// Ajuste de SCSS para evitar rolagem horizontal em dispositivos móveis.
-
+// Fonte personalizada
 @font-face {
   font-family: 'PlaywriteITModerna';
   src: url('@/assets/fonts/PlaywriteITModerna/PlaywriteITModerna-Regular.woff2') format('woff2');
@@ -8,40 +7,38 @@
   font-display: swap;
 }
 
-:root {
-  --tema-cor-primaria: #FF6600; // Um fallback caso de problemas
+// Reset geral
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
 }
 
-
-*,
-*::before,
-*::after {
+html,
+body {
+  height: 100%;
   margin: 0;
   padding: 0;
 }
 
 html {
-  // Permite quebra de texto e evita zoom automático em iOS.
   overflow-wrap: break-word;
   -webkit-text-size-adjust: 100%;
 }
 
 body {
-  margin: 0;
-  padding: 0;
+  position: relative;
   font-family: 'PlaywriteITModerna', Arial, sans-serif;
-  -webkit-overflow-scrolling: touch; // Garante rolagem suave em iOS.
-  background-image: url('https://tcbwhkdbktgzelgtyzgv.supabase.co/storage/v1/object/public/image/extras/fundo.webp');
-  background-size: 100% 100%; // Garante que a imagem cubra a tela.
-  background-position: center;
-  background-repeat: no-repeat;
-  min-height: min(100dvh, 100vh);
-  -webkit-background-size: cover;
-}
+  -webkit-overflow-scrolling: touch;
+  overflow-wrap: break-word;
+  -webkit-text-size-adjust: 100%;
 
-
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
+  // Imagem de fundo via pseudo-elemento para compatibilidade máxima
+  &::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: url('https://tcbwhkdbktgzelgtyzgv.supabase.co/storage/v1/object/public/image/extras/fundo.webp')
+                center/cover no-repeat;
+  }
 }
