@@ -21,7 +21,7 @@ $testesAtivos: false;
         background-color: lawngreen;
         box-shadow: px-para-rem(8px) px-para-rem(4px) px-para-rem(8px) rgba(0, 0, 0, 0.2);
         padding: px-para-rem(16px);
-    gap: px-para-rem(10px);
+        gap: px-para-rem(20px);
 
 
         @include custom-scrollbar;
@@ -47,8 +47,8 @@ $testesAtivos: false;
         }
 
         @include laptop {
-            height: px-para-rem(30px);
-            width: px-para-rem(130px);
+            height: px-para-rem(33px);
+            width: px-para-rem(160px);
             font-size: px-para-rem(14px);
         }
 
