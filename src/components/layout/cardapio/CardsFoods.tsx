@@ -81,7 +81,7 @@ const CardsList: React.FC<CardsListProps> = ({ comidas, setSelectFood, settingsC
         <AlertDiagPers
           valueVH={alertDialogSize}
           title={itemOut.title}
-          extra="Item Esgotado"
+          observation="Item Esgotado"
           content={
             <Grid className={stylesPerso['main_container_alert']}>
               

@@ -10,84 +10,37 @@ $testesAtivos: false;
     flex-direction: column;
 
     @include mobile {
-        width: 78vw;
+        width: 86vw;
         border-radius: px-para-rem(10px);
     }
 
     .header_container {
-        height: alturaResponsivaViewport(5);
         display: flex;
         align-items: center;
-        justify-content: center;
-        padding: px-para-rem(10px);
-        box-sizing: border-box;
-        gap: px-para-rem(5px);
+        justify-content: space-between;
+        padding: px-para-rem(10px) px-para-rem(20px);
+    }
 
-        @include laptop {
-            height: alturaResponsivaViewport(6);
-        }
+    .infos_container {
+        width: 90%;
 
         @include mobile {
-            height: alturaResponsivaViewport(10);
-            align-items: unset;
-            justify-content: unset;
-            flex-direction: column;
-            position: relative;
+            width: 86%;
         }
 
     }
-
 
     .title {
-        max-width: 55%;
         white-space: nowrap;
-        text-overflow: ellipsis;
         overflow: hidden;
+        text-overflow: ellipsis;
         font-weight: bold;
         font-size: px-para-rem(18px);
-
-        @include mobile {
-            max-width: 72%;
-        }
     }
-
-    .complement {
-        max-width: 32%;
-        font-weight: bold;
-        font-size: px-para-rem(18.5px);
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-
-        @include laptop {
-            font-size: px-para-rem(16px);
-        }
-
-        @include mobile {
-            max-width: 72%;
-            font-size: px-para-rem(20px);
-        }
+    .observation {
+        @extend .title;    
+        font-size: px-para-rem(17px);
     }
-
-    .icon {
-        width: 5%;
-        margin-left: auto;
-        cursor: pointer;
-
-        @include mobile {
-            width: 15%;
-            height: 40%;
-            position: absolute;
-            right: 5%;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-        }
-    }
-
 
     .content_container {
         height: alturaResponsivaViewport(25);
@@ -107,17 +60,21 @@ $testesAtivos: false;
     }
 
     .buttons_container {
-        height: alturaResponsivaViewport(8.5);
         width: 100%;
         display: flex;
         justify-content: end;
         align-items: center;
         overflow: hidden;
-        padding: px-para-rem(10px);
+        padding: px-para-rem(13px);
         box-sizing: border-box;
-        margin-left: auto;
+
+        @include mobile {
+            padding: px-para-rem(10px);
+            justify-content: center;
+        }
 
     }
+
 
     .buttons_default {
         height: px-para-rem(31px);

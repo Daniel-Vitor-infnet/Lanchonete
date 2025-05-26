@@ -9,17 +9,17 @@ import stylesPerso from '@/styles/elements/AlertDiagPers.module.scss';
 
 interface CustomizedDialogsProps {
    valueVH?: number;
-   title?: string;
-   extra?: string;
+   title: string;
+   observation?: string;
    noIcon?: boolean;
    content: React.ReactNode;
    buttons?: React.ReactNode;
    settingsColorsBaseData: InterfaceSettingsColors;
-   setOpenDialog: React.Dispatch<React.SetStateAction<any>>;
+   setOpenDialog: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 
-export default function CustomizedDialogs({ valueVH, title, extra, noIcon, content, buttons, settingsColorsBaseData, setOpenDialog }: CustomizedDialogsProps) {
+export default function CustomizedDialogs({ valueVH, title, observation, noIcon, content, buttons, settingsColorsBaseData, setOpenDialog }: CustomizedDialogsProps) {
 
 
    const elmentSize = getByScreenSize({ desktop: 79.5, mobile: 72.5 })
@@ -32,23 +32,20 @@ export default function CustomizedDialogs({ valueVH, title, extra, noIcon, conte
 
    return (
       <Blur>
-         <Box className={stylesPerso["main_container"]} >
-            <Grid className={stylesPerso["header_container"]}>
-               <Typography className={stylesPerso["title"]} style={{ color: settingsColorsBaseData["escrita_dark"].value }} >
-                  {!!title ? title : "Aviso!"}
-               </Typography>
-               {!!extra && (
-                  <Typography className={stylesPerso["complement"]} style={{ color: settingsColorsBaseData["observations"].value }} >
-                     ({extra})
+         <Grid className={stylesPerso['main_container']}>
+            <Box className={stylesPerso['header_container']}>
+               <Box className={stylesPerso['infos_container']}>
+                  <Typography className={stylesPerso['title']} style={{ color: settingsColorsBaseData["escrita_dark"].value }} >
+                     {title}
                   </Typography>
-               )}
-               {!noIcon && (
-                  <span className={stylesPerso["icon"]} onClick={setCloseDialog}>
-                     {iconSelect({ iconInfo: "mui-geral-Close", size: 1.5, colorData: settingsColorsBaseData["icon_dark"].value })}
-                  </span>
-               )}
-            </Grid>
-
+                  <Typography className={stylesPerso['observation']} style={{ color: settingsColorsBaseData["observations"].value }} >
+                     ({observation})
+                  </Typography>
+               </Box>
+               <span onClick={setCloseDialog} style={{ cursor: 'pointer'}}>
+                  {iconSelect({ iconInfo: "mui-geral-Close", size: 1.78, colorData: settingsColorsBaseData["icon_dark"].value })}
+               </span>
+            </Box>
             <Box className={stylesPerso["content_container"]} style={{ height: heightcheck, borderColor: culoriCalc({ keyColorData: settingsColorsBaseData['borda_dark'].value, calc: [0.8, 0.0, 0.0] }) }}>
                {content}
             </Box>
@@ -64,7 +61,8 @@ export default function CustomizedDialogs({ valueVH, title, extra, noIcon, conte
                   />
                }
             </Box>
-         </Box>
+         </Grid>
+
       </Blur>
    );
 
