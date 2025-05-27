@@ -28,8 +28,10 @@ export default defineConfig(() => ({
         // Divide chunks por grupos de dependências para otimizar cache e carregamento
         manualChunks: (id: string) => {
           if (id.includes("node_modules/react-dom")) return "react-dom";
+          if (id.includes("node_modules/lottie-react")) return "lottie";
           if (id.includes("node_modules/react")) return "react";
           if (id.includes("node_modules/react-router")) return "router";
+          if (id.includes("node_modules/mui-tel-input")) return "mui-tel-input";
           if (id.includes("node_modules/@mui")) return "mui";
           if (id.includes("node_modules/@supabase")) return "supabase";
           if (id.includes("node_modules/culori")) return "culori";

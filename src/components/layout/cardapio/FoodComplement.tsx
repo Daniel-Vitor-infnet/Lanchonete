@@ -3,6 +3,7 @@ import { Grid, Typography, FormControl, FormLabel, RadioGroup, FormControlLabel,
 import { InterfaceFoodAddons, InterfaceSettingsColors } from '@/types';
 import { imgStockCheck, formatMoneyBR, culoriCalc, iconSelect, getByScreenSize, preloadImages, getPublicImageURL  } from '@/utils/function';
 import stylesPerso from "@/styles/cardapio/FoodMenuOptions.module.scss";
+import { Loading } from '@/components';
 
 
 type CategoriaComComidas = InterfaceFoodAddons[string];
@@ -47,7 +48,7 @@ export default function FoodComplement({ complement, setComplements, complementD
   }, []);
 
 
-  if (!imgsLoaded) return <div>Carregando imagens...</div>; // ou algum skeleton
+  if (!imgsLoaded) return <Loading complement="imagens" />;
 
   // ===== Renderização =====
   return (

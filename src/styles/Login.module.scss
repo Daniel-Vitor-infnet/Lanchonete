@@ -1,78 +1,21 @@
-@use '@stylesFunction/mixins' as *;
-@use "@stylesFunction/index" as *;
-
-$testesAtivos: false;
-
-
-.main_container {
-  background-color: white;
-  width: 22%;
-  height: 50%;
-  border-radius: 5px;
+// src/components/LoadingBurger.module.scss
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
-  padding-top: px-para-rem(20px);
+  justify-content: center;
+  height: 100vh;
+  background-color: lab(100 0 -0.03);
+}
 
-  @include laptop {
-    width: 30%;
-    height: 80%;
-  }
+.ingrediente {
+  width: 100px;
+  margin-top: -20px;
+}
 
-  @include mobile {
-    width: 90%;
-    height: 65%;
-  }
-
-
-  .title {
-    font-size: px-para-rem(26);
-    font-weight: 600;
-  }
-
-  .fields_container {
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .fields {
-    width: 100%;
-  }
-
-  .buttons_default {
-    flex-shrink: 0;
-    height: px-para-rem(37px);
-    width: px-para-rem(174px);
-    border-radius: px-para-rem(13px);
-    font-size: px-para-rem(16px);
-    color: oklch(1 0 0);
-
-    &:hover {
-      box-shadow: unset;
-      transform: unset;
-    }
-
-    @include laptop {
-      height: px-para-rem(33px);
-      width: px-para-rem(160px);
-      font-size: px-para-rem(14px);
-    }
-
-
-    @include mobile {
-      height: px-para-rem(47px);
-      width: px-para-rem(160px);
-      font-size: px-para-rem(15px);
-    }
-
-    @include mobile-small {
-      height: px-para-rem(44px);
-      width: px-para-rem(150px);
-      font-size: px-para-rem(14px);
-    }
-  }
-
+.text {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: #ff6600;
+  font-weight: bold;
 }

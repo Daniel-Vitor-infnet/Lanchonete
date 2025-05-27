@@ -3,7 +3,7 @@ import { Grid, Typography, Box } from "@/libs/mui";
 import { InterfaceSettingsColors, InterfaceIngredientMap } from '@/types';
 import { imgStockCheck, formatMoneyBR, culoriCalc, iconSelect, getByScreenSize, preloadImages, getPublicImageURL } from '@/utils/function';
 import stylesPerso from "@/styles/cardapio/FoodMenuOptions.module.scss";
-import { ButtonPerson } from '@/components';
+import { ButtonPerson, Loading } from '@/components';
 
 interface FoodIngredientsProps {
     ingredients: InterfaceIngredientMap
@@ -39,7 +39,7 @@ export default function FoodIngredients({ ingredients, setIngredients, settingsC
         preloadImages(imageUrls).then(() => setImgsLoaded(true));
     }, []);
 
-    if (!imgsLoaded) return <div>Carregando imagens...</div>; // ou algum skeleton
+    if (!imgsLoaded) return <Loading complement="imagens" />;
 
     // ===== Renderização =====
     return (

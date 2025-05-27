@@ -3,7 +3,7 @@ import { Card, CardContent, Typography, Grid, Box } from "@/libs/mui";
 import { getByScreenSize, imgStockCheck, formatMoneyBR, culoriCalc, preloadImages, getPublicImageURL } from "@/utils/function";
 import stylesPerso from "@/styles/cardapio/CardsFoods.module.scss";
 import { InterfaceFoodDataBase, InterfaceSettingsColors } from "@/types";
-import { AlertDiagPers } from "@/components";
+import { AlertDiagPers, Loading } from "@/components";
 
 
 interface CardsListProps {
@@ -36,7 +36,7 @@ const CardsList: React.FC<CardsListProps> = ({ comidas, setSelectFood, settingsC
     }
   };
 
-  if (!imgsLoaded) return <div>Carregando imagens...</div>; // ou algum skeleton
+  if (!imgsLoaded) return <Loading complement="imagens" bg={true} />; 
 
   return (
     <Grid className={stylesPerso['main_container']}>
