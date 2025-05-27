@@ -20,6 +20,11 @@ $testesAtivos: false;
     height: 80%;
   }
 
+  @include mobile {
+    width: 90%;
+    height: 65%;
+  }
+
 
   .title {
     font-size: px-para-rem(26);

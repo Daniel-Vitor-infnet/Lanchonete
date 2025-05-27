@@ -56,6 +56,7 @@ const router = createBrowserRouter([
         path: '/login',
         element: <Login />,
         handle: {
+          viewportLimitConfig: { desktop: "complete", mobile: 'company' },
           isCenterItemH: true,
           isCenterItemV: true
         }
