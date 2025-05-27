@@ -101,6 +101,8 @@ export interface device {
   mobileSmall?: any;
 }
 
+// Essa função precisa ser do tipo any, pois o valor pode ser qualquer coisa (string, number, undefind, null etc. pode ser literalmente qualquer coisa)
+
 export const getByScreenSize = (devices: device): any => {
   const ordem: (keyof device)[] = [
     "desktop", "laptop", "tablet", "mobileLarge", "mobile", "mobileSmall"

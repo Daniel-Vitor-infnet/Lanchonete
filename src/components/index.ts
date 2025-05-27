@@ -4,6 +4,7 @@ export { default as BoxLayout } from '@/components/layout/BoxLayout.tsx';
 
 
 
+export { default as AlertDiagConstruction } from '@/components/elementos/AlertDiagConstruction';
 export { default as AlertDiagPers } from '@/components/elementos/AlertDiagPers';
 export { default as ButtonOnOff } from '@/components/elementos/button/onOff.tsx';
 export { default as CardsFoods } from '@/components/layout/cardapio/CardsFoods';

@@ -1,15 +1,19 @@
 import { useMatches, Outlet } from 'react-router-dom';
-import { PageLayout } from '@/components/layout/PageLayout/PageLayout.tsx';
-import { PageLayoutProps } from '@/types';
+import PageLayout from '@/components/layout/PageLayout/PageLayout';
+import type { PageLayoutDataBaseProps } from '@/components/layout/PageLayout/PageLayout';
 import { getByScreenSize } from '@/utils/function';
 
-type ViewportConfig = { desktop: string | null; mobile: string | null };
+// Define tipo auxiliar para configuracao por breakpoints
+export type ViewportConfig = {
+  desktop: string | null;
+  mobile: string | null;
+};
 
 export default function PageLayoutWrapper() {
   // pega a rota ativa (mais profunda)
   const matches = useMatches();
   const handle = matches.at(-1)?.handle as Partial<
-    PageLayoutProps & { viewportLimitConfig?: ViewportConfig }
+    PageLayoutDataBaseProps & { viewportLimitConfig?: ViewportConfig }
   > ?? {};
 
   // se houver config, roda o hook com ela; senão fica undefined
@@ -17,7 +21,7 @@ export default function PageLayoutWrapper() {
     ? getByScreenSize(handle.viewportLimitConfig)
     : undefined;
 
-  // prioriza valor dinâmico, depois valor estático handle.viewportLimit
+  // prioriza valor dinâmico, depois valor estático
   const finalViewportLimit = dynamicViewport ?? handle.viewportLimit;
 
   return (

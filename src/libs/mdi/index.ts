@@ -12,6 +12,9 @@ import { mdiInstagram } from '@mdi/js';
 import { mdiWhatsapp } from '@mdi/js';
 import { mdiFood } from '@mdi/js';
 import { mdiWater } from '@mdi/js';
+import { mdiCreditCardOutline } from '@mdi/js';
+import { mdiCashMultiple } from '@mdi/js';
+import DeliveryDiningIcon from '@mui/icons-material/DeliveryDining';
 
 //Imports de rede social
   interface InterfaceIconObject {
@@ -42,6 +45,10 @@ const icones: InterfaceIconObject = {
       comidas: {
         food: mdiFood,
       },
+      paymentMethods: {
+        CreditCard: mdiCreditCardOutline,
+        Cash: mdiCashMultiple,
+      }
 
 };
 

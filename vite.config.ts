@@ -5,39 +5,50 @@ import { visualizer } from "rollup-plugin-visualizer";
 import path from "path";
 import stylelintPlugin from "vite-plugin-stylelint"; // Importa o plugin do Stylelint
 
-export default defineConfig(() => {
-  return {
-    server: {
-      host: "0.0.0.0", // Permite acesso externo na rede
-      port: 5173, // Mantém a porta padrão do Vite
-      strictPort: true, // Garante que ele rode exatamente na porta definida
+// https://vitejs.dev/config/
+export default defineConfig(() => ({
+  server: {
+    host: "0.0.0.0",        // Permite acesso externo na rede
+    port: 5173,               // Porta padrão do Vite
+    strictPort: true,         // Garante porta definida
+  },
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "src"),
+      "@stylesFunction": path.resolve(__dirname, "src/utils/function/stylesFunction"),
     },
-    resolve: {
-      alias: {
-        "@": path.resolve(__dirname, "src"), // Define "@" como base do projeto
-        "@stylesFunction": path.resolve(__dirname, "src/utils/function/stylesFunction"),
-      },
-    },
-    build: {
-      outDir: "build",
-      minify: true, // Corrigido para um valor booleano correto
-      sourcemap: false, // Não precisa gerar mapa de código para produção
-      rollupOptions: {
-        treeshake: true, // Garante que o tree-shaking está ativado
-        output: {
-          manualChunks(id) {
-            if (id.includes("node_modules")) {
-              return "vendor"; // Separa dependências externas em um chunk separado
-            }
-          },
+  },
+  build: {
+    outDir: "build",
+    minify: true,
+    sourcemap: true,          // Gera sourcemaps para análise de bundle
+    treeshake: true,          // Garante tree-shaking ativo
+    rollupOptions: {
+      output: {
+        // Divide chunks por grupos de dependências para otimizar cache e carregamento
+        manualChunks: (id: string) => {
+          if (id.includes("node_modules/react-dom")) return "react-dom";
+          if (id.includes("node_modules/react")) return "react";
+          if (id.includes("node_modules/react-router")) return "router";
+          if (id.includes("node_modules/@mui")) return "mui";
+          if (id.includes("node_modules/@supabase")) return "supabase";
+          if (id.includes("node_modules/culori")) return "culori";
+          if (id.includes("node_modules")) return "vendor";
         },
       },
     },
-    plugins: [
-      react(), 
-      livereload("src/**/*.{js,jsx,ts,tsx}"), 
-      visualizer({ open: true }),
-      //stylelintPlugin({ include: ["src/**/*.scss"] }) // Adiciona Stylelint ao Vite
-    ], 
-  };
-});
+    // Limite de aviso para tamanho de chunk
+    chunkSizeWarningLimit: 500,
+  },
+  plugins: [
+    react(),
+    livereload("src/**/*.{js,jsx,ts,tsx}"),
+    visualizer({
+      filename: 'dist/stats.html',  // Relatório de bundle
+      open: true,                    // Abre automaticamente
+      gzipSize: true,                // Exibe tamanho gzip
+      brotliSize: true,              // Exibe tamanho brotli
+    }),
+    // stylelintPlugin({ include: ["src/**/*.scss"] }), // Ativa Stylelint
+  ],
+}));

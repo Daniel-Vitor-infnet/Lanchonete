@@ -38,8 +38,6 @@ const CardsList: React.FC<CardsListProps> = ({ comidas, setSelectFood, settingsC
 
   if (!imgsLoaded) return <div>Carregando imagens...</div>; // ou algum skeleton
 
-  console.log(itemOut)
-
   return (
     <Grid className={stylesPerso['main_container']}>
       {comidas.map(item => {
@@ -83,7 +81,7 @@ const CardsList: React.FC<CardsListProps> = ({ comidas, setSelectFood, settingsC
         <AlertDiagPers
           valueVH={alertDialogSize}
           title={itemOut.title}
-          extra="Item Esgotado"
+          observation="Item Esgotado"
           content={
             <Grid className={stylesPerso['main_container_alert']}>
               

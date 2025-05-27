@@ -11,6 +11,7 @@ export { default as TabPanel } from '@mui/lab/TabPanel';
 export { default as Avatar } from '@mui/material/Avatar';
 export { default as IconButton } from '@mui/material/IconButton';
 export { default as Card } from '@mui/material/Card';
+export { default as Container } from '@mui/material/Container';
 export { default as CardContent } from '@mui/material/CardContent';
 export { default as CardMedia } from '@mui/material/CardMedia';
 export { default as CardActionArea } from '@mui/material/CardActionArea';

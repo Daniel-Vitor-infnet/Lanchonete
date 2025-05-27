@@ -1,4 +1,16 @@
-export type { InterfaceFoodCategory, InterfaceFoodDataBase, InterfaceFood, InterfaceIngredient, InterfaceIngredientMap, InterfaceFoodVersionDataBase, InterfaceFoodVersion, InterfaceFoodPropVersion, InterfaceFoodAddons } from '@/types/foodMenu';
+export type {
+  InterfaceFoodCategory,
+  InterfaceFoodDataBase,
+  InterfaceFood,
+  InterfaceIngredient,
+  InterfaceIngredientMap,
+  InterfaceFoodVersionDataBase,
+  InterfaceFoodVersion,
+  InterfaceFoodPropVersion,
+  InterfaceFoodAddons,
+  InterfaceOrderEndDataBase
+} from '@/types/foodMenu';
+export type { InterfacePaymentMethods, InterfaceFoodPropVersionOrderEnd, InterfacePagOrderEndDataBase } from '@/types/PagOrderEnd';
 
 
 
@@ -26,14 +38,5 @@ export interface InterfaceStatusCheck {
 };
 
 
-export interface PageLayoutProps  {
-  children?: React.ReactNode;
-  hideFooter?: boolean;
-  viewportLimit?: string | null;
-  isCenterItemH?: boolean;
-  isCenterItemV?: boolean;
-  hideAlertColor?: boolean;
-  testeLayout?: boolean;
-}
 
 

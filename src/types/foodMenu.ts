@@ -66,3 +66,16 @@ export interface InterfaceFoodAddons {
         order: number;
     }
 }
+
+
+export interface InterfaceOrderEndDataBase {
+    id: string
+    food: InterfaceFoodDataBase
+    version: InterfaceFoodVersion
+    ingredients: InterfaceIngredient[]
+    complements: InterfaceFoodPropVersion[]
+}
+
+
+
+

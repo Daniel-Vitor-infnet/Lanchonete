@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from '@/styles/Home.module.scss';
 import { Grid, Box, Avatar } from '@/libs/mui';
-import slide from '@/assets/img/logo.png';
-import logo from '@/assets/img/Logo.png';
+import slide from "https://tcbwhkdbktgzelgtyzgv.supabase.co/storage/v1/object/public/image/logos/logo.webp";
+import logo from "https://tcbwhkdbktgzelgtyzgv.supabase.co/storage/v1/object/public/image/logos/logo.webp";
 import stylesCardCategoria from "@/styles/cardapio/Categoria.module.scss";
 import { ImageCarousel, BoxLayout } from '@/components';
 

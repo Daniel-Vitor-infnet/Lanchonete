@@ -1,0 +1,2 @@
+const e="_main_container_pp6l5_1",t="_food_container_pp6l5_6",_="_title_pp6l5_10",n="_food_name_pp6l5_23",o="_title_category_pp6l5_34",i="_title_itens_pp6l5_45",c="_complements_container_pp6l5_54",p="_ingredients_container_pp6l5_61",r="_price_pp6l5_68",s="_price_free_pp6l5_68",l={main_container:e,food_container:t,title:_,food_name:n,title_category:o,title_itens:i,complements_container:c,ingredients_container:p,price:r,price_free:s};export{l as s};
+//# sourceMappingURL=FoodOrderEnd.module-CqnBv56m.js.map

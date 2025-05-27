@@ -1,7 +1,6 @@
-import React from 'react';
-import { Grid, Paper, Typography, Avatar } from '@/libs/mui';
+import { Grid, Typography, Avatar } from '@/libs/mui';
 import stylesPerso from "@/styles/pageLayout/Header.module.scss";
-import { getByScreenSize, culoriCalc, getPublicImageURL } from "@/utils/function";
+import { getByScreenSize, culoriCalc } from "@/utils/function";
 import { Button } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import MobileMenu from "@/components/elementos/button/MobileMenu";
@@ -33,7 +32,7 @@ export default function CardapHeaderPersioBaseData({ settingsColorsBaseData }: H
       style={{ backgroundColor: culoriCalc({ keyColorData: settingsColorsBaseData['base_tematica'].value, calc: [-0.19, 0.08, -31.18] }) }}
     >
       <Grid className={stylesPerso['logo']}>
-        <img src={getPublicImageURL("logos/logo.webp")} alt="Logo" />
+        <img src={"https://tcbwhkdbktgzelgtyzgv.supabase.co/storage/v1/object/public/image/logos/logo.webp"} alt="Logo" />
       </Grid>
 
       <Grid className={stylesPerso['extras']}>

@@ -1,6 +1,6 @@
 // hooks/useDatabaseStatusUI.tsx
 import { ReactNode } from 'react'
-import { useDelayedLoading } from '@/hooks'
+import { useDelayedLoading } from './useDelayedLoading'
 import Loading from '@/components/layout/database/Loading'
 import ErrorMessage from '@/components/layout/database/ErrorMessage'
 import EmptyMessage from '@/components/layout/database/EmptyMessage'
