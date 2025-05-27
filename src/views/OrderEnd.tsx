@@ -236,7 +236,7 @@ const OrderEnd = ({ settingsColorsBaseData, orderEndDataBase, paymentMethodsData
 
             {!!alert && (
                <Typography style={{ color: settingsColorsBaseData["observations"].value }} >
-                  Você deve prencher o {alert}
+                  {alert}
                </Typography>
             )}
             <ButtonPerson
