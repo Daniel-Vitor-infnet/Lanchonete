@@ -15,6 +15,11 @@ $testesAtivos: false;
   gap: 20px;
   padding-top: px-para-rem(20px);
 
+  @include laptop {
+    width: 30%;
+    height: 80%;
+  }
+
 
   .title {
     font-size: px-para-rem(26);
