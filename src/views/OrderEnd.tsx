@@ -4,7 +4,7 @@ import { Grid, Typography, Box, TextField } from "@/libs/mui";
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { iconSelect, formatMoneyBR, getBrowser } from "@/utils/function";
 import { InterfaceSettingsColors, InterfacePaymentMethods, InterfacePagOrderEndDataBase } from '@/types';
-import { ButtonPerson, AlertDiagPers } from '@/components';
+import { ButtonPerson, AlertDiagConstruction } from '@/components';
 import { useAppContext } from '@/Context';
 import stylesPerso from '@/styles/OrderEnd.module.scss';
 import PaymentMethods from '@/components/layout/order-end/PaymentMethods';
@@ -85,6 +85,7 @@ const OrderEnd = ({ settingsColorsBaseData, orderEndDataBase, paymentMethodsData
    const [change, setChange] = useState<string>('');
    const [changeValue, setChangeValue] = useState<string>('');
    const [alert, setAlert] = useState<string | boolean>(false);
+   const [alertDiagConstruction, setAlertDiagConstruction] = useState<boolean>(false);
 
    const changeValueFormatted = Number(changeValue.replace(",", "."))
 
@@ -243,7 +244,7 @@ const OrderEnd = ({ settingsColorsBaseData, orderEndDataBase, paymentMethodsData
                className={stylesPerso["buttons_default"]}
                text="Concluir Pedido"
                disablePerson={!!alert}
-               onClick={() => { }}
+               onClick={() => setAlertDiagConstruction(true)}
             />
             <ButtonPerson
                colorsData={settingsColorsBaseData}
@@ -251,7 +252,12 @@ const OrderEnd = ({ settingsColorsBaseData, orderEndDataBase, paymentMethodsData
                text="Cancelar Pedido"
                onClick={() => navigate("/cardapio")}
             />
-
+            {alertDiagConstruction && (
+               <AlertDiagConstruction
+                  settingsColorsBaseData={settingsColorsBaseData}
+                  setOpenDialog={setAlertDiagConstruction}
+               />
+            )}
          </Grid>
 
       </Box>
