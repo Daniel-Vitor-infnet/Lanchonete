@@ -1,89 +1,68 @@
-@use "@stylesFunction/mixins.scss" as *;
+@use '@stylesFunction/mixins' as *;
+@use "@stylesFunction/index" as *;
+
+$testesAtivos: false;
 
 
-$primary-color: mediumspringgreen;
-$secondary-color: skyblue;
-$text-color: white;
-$button-color: darkorchid;
-$error-color: red;
-
-.main-container {
-  min-width: min(100vh, 100dvh);
+.main_container {
+  background-color: white;
+  width: 22%;
+  height: 50%;
+  border-radius: 5px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-
-  @include laptop {}
-
-
-
-  @include mobile {}
+  gap: 20px;
+  padding-top: px-para-rem(20px);
 
 
+  .title {
+    font-size: px-para-rem(26);
+    font-weight: 600;
+  }
 
-  .box {
-    width: 22%;
-    height: 450px;
-    border-radius: 8px;
+  .fields_container {
+    width: 80%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    margin-top: 60px;
-    padding: 20px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    background-color: white;
-    overflow: hidden;
+    gap: 10px;
+  }
 
-    @include laptop {
-      width: 30%;
-      height: 400px;
-      margin-bottom: 60px;
+  .fields {
+    width: 100%;
+  }
+
+  .buttons_default {
+    flex-shrink: 0;
+    height: px-para-rem(37px);
+    width: px-para-rem(174px);
+    border-radius: px-para-rem(13px);
+    font-size: px-para-rem(16px);
+    color: oklch(1 0 0);
+
+    &:hover {
+      box-shadow: unset;
+      transform: unset;
     }
 
+    @include laptop {
+      height: px-para-rem(33px);
+      width: px-para-rem(160px);
+      font-size: px-para-rem(14px);
+    }
 
 
     @include mobile {
-      width: 90%;
+      height: px-para-rem(47px);
+      width: px-para-rem(160px);
+      font-size: px-para-rem(15px);
     }
 
-
-  }
-
-  .box>* {
-    height: 100%;
-  }
-
-  .link {
-    color: blue;
-    text-decoration: none;
-    cursor: pointer;
-    text-align: center;
-    margin-top: 8px;
-
-    &:hover {
-      text-decoration: underline;
+    @include mobile-small {
+      height: px-para-rem(44px);
+      width: px-para-rem(150px);
+      font-size: px-para-rem(14px);
     }
-
-    @include laptop {}
-
-
-
-    @include mobile {}
-
-
   }
 
-  .button {
-    margin-top: 16px;
-    background-color: $button-color !important;
-    color: $text-color !important;
-
-    @include laptop {}
-
-
-
-    @include mobile {}
-
-
-  }
 }

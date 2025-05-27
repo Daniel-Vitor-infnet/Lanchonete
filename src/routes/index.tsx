@@ -44,7 +44,6 @@ const router = createBrowserRouter([
         element: <SettingsColors />,
         handle: {
           hideAlertColor: true,
-          viewportLimit: true,
           isCenterItemH: true,
           isCenterItemV: true
         }
@@ -55,7 +54,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/login',
-        element: <Login />
+        element: <Login />,
+        handle: {
+          isCenterItemH: true,
+          isCenterItemV: true
+        }
       },
       {
         path: '/pedido_finalizado',
