@@ -6,7 +6,7 @@ import { getByScreenSize } from "@/utils/function";
 
 interface AlertDiagConstructionProps {
    settingsColorsBaseData: any;
-   setOpenDialog: React.Dispatch<React.SetStateAction<boolean>>;
+   setOpenDialog: React.Dispatch<React.SetStateAction<any>>;
 }
 
 export default function AlertDiagConstruction({ settingsColorsBaseData, setOpenDialog }: AlertDiagConstructionProps) {

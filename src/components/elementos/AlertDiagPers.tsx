@@ -15,7 +15,7 @@ interface CustomizedDialogsProps {
    content: React.ReactNode;
    buttons?: React.ReactNode;
    settingsColorsBaseData: InterfaceSettingsColors;
-   setOpenDialog: React.Dispatch<React.SetStateAction<boolean>>;
+   setOpenDialog: React.Dispatch<React.SetStateAction<any>>;
 }
 
 
