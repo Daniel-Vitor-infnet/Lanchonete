@@ -23,8 +23,14 @@ export default function OrderEndDataBase() {
    // ¦  ========== [ Bancos de dados ] ==========
 
    const { data: settingsColorsBaseData, isLoading: settingsColorsLoading, error: settingsColorsError } = useSettingsColors({});
-   const { data: orderEndDataBase, isLoading: orderEndLoading, error: orderEndError } = useOrderEnd();
+   const { data: orderEndDataBase, isLoading: orderEndLoading, error: orderEndError, refetch: refetchOrderEnd } = useOrderEnd();
    const { data: paymentMethodsDataBase, isLoading: paymentMethodsLoading, error: paymentMethodsEndError } = usePaymentMethods();
+
+
+   //Forçar o banco de dados a ser atualizado quando o componente é montado
+   useEffect(() => {
+      refetchOrderEnd();
+   }, []);
 
    const safeColors = settingsColorsBaseData ?? {}
    const safeOrderEnd = orderEndDataBase ?? []
@@ -55,11 +61,18 @@ export default function OrderEndDataBase() {
 
    if (statusUI) return <>{statusUI}</>
 
+   const orderLastID = safeOrderEnd.map(i => Number(i.id));
+   const orderLast = Math.max(...orderLastID);
+
+   console.log(orderLastID, "orderLastID")
+   console.log(orderLast, "orderLast")
+   console.log(safeOrderEnd.find(i => i.id === String(orderLast)), "orderLastData")
+
 
    return (
       <OrderEnd
          settingsColorsBaseData={safeColors}
-         orderEndDataBase={safeOrderEnd[0]}
+         orderEndDataBase={safeOrderEnd.find(i => i.id === String(orderLast))!}
          paymentMethodsDataBase={safePaymentMethods}
       />
    )
