@@ -64,10 +64,7 @@ export default function OrderEndDataBase() {
    const orderLastID = safeOrderEnd.map(i => Number(i.id));
    const orderLast = Math.max(...orderLastID);
 
-   console.log(orderLastID, "orderLastID")
-   console.log(orderLast, "orderLast")
-   console.log(safeOrderEnd.find(i => i.id === String(orderLast)), "orderLastData")
-
+// Ajustar lógica antes do carregamento do componente
 
    return (
       <OrderEnd

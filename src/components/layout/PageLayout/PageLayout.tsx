@@ -15,7 +15,7 @@ import { InterfaceSettingsColors } from '@/types';
 export interface PageLayoutDataBaseProps {
   children: React.ReactNode;
   hideFooter?: boolean;
-  viewportLimit?: 'company' | 'auto' | 'complete' | null;
+  viewportLimit?: 'company' | 'auto' | 'complete' | 'completeMobile' | null;
   isCenterItemH?: boolean;
   isCenterItemV?: boolean;
   hideAlertColor?: boolean;
@@ -78,8 +78,9 @@ const PageLayout = ({ settingsColorsBaseData, children, hideFooter, viewportLimi
     <Grid
       className={stylesPerso.page}
       style={{
-        gridTemplateRows: `
-        min(${maxLineDescriptionScreen[0]}vh, ${maxLineDescriptionScreen[0]}dvh) 
+        gridTemplateRows: viewportLimit === "completeMobile"
+          ? `min(0vh, 0dvh) min(100vh, 100dvh) min(0vh, 0dvh) `
+          : `min(${maxLineDescriptionScreen[0]}vh, ${maxLineDescriptionScreen[0]}dvh) 
         ${viewportLimit === 'auto' ? 'auto' : `min(${calcItem2}vh, ${calcItem2}dvh) `}
         min(${maxLineDescriptionScreen[2]}vh, ${maxLineDescriptionScreen[2]}dvh)`
       }}

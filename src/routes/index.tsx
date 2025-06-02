@@ -64,6 +64,9 @@ const router = createBrowserRouter([
       {
         path: '/pedido_finalizado',
         element: <PedidoFinalizado />,
+        handle: {
+          viewportLimitConfig: { desktop: "complete", mobile: 'completeMobile' },
+        }
         
       },
       {
