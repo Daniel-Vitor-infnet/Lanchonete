@@ -10,7 +10,11 @@ import FoodMenu from '@/components/layout/cardapio/FoodMenu.tsx';
 import { useAppContext } from "@/Context";
 
 
-
+/*
+ * Página que exibe o cardápio completo ao usuário.
+ * É responsável por buscar os dados das categorias e dos itens
+ * e renderizá-los de forma organizada na tela.
+*/
 
 
 //#region Lógica para garantir que todos bancos de dados foram carregados
@@ -19,8 +23,6 @@ import { useAppContext } from "@/Context";
 
 
 export default function CardapioData() {
-
-
 
   // ¦  ========== [ Bancos de dados ] ==========
 
@@ -60,6 +62,7 @@ export default function CardapioData() {
 }
 
 //#endregion
+
 
 interface CardapioProps {
   categoryDataBase: InterfaceFoodCategory[];
