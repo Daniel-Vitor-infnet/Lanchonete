@@ -1,7 +1,7 @@
 export type {
   InterfaceFoodCategory,
   InterfaceFoodDataBase,
-  InterfaceFood,
+  InterfaceFoodByCategory,
   InterfaceIngredient,
   InterfaceIngredientMap,
   InterfaceFoodVersionDataBase,
@@ -14,6 +14,7 @@ export type { InterfacePaymentMethods, InterfaceFoodPropVersionOrderEnd, Interfa
 
 
 
+/** Interface que puxa todas cores diretamente do banco de dados */
 export interface InterfaceSettingsColorsDataBase {
   id: string;
   name: string;
@@ -26,10 +27,13 @@ export interface InterfaceSettingsColorsDataBase {
   infos: string;
 };
 
+/** Interface que puxa todas cores diretamente do banco de dados com a chave sendo o id da cor */
 export interface InterfaceSettingsColors {
   [keyID: string]: InterfaceSettingsColorsDataBase;
 };
 
+
+/** Interface que checa o status da pagina */
 export interface InterfaceStatusCheck {
   isLoading: boolean;
   error: Error | null;

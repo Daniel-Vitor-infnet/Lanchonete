@@ -5,7 +5,7 @@ import { Grid, Tab, TabPanel, Typography, Box, TabList, TabContext } from "@/lib
 import { CardsFoods } from '@/components';
 import { getByScreenSize, iconSelect, culoriCalc, getBrowser } from "@/utils/function";
 import { useCategorias, useComidasPorCategoria, useSettingsColors, useDatabaseStatusUI } from '@/hooks';
-import { InterfaceFood, InterfaceFoodCategory, InterfaceFoodDataBase, InterfaceSettingsColors } from "@/types";
+import { InterfaceFoodByCategory, InterfaceFoodCategory, InterfaceFoodDataBase, InterfaceSettingsColors } from "@/types";
 import FoodMenu from '@/components/layout/cardapio/FoodMenu.tsx';
 import { useAppContext } from "@/Context";
 
@@ -63,7 +63,7 @@ export default function CardapioData() {
 
 interface CardapioProps {
   categoryDataBase: InterfaceFoodCategory[];
-  foodsDataBase: InterfaceFood;
+  foodsDataBase: InterfaceFoodByCategory;
   settingsColorsBaseData: InterfaceSettingsColors;
 }
 

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/libs/supabaseClient';
-import { InterfaceFoodDataBase, InterfaceFood } from '@/types';
+import { InterfaceFoodDataBase, InterfaceFoodByCategory } from '@/types';
 
 
 interface UseComidasPorCategoriaProps {
@@ -8,7 +8,7 @@ interface UseComidasPorCategoriaProps {
 }
 
 export const useComidasPorCategoria = ({ isSale = true }: UseComidasPorCategoriaProps) => {
-  return useQuery<InterfaceFood>({
+  return useQuery<InterfaceFoodByCategory>({
     queryKey: ['comidas', isSale],
     queryFn: async () => {
       const { data, error } = await supabase
@@ -20,7 +20,7 @@ export const useComidasPorCategoria = ({ isSale = true }: UseComidasPorCategoria
       const dataFormt = isSale ? data.filter((item) => item.sale) : data;
       
 
-      return dataFormt.reduce<InterfaceFood>((acc, item) => {
+      return dataFormt.reduce<InterfaceFoodByCategory>((acc, item) => {
 
         if (!acc[item.categoria_id]) {
           acc[item.categoria_id] = []

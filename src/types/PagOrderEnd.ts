@@ -2,10 +2,12 @@ import { InterfaceFoodPropVersion, InterfaceFoodDataBase, InterfaceFoodVersion, 
 
 
 
+/** Interface versão da comida diretamente (versão Pagina do pedido) */
 export interface InterfaceFoodPropVersionOrderEnd extends InterfaceFoodPropVersion {
     categoryID: string
 }
 
+/** Interface que puxa todos os dados do pedido direto do banco de dados (versão Pagina do pedido) */
 export interface InterfacePagOrderEndDataBase {
     id: string
     food: InterfaceFoodDataBase
@@ -14,7 +16,7 @@ export interface InterfacePagOrderEndDataBase {
     complements: InterfaceFoodPropVersionOrderEnd[] | null
 }
 
-
+/** Interface dos métodos de pagamentos */
 export interface InterfacePaymentMethods {
     id: string
     name: string
