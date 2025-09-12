@@ -1,14 +1,18 @@
 /** Interface de categorias de comidas */
-export interface InterfaceFoodCategory {
-    id: string
-    title: string
-    description: string
-    image: string
-    icon: string
-    stock: boolean
-    sale: boolean
-    promotion: boolean | null
+interface InterfaceFoodCategoryBase {
+    id: string;
+    name: string;
+    icon: string;
+    sale: boolean;
+    promotion: number | null;
+    order: number | null;
 }
+
+export interface InterfaceFoodCategoryAdmin extends InterfaceFoodCategoryBase {
+    description: string;
+}
+
+export type InterfaceFoodCategory = InterfaceFoodCategoryBase | InterfaceFoodCategoryAdmin;
 
 /** Interface das comidas diretamente do banco de dados */
 export interface InterfaceFoodDataBase {

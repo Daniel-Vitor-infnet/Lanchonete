@@ -27,21 +27,21 @@ export default function CardapioData() {
   // ¦  ========== [ Bancos de dados ] ==========
 
   const { data: categoryDataBase, isLoading: categoryLoading, error: categoryError } = useCategorias({});
-  const { data: foodsDataBase, isLoading: foodsLoading, error: foodsError } = useComidasPorCategoria({});
-  const { data: settingsColorsBaseData, isLoading: settingsColorsLoading3, error: settingsColorsError } = useSettingsColors({});
+  // const { data: foodsDataBase, isLoading: foodsLoading, error: foodsError } = useComidasPorCategoria({});
+   const { data: settingsColorsBaseData, isLoading: settingsColorsLoading3, error: settingsColorsError } = useSettingsColors({});
 
   const safeCategory = categoryDataBase ?? []
-  const safeFoods = foodsDataBase ?? {}
-  const safeColors = settingsColorsBaseData ?? {}
+  // const safeFoods = foodsDataBase ?? {}
+   const safeColors = settingsColorsBaseData ?? {}
 
   const hasCategory = safeCategory.length > 0
-  const hasFoods = Object.keys(safeFoods).length > 0
+  // const hasFoods = Object.keys(safeFoods).length > 0
   const hasColors = Object.keys(safeColors).length > 0
 
   const statuses = [
     { isLoading: categoryLoading, error: categoryError, isEmpty: !hasCategory, emptyMsg: 'Sem Categorias' },
-    { isLoading: foodsLoading, error: foodsError, isEmpty: !hasFoods, emptyMsg: 'Sem Comidas' },
-    { isLoading: settingsColorsLoading3, error: settingsColorsError, isEmpty: !hasColors, emptyMsg: 'Sem cores' },
+    // { isLoading: foodsLoading, error: foodsError, isEmpty: !hasFoods, emptyMsg: 'Sem Comidas' },
+     { isLoading: settingsColorsLoading3, error: settingsColorsError, isEmpty: !hasColors, emptyMsg: 'Sem cores' },
   ]
 
   const statusUI = useDatabaseStatusUI(statuses, 5000)
@@ -55,8 +55,8 @@ export default function CardapioData() {
   return (
     <Cardapio
       categoryDataBase={safeCategory}
-      foodsDataBase={safeFoods}
-      settingsColorsBaseData={safeColors}
+      // foodsDataBase={safeFoods}
+       settingsColorsBaseData={safeColors}
     />
   )
 }
@@ -66,14 +66,15 @@ export default function CardapioData() {
 
 interface CardapioProps {
   categoryDataBase: InterfaceFoodCategory[];
-  foodsDataBase: InterfaceFoodByCategory;
-  settingsColorsBaseData: InterfaceSettingsColors;
+  // foodsDataBase: InterfaceFoodByCategory;
+   settingsColorsBaseData: InterfaceSettingsColors;
 }
 
 
 
 
-const Cardapio = ({ categoryDataBase, foodsDataBase, settingsColorsBaseData }: CardapioProps) => {
+//const Cardapio = ({ categoryDataBase, foodsDataBase, settingsColorsBaseData }: CardapioProps) => {
+const Cardapio = ({ categoryDataBase, settingsColorsBaseData }: CardapioProps) => {
 
   const { browser } = useAppContext();
 
@@ -99,8 +100,8 @@ const Cardapio = ({ categoryDataBase, foodsDataBase, settingsColorsBaseData }: C
   // Lógica para trocar o url conforme o id da categoria
   useEffect(() => {
     const cat = categoryDataBase.find(c => c.id === selectCategoryID);
-    if (cat && pagID !== cat.title.toLowerCase()) {
-      navigate(`/cardapio/${cat.title.toLowerCase()}`, { replace: true });
+    if (cat && pagID !== cat.name.toLowerCase()) {
+      navigate(`/cardapio/${cat.name.toLowerCase()}`, { replace: true });
     }
   }, [selectCategoryID, navigate, pagID]);
 
@@ -152,7 +153,7 @@ const Cardapio = ({ categoryDataBase, foodsDataBase, settingsColorsBaseData }: C
                   <Grid className={styles['barra_lateral_conteudo']}>
                     {iconSelect({ iconInfo: c.icon, size: iconSize, colorData: settingsColorsBaseData["icon_dark"].value, })}
                     <Typography className={styles['barra_lateral_text']} style={{ color: culoriCalc({ keyColorData: settingsColorsBaseData['escrita_dark'].value, calc: [0.24, 0.0, 0.0] }) }}>
-                      {c.title}
+                      {c.name}
                     </Typography>
                   </Grid>
                 }
@@ -172,11 +173,8 @@ const Cardapio = ({ categoryDataBase, foodsDataBase, settingsColorsBaseData }: C
           style={{ backgroundColor: menuFoodBackGround, scrollbarWidth: getBrowser({ browserData: browser, chrome: "thin", opera: "auto" }), scrollbarColor: `${settingsColorsBaseData["scrollbar"].value} ${settingsColorsBaseData["scrollbarbackgroud"].value}` }}
         >
 
-          <CardsFoods
-            comidas={foodsDataBase[selectCategoryID]}
-            setSelectFood={setSelectFood}
-            settingsColorsBaseData={settingsColorsBaseData}
-          />
+
+
 
         </TabPanel>
       </TabContext>
@@ -196,3 +194,8 @@ const Cardapio = ({ categoryDataBase, foodsDataBase, settingsColorsBaseData }: C
 
 };
 
+          // <CardsFoods
+          //   comidas={foodsDataBase[selectCategoryID]}
+          //   setSelectFood={setSelectFood}
+          //   settingsColorsBaseData={settingsColorsBaseData}
+          // />

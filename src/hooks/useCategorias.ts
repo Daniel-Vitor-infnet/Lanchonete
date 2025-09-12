@@ -3,23 +3,51 @@ import { supabase } from '@/libs/supabaseClient'
 import { InterfaceFoodCategory } from '@/types'
 
 interface UseCategoriasProps {
-  isSale?: boolean;
+  admin?: boolean;
 }
 
-export const useCategorias = ({ isSale = true }: UseCategoriasProps) => {
+export const useCategorias = ({ admin = false }: UseCategoriasProps) => {
   return useQuery<InterfaceFoodCategory[]>({
-    queryKey: ['categorias', isSale],
+    queryKey: ['categorias', admin],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from('categorias')
-        .select('id, title, description, image, icon, stock, sale, promotion')
+      let query;
 
+      if (admin) {
+        query = supabase
+          .from('categorias')
+          .select('id, name, description, icon, sale, promotion, order')
+          .order('order', { ascending: true });
+      } else {
+        query = supabase
+          .from('categorias')
+          .select('id, name, icon, sale, promotion, order')
+          .eq('sale', true)
+          .order('order', { ascending: true });
+      }
+      const { data, error } = await query;
       if (!data || error) throw error;
 
 
-      return isSale ? data.filter((item) => item.sale) : data;
-},
-  staleTime: Number.POSITIVE_INFINITY,
-  refetchOnWindowFocus: false,
+      return data;
+    },
+    staleTime: Number.POSITIVE_INFINITY,
+    refetchOnWindowFocus: false,
   });
 };
+
+//  +  ========== [ Código SQL usado ] ==========
+//  +  ========== [ comuum ] ==========
+/*
+SELECT
+  "id", "name", "icon", "sale", "promotion", "order"
+FROM "categorias"
+ORDER BY "order" ASC
+*/
+
+//  +  ========== [ ADMIN ] ==========
+/*
+SELECT 
+  "id", "name", "description", "icon", "sale", "promotion", "order"
+FROM "categorias"
+ORDER BY "order" ASC
+*/
