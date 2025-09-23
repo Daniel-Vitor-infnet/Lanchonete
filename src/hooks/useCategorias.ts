@@ -24,9 +24,9 @@ export const useCategorias = ({ admin = false }: UseCategoriasProps) => {
           .eq('sale', true)
           .order('order', { ascending: true });
       }
+
       const { data, error } = await query;
       if (!data || error) throw error;
-
 
       return data;
     },

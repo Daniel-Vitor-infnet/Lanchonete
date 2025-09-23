@@ -1,92 +1,89 @@
-import * as React from 'react';
-import styles from '@/styles/Panel.module.scss';
-import { Grid, Box, Typography, Button, Switch, pink, alpha, styled } from '@/libs/mui';
-import { AlertDiagPers, ButtonOnOff, TimeSelectPerso, ButtonPerson, mixins } from '@/components';
-import { Status, StatusMobile } from '@/components/panel/status';
-
-const mediaQuery = window.matchMedia("(min-width: 1024px)");
-
-
-const PinkSwitch = styled(Switch)(({ theme }) => ({
-  '& .MuiSwitch-switchBase.Mui-checked': {
-    color: pink[600],
-    '&:hover': {
-      backgroundColor: alpha(pink[600], theme.palette.action.hoverOpacity),
-    },
-  },
-  '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-    backgroundColor: pink[600],
-  },
-}));
-
-const label = { inputProps: { 'aria-label': 'Color switch demo' } };
-
-const buttonPedidosCardsStyles = ({
-  background: 'linear-gradient(45deg, #FF1044 30%, #FF8E53 90%)',
-  with: '100%',
-  height: '100%',
-  textTransform: "uppercase",
-});
-
-const buttonAplicarStyles = ({
-  background: 'blue',
-  height: '35px',
-  width: '160px',
-  "&:hover": {
-    background: "linear-gradient(135deg, oklch(0.59 0.22 261.41), oklch(0.59 0.22 261.37))", // Gradiente mais escuro no hover
-    boxShadow: "unset",
-    transform: "unset", // Levanta levemente o botão
-  },
-  "&:active": {},
-
-  "&::before": {},
-  "&:hover::before": {},
-  [mixins.laptop]: {
-    height: '43px',
-    width: '140px',
-  },
-});
+import { useLocation, useNavigate } from "react-router-dom";
+import { useCategorias, useSettingsColors, useDatabaseStatusUI } from '@/hooks'
+import { Grid, Typography, Box, TextField } from "@/libs/mui";
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { iconSelect, formatMoneyBR, getBrowser } from "@/utils/function";
+import { InterfaceSettingsColors, InterfacePaymentMethods, InterfacePagOrderEndDataBase } from '@/types';
+import { ButtonPerson, AlertDiagConstruction } from '@/components';
+import { useAppContext } from '@/Context';
+import stylesPerso from '@/styles/OrderEnd.module.scss';
+import PaymentMethods from '@/components/layout/order-end/PaymentMethods';
+import DeliveryType from '@/components/layout/order-end/DeliveryType';
+import CashChange from '@/components/layout/order-end/CashChange';
+import stylesExport from "@/styles/cardapio/FoodOrderEnd.module.scss";
 
 
-const Panel: React.FC = () => {
+
+
+export default function PainelData() {
+
+  // ¦  ========== [ Bancos de dados ] ==========
+
+  const { data: categoryDataBase, isLoading: categoryLoading, error: categoryError } = useCategorias({});
+  // const { data: foodsDataBase, isLoading: foodsLoading, error: foodsError } = useComidasPorCategoria({});
+   const { data: settingsColorsBaseData, isLoading: settingsColorsLoading3, error: settingsColorsError } = useSettingsColors({});
+
+  const safeCategory = categoryDataBase ?? []
+  // const safeFoods = foodsDataBase ?? {}
+   const safeColors = settingsColorsBaseData ?? {}
+
+  const hasCategory = safeCategory.length > 0
+  // const hasFoods = Object.keys(safeFoods).length > 0
+  const hasColors = Object.keys(safeColors).length > 0
+
+  const statuses = [
+    { isLoading: categoryLoading, error: categoryError, isEmpty: !hasCategory, emptyMsg: 'Sem Categorias' },
+    // { isLoading: foodsLoading, error: foodsError, isEmpty: !hasFoods, emptyMsg: 'Sem Comidas' },
+     { isLoading: settingsColorsLoading3, error: settingsColorsError, isEmpty: !hasColors, emptyMsg: 'Sem cores' },
+  ]
+
+  const statusUI = useDatabaseStatusUI(statuses, 5000)
+
+
+
+  if (statusUI) return <>{statusUI}</>
+
+
+
   return (
-    <Grid className={styles.mainContainer}>
-      <AlertDiagPers message="Apenas os botões de 'Ver Pediodos' e 'Editar Itens' estão funcionais" />
-      <Box className={styles.box}>
-        <Typography className={styles.title}>
-          Painel de configurações
-        </Typography>
-        <Grid className={styles.optionContainer}>
-          <Typography className={styles.subTitle}>Status</Typography>
-          {mediaQuery.matches ? <Status /> : <StatusMobile />}
-        </Grid>
-        <Grid className={styles.optionContainer}>
-          <Typography className={styles.subTitle}>Teste 1</Typography>
-          <PinkSwitch {...label} defaultChecked />
-        </Grid>
-        <Grid className={styles.optionContainer}>
-          <Typography className={styles.subTitle}>Teste 2</Typography>
-          <PinkSwitch {...label} defaultChecked />
-        </Grid>
-        <Grid className={styles.optionContainer}>
-          <Typography className={styles.subTitle}>Tempo De Espera</Typography>
-          <TimeSelectPerso />
-        </Grid>
-        <Grid className={styles.optionContainer}>
-          <Typography className={styles.subTitle}>Teste 4</Typography>
-          <ButtonOnOff />
-        </Grid>
-        <Grid className={styles.buttonAplicarContainer}>
-          <ButtonPerson text='Aplicar' customStyles={buttonAplicarStyles} />
-        </Grid>
-      </Box>
-      <Grid className={styles.buttonPedidosCardsContainer}>
-        <ButtonPerson text='Ver Pediodos' customStyles={buttonPedidosCardsStyles} />
-        <ButtonPerson text='Editar Itens' customStyles={buttonPedidosCardsStyles} />
-      </Grid>
-    </Grid>
-  );
-  3
-};
+    <Painel
+      categoryDataBase={safeCategory}
+       settingsColorsBaseData={safeColors}
+    />
+  )
+}
 
-export default Panel;
+interface OrderEndProps {
+   settingsColorsBaseData: InterfaceSettingsColors;
+   orderEndDataBase: InterfacePagOrderEndDataBase;
+   paymentMethodsDataBase: InterfacePaymentMethods[];
+}
+
+
+
+
+
+const OrderEnd = ({ settingsColorsBaseData, orderEndDataBase, paymentMethodsDataBase }: OrderEndProps) => {
+
+
+
+   return (
+
+      <Box className={stylesPerso['main_container']} style={{ backgroundColor: settingsColorsBaseData["fundo_neutral"].value }}>
+         <Grid className={stylesPerso['content']}
+            sx={{
+               '&::-webkit-scrollbar-thumb': {
+                  backgroundColor: settingsColorsBaseData["scrollbar"].value,
+               },
+            }}
+            style={{ backgroundColor: settingsColorsBaseData["fundo_light"].value, scrollbarWidth: getBrowser({ browserData: browser, chrome: "thin", opera: "auto" }), scrollbarColor: `${settingsColorsBaseData["scrollbar"].value} ${settingsColorsBaseData["scrollbarbackgroud"].value}` }}
+         >
+         </Grid>
+
+      </Box>
+
+
+   );
+
+
+}
